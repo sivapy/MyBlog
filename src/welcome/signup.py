@@ -21,6 +21,8 @@ from pyjamas.ui.HorizontalPanel import HorizontalPanel
 class signupform:
     def onModuleLoad(self):
         self.form=FormPanel()
+        self.remote_py = EchoServicePython()
+        
         self.form.setAction("/home.html")
         
         
@@ -104,10 +106,12 @@ class signupform:
         Window.alert(event.getResults())
                 
     def createUser(self):
-        self.remote_py.callMethod('createUser', [self.uname.getText(), self.password.getText()], self)           
+         self.remote_py.callMethod('createUser', [self.uname.getText(), self.password.getText()], self)           
             
         
-        
+class EchoServicePython(ServiceProxy):
+    def __init__(self):
+        ServiceProxy.__init__(self, "http://127.0.0.1:8000/json/", 'jsonrpc', headers=None)        
         
         
 if __name__ == '__main__':

@@ -19224,6 +19224,7 @@ $pyjs['loaded_modules']['signup'] = function (__mod_name__) {
 			}
 			var panelform,part1,anchor,header,part2,hpanel,image,panel;
 			self['form'] = $m['FormPanel']();
+			self['remote_py'] = (typeof EchoServicePython == "undefined"?$m['EchoServicePython']:EchoServicePython)();
 			self['form']['setAction']('/home.html');
 			panel = $pyjs_kwargs_call(null, $m['VerticalPanel'], null, null, [{'StyleName':'signup'}]);
 			self['form']['setWidget'](panel);
@@ -19325,6 +19326,27 @@ $pyjs['loaded_modules']['signup'] = function (__mod_name__) {
 		var $data = $p['dict']();
 		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
 		return $p['_create_class']('signupform', $p['tuple']($bases), $data);
+	})();
+	$m['EchoServicePython'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'signup';
+		$method = $pyjs__bind_method2('__init__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			$pyjs_kwargs_call($m['ServiceProxy'], '__init__', null, null, [{'headers':null}, self, 'http://127.0.0.1:8000/json/', 'jsonrpc']);
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__init__'] = $method;
+		var $bases = new Array($m['ServiceProxy']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('EchoServicePython', $p['tuple']($bases), $data);
 	})();
 	if ($p['bool']($p['op_eq']((typeof __name__ == "undefined"?$m['__name__']:__name__), '__main__'))) {
 		$m['app'] = $m['signupform']();
