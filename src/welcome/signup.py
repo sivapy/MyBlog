@@ -11,6 +11,8 @@ from pyjamas.ui.Anchor import Anchor
 from pyjamas.ui.Image import Image
 from pyjamas.ui.Hyperlink import Hyperlink
 from pyjamas.ui import HasAlignment
+import re
+
 
 from pyjamas.ui.CSS import StyleSheetCssFile
 
@@ -23,81 +25,104 @@ class signupform:
         self.form=FormPanel()
         self.remote_py = EchoServicePython()
         
-        self.form.setAction("/home.html")
+        self.form.setAction("/index.html")
         
         
-        panel=VerticalPanel(StyleName="signup")
-        self.form.setWidget(panel)
+        vp=VerticalPanel(BorderWidth=0,HorizontalAlignment=HasAlignment.ALIGN_CENTER,VerticalAlignment=HasAlignment.ALIGN_MIDDLE,Width="100%",Height="150px")
+        self.form.setWidget(vp)
         
-        self.logo=Image("Testware_logo.png")
-        self.logo.setStyleName("logo")
-        panel.add(self.logo)
-        
-        header=HTML("<h2>SIGN UP</h2><h3>Welcome to signup form</h3>")
-        panel.add(header)
-        
-        panelform=VerticalPanel(StyleName="innerform")
-       
-        
-              
+        header=HTML("<h2>CREATE MY ACCOUNT</h2><h3>Welcome to signup form</h3>")
+        part1=header
+                
+        hpn=HorizontalPanel(BorderWidth=0,HorizontalAlignment=HasAlignment.ALIGN_LEFT,VerticalAlignment=HasAlignment.ALIGN_MIDDLE,Width="92%",Height="60px")
                
-        self.uname=TextBox()
-        self.uname.setName("unamesignup")
-        self.uname.setPlaceholder("Enter your Name")
-        panelform.add(self.uname)
+        self.fname=TextBox()
+        self.fname.setName("fname")
+        self.fname.setPlaceholder("First Name")
+        hpn.add(self.fname)
+        
+        self.lname=TextBox()
+        self.lname.setName("lname")
+        self.lname.setPlaceholder("Last Name")
+        hpn.add(self.lname)
+        hpn.setCellWidth(self.fname, "70%")
+        hpn.setCellWidth(self.lname, "30%")
+        part2=hpn
+        
+      
         
         self.email=TextBox()
         self.email.setName("emailsignup")
-        self.email.setPlaceholder("Enter your mail")
-        panelform.add(self.email)
+        self.email.setPlaceholder("Enter your email address ")
+        
+        part3=self.email
         
         self.password=PasswordTextBox()
         self.password.setName("passsignup")
         self.password.setPlaceholder("Choose a password")
-        panelform.add(self.password)
+        part4=self.password
         
         self.rpassword=PasswordTextBox()
         self.rpassword.setName("rpasssignup")
         self.rpassword.setPlaceholder("Confirm your password")
-        panelform.add(self.rpassword)
+        part5=self.rpassword
         
         self.errorlabel=Label()
         self.errorlabel.setStyleName("errorlabel")
-        panelform.add(self.errorlabel)
+        part6=self.errorlabel
         
         hpanel = HorizontalPanel(BorderWidth=0,HorizontalAlignment=HasAlignment.ALIGN_CENTER,VerticalAlignment=HasAlignment.ALIGN_MIDDLE,Width="100%",Height="50px")
 
-        part1 = Button("Signup",self)
-        part1.setStyleName('btn')
+        partb = Button("Signup",self)
+        partb.setStyleName('btn')
         image=Label("Already have account! Sign in")
         anchor = Anchor(Widget=image, Href='/index.html')
-        part2 = anchor
-        hpanel.setStyleName("hp")
-        hpanel.add(part1)
-        hpanel.add(part2)
+        parta = anchor
+       
+        hpanel.add(partb)
+        hpanel.add(parta)
+        hpanel.setStyleName("hpanel")
         
-        panel.setCellWidth(part1, "45%")
-        panel.setCellWidth(part2, "55%")
         
+        part7=hpanel
  
+        vp.add(part1)
+        vp.add(part2)
+        vp.add(part3)
+        vp.add(part4)
+        vp.add(part5)
+        vp.add(part6)
+        vp.add(part7)
         
-        panelform.add(hpanel)
         
+        vp.setCellHeight(part1,"5%")
+        vp.setCellHeight(part2,"10%")
+        vp.setCellHeight(part3,"10%")
+        vp.setCellHeight(part4,"10%")
+        vp.setCellHeight(part5,"10%")
+        vp.setCellHeight(part6,"10%")
+        vp.setCellHeight(part7,"10%")
         
-        panel.add(panelform)
-        
+        vp.setStyleName("signup")
+                         
         self.form.addFormHandler(self)
-        
         RootPanel().add(self.form)
         
         
     def onClick(self, sender):
-        if(len(self.uname.getText())==0 or len(self.password.getText())==0):
-            self.errorlabel.setText("Username or password can't be empty!")
+        add=self.email.getText()
+        match=re.match('^[a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$',add)
+        if(len(self.fname.getText())==0 or len(self.lname.getText())==0):  
+            self.errorlabel.setText("First Name or Last name can't be empty ")
+        elif (len(self.password.getText())==0):
+            self.errorlabel.setText("Password can't be empty ")
+            
         elif(len(self.rpassword.getText())==0):
             self.errorlabel.setText("confirm your password")
         elif((self.password.getText()!=self.rpassword.getText())):
             self.errorlabel.setText("Password should be same!")
+        elif match==None:
+            self.errorlabel.setText("invalid email")
         else:
             self.errorlabel.setText('')
             self.createUser()
@@ -106,7 +131,7 @@ class signupform:
         Window.alert(event.getResults())
                 
     def createUser(self):
-         self.remote_py.callMethod('createUser', [self.uname.getText(), self.password.getText()], self)           
+         self.remote_py.callMethod('createUser', [self.fname.getText(), self.email.getText(),self.password.getText()], self)           
             
         
 class EchoServicePython(ServiceProxy):
