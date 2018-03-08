@@ -21314,11 +21314,28 @@ $pyjs['loaded_modules']['signup'] = function (__mod_name__) {
 				var self = arguments[0];
 			}
 
-			self['remote_py']['callMethod']('createUser', $p['list']([self['fname']['getText'](), self['email']['getText'](), self['password']['getText']()]), self);
+			self['remote_py']['callMethod']('createUser', $p['list']([self['fname']['getText'](), self['email']['getText'](), self['password']['getText'](), self['lname']['getText']()]), self);
 			return null;
 		}
 	, 1, [null,null,['self']]);
 		$cls_definition['createUser'] = $method;
+		$method = $pyjs__bind_method2('onRemoteError', function(code, error_dict, requestInfo) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				code = arguments[1];
+				error_dict = arguments[2];
+				requestInfo = arguments[3];
+			}
+
+			if ($p['bool']($p['op_eq'](code, 500))) {
+				self['errorlabel']['setText']('user name already exists .');
+			}
+			return null;
+		}
+	, 1, [null,null,['self'],['code'],['error_dict'],['requestInfo']]);
+		$cls_definition['onRemoteError'] = $method;
 		var $bases = new Array(pyjslib['object']);
 		var $data = $p['dict']();
 		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }

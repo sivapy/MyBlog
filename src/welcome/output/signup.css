@@ -38,13 +38,14 @@ input {
     display: block;
     margin: auto auto;
     width: 90%;
-    margin-bottom: 1.5em;
+    margin-top:1.5em;
+    margin-bottom: 1em;
 	margin-left: .5em;
 	margin-right: .5em;
     padding: 0.5em;
     border: none;
     border-bottom: 1px solid #eaeaea;
-    padding-bottom: 1.25em;
+    padding-bottom: 1em;
     color: #757575;
     font-size: 1em;
 	
@@ -54,9 +55,9 @@ input {
 
 .signup
 {
-   width: 70%;
-  min-width: 450px;
-  max-width: 600px;
+   width: 50%;
+  min-width: 425px;
+  max-width: 520px;
   background: #fff;
   position: absolute;
   top: 50%;
@@ -98,16 +99,7 @@ transform: translate(0%,0%);
   text-align: center;
   font-size: .9em;
 }
-.innerform{
-  color: #33d3de;
-  line-height: .5em;
-  top: 2.5em;
-  text-decoration: none;
-  font-size: .95em;
-  margin: 0;
-  padding: 0;
-  
-}
+
 .btn {
     display: inline-block;
     background: #1fb5bf;

@@ -11,14 +11,10 @@ from pyjamas.ui.Anchor import Anchor
 from pyjamas.ui.Image import Image
 from pyjamas.ui.Hyperlink import Hyperlink
 from pyjamas.ui import HasAlignment
-import re
-
-
 from pyjamas.ui.CSS import StyleSheetCssFile
-
 from pyjamas.JSONService import ServiceProxy
 from pyjamas.ui.HorizontalPanel import HorizontalPanel
-
+import re
 
 class signupform:
     def onModuleLoad(self):
@@ -131,8 +127,11 @@ class signupform:
         Window.alert(event.getResults())
                 
     def createUser(self):
-         self.remote_py.callMethod('createUser', [self.fname.getText(), self.email.getText(),self.password.getText()], self)           
-            
+        self.remote_py.callMethod('createUser', [self.fname.getText(), self.email.getText(),self.password.getText(),self.lname.getText()], self)            
+    
+    def onRemoteError(self, code, error_dict, requestInfo):
+        if code == 500:
+            self.errorlabel.setText("user name already exists .")       
         
 class EchoServicePython(ServiceProxy):
     def __init__(self):
