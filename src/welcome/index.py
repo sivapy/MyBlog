@@ -1,4 +1,3 @@
-
 from pyjamas.ui.RootPanel import RootPanel
 from pyjamas.ui.Label import Label
 from pyjamas.ui.Button import Button
@@ -9,6 +8,9 @@ from pyjamas.ui.TextBox import TextBox
 from pyjamas.ui.PasswordTextBox import PasswordTextBox
 from pyjamas import Window
 from pyjamas.ui.Anchor import Anchor
+from pyjamas.ui.Hyperlink import Hyperlink
+from pyjamas.ui.HorizontalPanel import HorizontalPanel
+from pyjamas.ui import HasAlignment
 
 from pyjamas.ui.CSS import StyleSheetCssFile
 
@@ -26,37 +28,54 @@ class Index:
         self.form = FormPanel()
         
         # Create a panel to hold all of the form widgets.
-        panel = VerticalPanel(StyleName='log-form')
-        self.form.setWidget(panel)
+        vp=VerticalPanel(BorderWidth=0,HorizontalAlignment=HasAlignment.ALIGN_CENTER,VerticalAlignment=HasAlignment.ALIGN_MIDDLE,Width="100%",Height="150px")
+        self.form.setWidget(vp)
         
-        header = HTML("<h2>LOGIN TO YOUR ACCOUNT</h2>")
-        panel.add(header)
-        
-        panelForm = VerticalPanel(StyleName='inner-panel-form')
-        panel.add(panelForm)
-        
+        header=HTML("<h2>LOGIN TO YOUR ACCOUNT</h2>")
+        part1=header
+              
         # Create a TextBox, giving it a name so that it will be submitted.
-        self.userName = TextBox(StyleName='input-text')
+        self.userName = TextBox()
         self.userName.setName("userNameFormElement")
         self.userName.setPlaceholder("User Name")
-        panelForm.add(self.userName)
+        part2=self.userName
         
-        self.password = PasswordTextBox(StyleName='input-text')
+        self.password = PasswordTextBox()
         self.password.setName("passwordFormElement")
         self.password.setPlaceholder("Password")
-        panelForm.add(self.password)
+        part3=self.password
         
         self.errorInfoLabel = Label()
         self.errorInfoLabel.setStyleName('error-info')
-        panelForm.add(self.errorInfoLabel)
+        part4=self.errorInfoLabel
+        part4.setStyleName("errorlabel")
         
          # Add a 'submit' button.
-        panelForm.add(Button("Login", self, StyleName='btn'))
+        hpanel = HorizontalPanel(BorderWidth=0,HorizontalAlignment=HasAlignment.ALIGN_CENTER,VerticalAlignment=HasAlignment.ALIGN_MIDDLE,Width="100%",Height="50px")
         
-        signupAnchor = Anchor(Widget = HTML('Don''t have account? Sign up'), Href='/signup.html', Title = 'Signup')
-        signupAnchor.setStyleName('signup') 
-        panelForm.add(signupAnchor)
+        partb=Button("Login", self)
+        partb.setStyleName('btn')
         
+        image=Label("Don''t have account? Sign up")
+        anchor = Anchor(Widget=image, Href='/signup.html')
+        parta=anchor
+        
+             
+        hpanel.add(partb)
+        hpanel.add(parta)
+       
+        part5=hpanel 
+        part5.setStyleName("hpanel")
+        
+        vp.add(part1)
+        vp.add(part2)
+        vp.add(part3)
+        vp.add(part4)
+        vp.add(part5)
+        vp.setStyleName("signup")
+        
+        # Add an event handler to the form.
+        self.form.addFormHandler(self)
         RootPanel().add(self.form)
     
     def onClick(self, sender):
@@ -92,5 +111,5 @@ class MyBlogService(ServiceProxy):
 if __name__ == '__main__':
     app = Index()
     app.onModuleLoad()
-    StyleSheetCssFile("./login.css")
+    StyleSheetCssFile("./signup.css")
 
