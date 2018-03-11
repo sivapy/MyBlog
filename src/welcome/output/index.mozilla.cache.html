@@ -3361,6 +3361,176 @@ $p['_print_to_console'](content)
 
 --></script>
 <script type="text/javascript"><!--
+/* start module: pyjamas.History */
+$pyjs['loaded_modules']['pyjamas.History'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['pyjamas.History']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.History'];
+	if(typeof $pyjs['loaded_modules']['pyjamas'] == 'undefined' || !$pyjs['loaded_modules']['pyjamas']['__was_initialized__']) $p['___import___']('pyjamas', null);
+	var $m = $pyjs['loaded_modules']['pyjamas.History'];
+	$m['__repr__'] = function() { return '<module: pyjamas.History>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'pyjamas.History';
+	$m['__name__'] = __mod_name__;
+	$pyjs['loaded_modules']['pyjamas']['History'] = $pyjs['loaded_modules']['pyjamas.History'];
+
+
+	$m['pyjd'] = $p['___import___']('pyjd', 'pyjamas');
+	if ($p['bool']($p['getattr']($m['pyjd'], 'is_desktop'))) {
+	}
+	$m['historyToken'] = '';
+	$m['historyListeners'] = $p['list']([]);
+	$m['addHistoryListener'] = function(listener) {
+
+		$m['historyListeners']['append'](listener);
+		return null;
+	};
+	$m['addHistoryListener']['__name__'] = 'addHistoryListener';
+
+	$m['addHistoryListener']['__bind_type__'] = 0;
+	$m['addHistoryListener']['__args__'] = [null,null,['listener']];
+	$m['back'] = function() {
+
+
+    $wnd['history']['back']();
+    
+	};
+	$m['back']['__name__'] = 'back';
+
+	$m['back']['__bind_type__'] = 0;
+	$m['back']['__args__'] = [null,null];
+	$m['forward'] = function() {
+
+
+    $wnd['history']['forward']();
+    
+	};
+	$m['forward']['__name__'] = 'forward';
+
+	$m['forward']['__bind_type__'] = 0;
+	$m['forward']['__args__'] = [null,null];
+	$m['getToken'] = function() {
+
+
+    return $wnd['__historyToken'];
+    
+	};
+	$m['getToken']['__name__'] = 'getToken';
+
+	$m['getToken']['__bind_type__'] = 0;
+	$m['getToken']['__args__'] = [null,null];
+	$m['newItem'] = function(_historyToken) {
+
+
+    var historyToken = _historyToken;
+    if(historyToken == "" || historyToken == null){
+        historyToken = "#";
+    }
+    $wnd['location']['hash'] = encodeURI(historyToken)['replace']('#','%23');
+    
+	};
+	$m['newItem']['__name__'] = 'newItem';
+
+	$m['newItem']['__bind_type__'] = 0;
+	$m['newItem']['__args__'] = [null,null,['_historyToken']];
+	$m['onHistoryChanged'] = function(historyToken) {
+
+		(typeof fireHistoryChangedImpl == "undefined"?$m['fireHistoryChangedImpl']:fireHistoryChangedImpl)(historyToken);
+		return null;
+	};
+	$m['onHistoryChanged']['__name__'] = 'onHistoryChanged';
+
+	$m['onHistoryChanged']['__bind_type__'] = 0;
+	$m['onHistoryChanged']['__args__'] = [null,null,['historyToken']];
+	$m['fireHistoryChangedAndCatch'] = function() {
+
+ 		return null;
+	};
+	$m['fireHistoryChangedAndCatch']['__name__'] = 'fireHistoryChangedAndCatch';
+
+	$m['fireHistoryChangedAndCatch']['__bind_type__'] = 0;
+	$m['fireHistoryChangedAndCatch']['__args__'] = [null,null];
+	$m['fireHistoryChangedImpl'] = function(historyToken) {
+		var $iter1_nextval,$iter1_type,$iter1_iter,listener,$iter1_array,$iter1_idx;
+		$iter1_iter = $m['historyListeners'];
+		$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
+		while (typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined') {
+			listener = $iter1_nextval['$nextval'];
+			listener['onHistoryChanged'](historyToken);
+		}
+		return null;
+	};
+	$m['fireHistoryChangedImpl']['__name__'] = 'fireHistoryChangedImpl';
+
+	$m['fireHistoryChangedImpl']['__bind_type__'] = 0;
+	$m['fireHistoryChangedImpl']['__args__'] = [null,null,['historyToken']];
+	$m['removeHistoryListener'] = function(listener) {
+
+		$m['historyListeners']['remove'](listener);
+		return null;
+	};
+	$m['removeHistoryListener']['__name__'] = 'removeHistoryListener';
+
+	$m['removeHistoryListener']['__bind_type__'] = 0;
+	$m['removeHistoryListener']['__args__'] = [null,null,['listener']];
+	$m['_first_notify'] = function() {
+
+		$p['printFunc'](['first notify', $m['historyToken']], 1);
+		$m['onHistoryChanged']($m['historyToken']);
+		return null;
+	};
+	$m['_first_notify']['__name__'] = '_first_notify';
+
+	$m['_first_notify']['__bind_type__'] = 0;
+	$m['_first_notify']['__args__'] = [null,null];
+	$m['init'] = function() {
+
+
+    $wnd['__historyToken'] = '';
+
+    // Get the initial token from the url's hash component.
+    var hash = $wnd['location']['hash'];
+    if (hash['length'] > 0)
+        $wnd['__historyToken'] = decodeURI(hash['substring'](1))['replace']('%23','#');
+
+    // Create the timer that checks the browser's url hash every 1/4 s.
+    $wnd['__checkHistory'] = function() {
+        var token = '', hash = $wnd['location']['hash'];
+        if (hash['length'] > 0)
+            token = decodeURI(hash['substring'](1))['replace']('%23','#');
+
+        if (token != $wnd['__historyToken']) {
+            $wnd['__historyToken'] = token;
+            // TODO - move init back into History
+            // this['onHistoryChanged'](token);
+            $m['onHistoryChanged'](token);
+        }
+
+        $wnd['setTimeout']('__checkHistory()', 250);
+    };
+
+    // Kick off the timer.
+    $wnd['__checkHistory']();
+
+    return true;
+    
+	};
+	$m['init']['__name__'] = 'init';
+
+	$m['init']['__bind_type__'] = 0;
+	$m['init']['__args__'] = [null,null];
+	$m['init']();
+	return this;
+}; /* end pyjamas.History */
+
+
+/* end module: pyjamas.History */
+
+
+/*
+PYJS_DEPS: ['pyjd']
+*/
+
+--></script>
+<script type="text/javascript"><!--
 /* start module: pyjamas.ui.RootPanel */
 $pyjs['loaded_modules']['pyjamas.ui.RootPanel'] = function (__mod_name__) {
 	if($pyjs['loaded_modules']['pyjamas.ui.RootPanel']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.ui.RootPanel'];
@@ -4293,6 +4463,9 @@ $pyjs['loaded_modules']['index'] = function (__mod_name__) {
 	$m['PasswordTextBox'] = $p['___import___']('pyjamas.ui.PasswordTextBox.PasswordTextBox', null, null, false);
 	$m['Window'] = $p['___import___']('pyjamas.Window', null, null, false);
 	$m['Anchor'] = $p['___import___']('pyjamas.ui.Anchor.Anchor', null, null, false);
+	$m['Hyperlink'] = $p['___import___']('pyjamas.ui.Hyperlink.Hyperlink', null, null, false);
+	$m['HorizontalPanel'] = $p['___import___']('pyjamas.ui.HorizontalPanel.HorizontalPanel', null, null, false);
+	$m['HasAlignment'] = $p['___import___']('pyjamas.ui.HasAlignment', null, null, false);
 	$m['StyleSheetCssFile'] = $p['___import___']('pyjamas.ui.CSS.StyleSheetCssFile', null, null, false);
 	$m['ServiceProxy'] = $p['___import___']('pyjamas.JSONService.ServiceProxy', null, null, false);
 	$m['setCookie'] = $p['___import___']('pyjamas.Cookies.setCookie', null, null, false);
@@ -4308,30 +4481,42 @@ $pyjs['loaded_modules']['index'] = function (__mod_name__) {
 			} else {
 				var self = arguments[0];
 			}
-			var header,panelForm,signupAnchor,panel;
+			var parta,partb,part1,anchor,vp,header,part2,part3,part4,part5,hpanel,image;
 			self['remote_py'] = (typeof MyBlogService == "undefined"?$m['MyBlogService']:MyBlogService)();
 			self['form'] = $m['FormPanel']();
-			panel = $pyjs_kwargs_call(null, $m['VerticalPanel'], null, null, [{'StyleName':'log-form'}]);
-			self['form']['setWidget'](panel);
+			vp = $pyjs_kwargs_call(null, $m['VerticalPanel'], null, null, [{'BorderWidth':0, 'HorizontalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_CENTER'), 'VerticalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_MIDDLE'), 'Width':'100%', 'Height':'150px'}]);
+			self['form']['setWidget'](vp);
 			header = $m['HTML']('<h2>LOGIN TO YOUR ACCOUNT</h2>');
-			panel['add'](header);
-			panelForm = $pyjs_kwargs_call(null, $m['VerticalPanel'], null, null, [{'StyleName':'inner-panel-form'}]);
-			panel['add'](panelForm);
-			self['userName'] = $pyjs_kwargs_call(null, $m['TextBox'], null, null, [{'StyleName':'input-text'}]);
+			part1 = header;
+			self['userName'] = $m['TextBox']();
 			self['userName']['setName']('userNameFormElement');
 			self['userName']['setPlaceholder']('User Name');
-			panelForm['add']($p['getattr'](self, 'userName'));
-			self['password'] = $pyjs_kwargs_call(null, $m['PasswordTextBox'], null, null, [{'StyleName':'input-text'}]);
+			part2 = $p['getattr'](self, 'userName');
+			self['password'] = $m['PasswordTextBox']();
 			self['password']['setName']('passwordFormElement');
 			self['password']['setPlaceholder']('Password');
-			panelForm['add']($p['getattr'](self, 'password'));
+			part3 = $p['getattr'](self, 'password');
 			self['errorInfoLabel'] = $m['Label']();
 			self['errorInfoLabel']['setStyleName']('error-info');
-			panelForm['add']($p['getattr'](self, 'errorInfoLabel'));
-			panelForm['add']($pyjs_kwargs_call(null, $m['Button'], null, null, [{'StyleName':'btn'}, 'Login', self]));
-			signupAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']('Dont have account? Sign up'), 'Href':'/signup.html', 'Title':'Signup'}]);
-			signupAnchor['setStyleName']('signup');
-			panelForm['add'](signupAnchor);
+			part4 = $p['getattr'](self, 'errorInfoLabel');
+			part4['setStyleName']('errorlabel');
+			hpanel = $pyjs_kwargs_call(null, $m['HorizontalPanel'], null, null, [{'BorderWidth':0, 'HorizontalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_CENTER'), 'VerticalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_MIDDLE'), 'Width':'100%', 'Height':'50px'}]);
+			partb = $m['Button']('Login', self);
+			partb['setStyleName']('btn');
+			image = $m['Label']("Don''t have account? Sign up");
+			anchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':image, 'Href':'/signup.html'}]);
+			parta = anchor;
+			hpanel['add'](partb);
+			hpanel['add'](parta);
+			part5 = hpanel;
+			part5['setStyleName']('hpanel');
+			vp['add'](part1);
+			vp['add'](part2);
+			vp['add'](part3);
+			vp['add'](part4);
+			vp['add'](part5);
+			vp['setStyleName']('signup');
+			self['form']['addFormHandler'](self);
 			$m['RootPanel']()['add']($p['getattr'](self, 'form'));
 			return null;
 		}
@@ -4437,7 +4622,7 @@ $pyjs['loaded_modules']['index'] = function (__mod_name__) {
 	if ($p['bool']($p['op_eq']((typeof __name__ == "undefined"?$m['__name__']:__name__), '__main__'))) {
 		$m['app'] = $m['Index']();
 		$m['app']['onModuleLoad']();
-		$m['StyleSheetCssFile']('./login.css');
+		$m['StyleSheetCssFile']('./signup.css');
 	}
 	return this;
 }; /* end index */
@@ -4447,7 +4632,7 @@ $pyjs['loaded_modules']['index'] = function (__mod_name__) {
 
 
 /*
-PYJS_DEPS: ['pyjamas.ui.RootPanel.RootPanel', 'pyjamas', 'pyjamas.ui', 'pyjamas.ui.RootPanel', 'pyjamas.ui.Label.Label', 'pyjamas.ui.Label', 'pyjamas.ui.Button.Button', 'pyjamas.ui.Button', 'pyjamas.ui.HTML.HTML', 'pyjamas.ui.HTML', 'pyjamas.ui.VerticalPanel.VerticalPanel', 'pyjamas.ui.VerticalPanel', 'pyjamas.ui.FormPanel.FormPanel', 'pyjamas.ui.FormPanel', 'pyjamas.ui.TextBox.TextBox', 'pyjamas.ui.TextBox', 'pyjamas.ui.PasswordTextBox.PasswordTextBox', 'pyjamas.ui.PasswordTextBox', 'pyjamas.Window', 'pyjamas.ui.Anchor.Anchor', 'pyjamas.ui.Anchor', 'pyjamas.ui.CSS.StyleSheetCssFile', 'pyjamas.ui.CSS', 'pyjamas.JSONService.ServiceProxy', 'pyjamas.JSONService', 'pyjamas.Cookies.setCookie', 'pyjamas.Cookies', 'json', 'datetime']
+PYJS_DEPS: ['pyjamas.ui.RootPanel.RootPanel', 'pyjamas', 'pyjamas.ui', 'pyjamas.ui.RootPanel', 'pyjamas.ui.Label.Label', 'pyjamas.ui.Label', 'pyjamas.ui.Button.Button', 'pyjamas.ui.Button', 'pyjamas.ui.HTML.HTML', 'pyjamas.ui.HTML', 'pyjamas.ui.VerticalPanel.VerticalPanel', 'pyjamas.ui.VerticalPanel', 'pyjamas.ui.FormPanel.FormPanel', 'pyjamas.ui.FormPanel', 'pyjamas.ui.TextBox.TextBox', 'pyjamas.ui.TextBox', 'pyjamas.ui.PasswordTextBox.PasswordTextBox', 'pyjamas.ui.PasswordTextBox', 'pyjamas.Window', 'pyjamas.ui.Anchor.Anchor', 'pyjamas.ui.Anchor', 'pyjamas.ui.Hyperlink.Hyperlink', 'pyjamas.ui.Hyperlink', 'pyjamas.ui.HorizontalPanel.HorizontalPanel', 'pyjamas.ui.HorizontalPanel', 'pyjamas.ui.HasAlignment', 'pyjamas.ui.CSS.StyleSheetCssFile', 'pyjamas.ui.CSS', 'pyjamas.JSONService.ServiceProxy', 'pyjamas.JSONService', 'pyjamas.Cookies.setCookie', 'pyjamas.Cookies', 'json', 'datetime']
 */
 
 --></script>
@@ -14662,6 +14847,219 @@ $pyjs['loaded_modules']['pyjd'] = function (__mod_name__) {
 /* end module: pyjd */
 
 
+
+--></script>
+<script type="text/javascript"><!--
+/* start module: pyjamas.ui.Hyperlink */
+$pyjs['loaded_modules']['pyjamas.ui.Hyperlink'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['pyjamas.ui.Hyperlink']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.ui.Hyperlink'];
+	if(typeof $pyjs['loaded_modules']['pyjamas.ui'] == 'undefined' || !$pyjs['loaded_modules']['pyjamas.ui']['__was_initialized__']) $p['___import___']('pyjamas.ui', null);
+	var $m = $pyjs['loaded_modules']['pyjamas.ui.Hyperlink'];
+	$m['__repr__'] = function() { return '<module: pyjamas.ui.Hyperlink>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'pyjamas.ui.Hyperlink';
+	$m['__name__'] = __mod_name__;
+	$pyjs['loaded_modules']['pyjamas.ui']['Hyperlink'] = $pyjs['loaded_modules']['pyjamas.ui.Hyperlink'];
+
+
+	$m['DOM'] = $p['___import___']('pyjamas.DOM', 'pyjamas.ui', null, false);
+	$m['Factory'] = $p['___import___']('pyjamas.Factory', 'pyjamas.ui', null, false);
+	$m['History'] = $p['___import___']('pyjamas.History', 'pyjamas.ui', null, false);
+	$m['Widget'] = $p['___import___']('pyjamas.ui.Widget.Widget', 'pyjamas.ui', null, false);
+	$m['Event'] = $p['___import___']('pyjamas.ui.Event', 'pyjamas.ui', null, false);
+	$m['ClickHandler'] = $p['___import___']('pyjamas.ui.ClickListener.ClickHandler', 'pyjamas.ui', null, false);
+	$m['Hyperlink'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'pyjamas.ui.Hyperlink';
+		$method = $pyjs__bind_method2('__init__', function(text, asHTML, Element) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+				var kwargs = arguments['length'] >= 4 ? arguments[arguments['length']-1] : arguments[arguments['length']];
+				if (kwargs === null || typeof kwargs != 'object' || kwargs['__name__'] != 'dict' || typeof kwargs['$pyjs_is_kwarg'] == 'undefined') {
+					var kwargs = arguments[arguments['length']+1];
+				} else {
+					delete kwargs['$pyjs_is_kwarg'];
+				}
+			} else {
+				var self = arguments[0];
+				text = arguments[1];
+				asHTML = arguments[2];
+				Element = arguments[3];
+				var kwargs = arguments['length'] >= 5 ? arguments[arguments['length']-1] : arguments[arguments['length']];
+				if (kwargs === null || typeof kwargs != 'object' || kwargs['__name__'] != 'dict' || typeof kwargs['$pyjs_is_kwarg'] == 'undefined') {
+					kwargs = arguments[arguments['length']+1];
+				} else {
+					delete kwargs['$pyjs_is_kwarg'];
+				}
+			}
+			if (typeof kwargs == 'undefined') {
+				kwargs = $p['__empty_dict']();
+				if (typeof Element != 'undefined') {
+					if (Element !== null && typeof Element['$pyjs_is_kwarg'] != 'undefined') {
+						kwargs = Element;
+						Element = arguments[4];
+					}
+				} else 				if (typeof asHTML != 'undefined') {
+					if (asHTML !== null && typeof asHTML['$pyjs_is_kwarg'] != 'undefined') {
+						kwargs = asHTML;
+						asHTML = arguments[4];
+					}
+				} else 				if (typeof text != 'undefined') {
+					if (text !== null && typeof text['$pyjs_is_kwarg'] != 'undefined') {
+						kwargs = text;
+						text = arguments[4];
+					}
+				} else 				if (typeof self != 'undefined') {
+					if (self !== null && typeof self['$pyjs_is_kwarg'] != 'undefined') {
+						kwargs = self;
+						self = arguments[4];
+					}
+				} else {
+				}
+			}
+			if (typeof text == 'undefined') text=arguments['callee']['__args__'][3][1];
+			if (typeof asHTML == 'undefined') asHTML=arguments['callee']['__args__'][4][1];
+			if (typeof Element == 'undefined') Element=arguments['callee']['__args__'][5][1];
+
+			if ($p['bool']((Element === null))) {
+				Element = $m['DOM']['createDiv']();
+			}
+			self['anchorElem'] = $m['DOM']['createAnchor']();
+			self['setElement'](Element);
+			$m['DOM']['appendChild'](self['getElement'](), $p['getattr'](self, 'anchorElem'));
+			if ($p['bool'](!$p['bool'](kwargs['has_key']('StyleName')))) {
+				kwargs['__setitem__']('StyleName', 'gwt-Hyperlink');
+			}
+			if ($p['bool'](text)) {
+				if ($p['bool'](asHTML)) {
+					kwargs['__setitem__']('HTML', text);
+				}
+				else {
+					kwargs['__setitem__']('Text', text);
+				}
+			}
+			if ($p['bool'](!$p['bool'](kwargs['has_key']('TargetHistoryToken')))) {
+				kwargs['__setitem__']('TargetHistoryToken', null);
+			}
+			$pyjs_kwargs_call($m['Widget'], '__init__', null, kwargs, [{}, self]);
+			$m['ClickHandler']['__init__'](self);
+			return null;
+		}
+	, 1, [null,['kwargs'],['self'],['text', ''],['asHTML', false],['Element', null]]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('onBrowserEvent', function(event) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				event = arguments[1];
+			}
+			var event_type;
+			$m['Widget']['onBrowserEvent'](self, event);
+			event_type = $m['DOM']['eventGetType'](event);
+			if ($p['bool']($p['op_eq'](event_type, 'click'))) {
+				$m['DOM']['eventPreventDefault'](event);
+				if ($p['bool'](($p['getattr'](self, 'targetHistoryToken') !== null))) {
+					$m['History']['newItem']($p['getattr'](self, 'targetHistoryToken'));
+				}
+			}
+			return null;
+		}
+	, 1, [null,null,['self'],['event']]);
+		$cls_definition['onBrowserEvent'] = $method;
+		$method = $pyjs__bind_method2('getHTML', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return $m['DOM']['getInnerHTML']($p['getattr'](self, 'anchorElem'));
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['getHTML'] = $method;
+		$method = $pyjs__bind_method2('setHTML', function(html) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				html = arguments[1];
+			}
+
+			$m['DOM']['setInnerHTML']($p['getattr'](self, 'anchorElem'), html);
+			return null;
+		}
+	, 1, [null,null,['self'],['html']]);
+		$cls_definition['setHTML'] = $method;
+		$method = $pyjs__bind_method2('getText', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return $m['DOM']['getInnerText']($p['getattr'](self, 'anchorElem'));
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['getText'] = $method;
+		$method = $pyjs__bind_method2('setText', function(text) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				text = arguments[1];
+			}
+
+			$m['DOM']['setInnerText']($p['getattr'](self, 'anchorElem'), text);
+			return null;
+		}
+	, 1, [null,null,['self'],['text']]);
+		$cls_definition['setText'] = $method;
+		$method = $pyjs__bind_method2('getTargetHistoryToken', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return $p['getattr'](self, 'targetHistoryToken');
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['getTargetHistoryToken'] = $method;
+		$method = $pyjs__bind_method2('setTargetHistoryToken', function(targetHistoryToken) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				targetHistoryToken = arguments[1];
+			}
+			var $add2,$add1;
+			self['targetHistoryToken'] = targetHistoryToken;
+			if ($p['bool']((targetHistoryToken === null))) {
+				targetHistoryToken = '';
+			}
+			$m['DOM']['setAttribute']($p['getattr'](self, 'anchorElem'), 'href', $p['__op_add']($add1='#',$add2=targetHistoryToken));
+			return null;
+		}
+	, 1, [null,null,['self'],['targetHistoryToken']]);
+		$cls_definition['setTargetHistoryToken'] = $method;
+		var $bases = new Array($m['Widget'],$m['ClickHandler']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('Hyperlink', $p['tuple']($bases), $data);
+	})();
+	$m['Factory']['registerClass']('pyjamas.ui.Hyperlink', 'Hyperlink', $m['Hyperlink']);
+	return this;
+}; /* end pyjamas.ui.Hyperlink */
+
+
+/* end module: pyjamas.ui.Hyperlink */
+
+
+/*
+PYJS_DEPS: ['pyjamas.DOM', 'pyjamas', 'pyjamas.Factory', 'pyjamas.History', 'pyjamas.ui.Widget.Widget', 'pyjamas.ui', 'pyjamas.ui.Widget', 'pyjamas.ui.Event', 'pyjamas.ui.ClickListener.ClickHandler', 'pyjamas.ui.ClickListener']
+*/
 
 --></script>
 <script type="text/javascript"><!--
@@ -29065,6 +29463,132 @@ PYJS_DEPS: ['pyjamas.DOM', 'pyjamas', 'pyjamas.Factory', 'pyjamas.ui.TextBoxBase
 
 --></script>
 <script type="text/javascript"><!--
+/* start module: pyjamas.ui.HorizontalPanel */
+$pyjs['loaded_modules']['pyjamas.ui.HorizontalPanel'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['pyjamas.ui.HorizontalPanel']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.ui.HorizontalPanel'];
+	if(typeof $pyjs['loaded_modules']['pyjamas.ui'] == 'undefined' || !$pyjs['loaded_modules']['pyjamas.ui']['__was_initialized__']) $p['___import___']('pyjamas.ui', null);
+	var $m = $pyjs['loaded_modules']['pyjamas.ui.HorizontalPanel'];
+	$m['__repr__'] = function() { return '<module: pyjamas.ui.HorizontalPanel>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'pyjamas.ui.HorizontalPanel';
+	$m['__name__'] = __mod_name__;
+	$pyjs['loaded_modules']['pyjamas.ui']['HorizontalPanel'] = $pyjs['loaded_modules']['pyjamas.ui.HorizontalPanel'];
+
+
+	$m['DOM'] = $p['___import___']('pyjamas.DOM', 'pyjamas.ui', null, false);
+	$m['Factory'] = $p['___import___']('pyjamas.Factory', 'pyjamas.ui', null, false);
+	$m['CellPanel'] = $p['___import___']('pyjamas.ui.CellPanel.CellPanel', 'pyjamas.ui', null, false);
+	$m['HorizontalPanel'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'pyjamas.ui.HorizontalPanel';
+		$method = $pyjs__bind_method2('__init__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+				var kwargs = arguments['length'] >= 1 ? arguments[arguments['length']-1] : arguments[arguments['length']];
+				if (kwargs === null || typeof kwargs != 'object' || kwargs['__name__'] != 'dict' || typeof kwargs['$pyjs_is_kwarg'] == 'undefined') {
+					var kwargs = arguments[arguments['length']+1];
+				} else {
+					delete kwargs['$pyjs_is_kwarg'];
+				}
+			} else {
+				var self = arguments[0];
+				var kwargs = arguments['length'] >= 2 ? arguments[arguments['length']-1] : arguments[arguments['length']];
+				if (kwargs === null || typeof kwargs != 'object' || kwargs['__name__'] != 'dict' || typeof kwargs['$pyjs_is_kwarg'] == 'undefined') {
+					kwargs = arguments[arguments['length']+1];
+				} else {
+					delete kwargs['$pyjs_is_kwarg'];
+				}
+			}
+			if (typeof kwargs == 'undefined') {
+				kwargs = $p['__empty_dict']();
+				if (typeof self != 'undefined') {
+					if (self !== null && typeof self['$pyjs_is_kwarg'] != 'undefined') {
+						kwargs = self;
+						self = arguments[1];
+					}
+				} else {
+				}
+			}
+
+			$pyjs_kwargs_call($m['CellPanel'], '__init__', null, kwargs, [{}, self]);
+			self['tableRow'] = $m['DOM']['createTR']();
+			$m['DOM']['appendChild'](self['getBody'](), $p['getattr'](self, 'tableRow'));
+			return null;
+		}
+	, 1, [null,['kwargs'],['self']]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('insert', function(widget, container, beforeIndex) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				widget = arguments[1];
+				container = arguments[2];
+				beforeIndex = arguments[3];
+			}
+			if (typeof beforeIndex == 'undefined') beforeIndex=arguments['callee']['__args__'][5][1];
+			var td;
+			if ($p['bool']($p['op_eq'](widget['getParent'](), self))) {
+				return null;
+			}
+			if ($p['bool']((beforeIndex === null))) {
+				beforeIndex = container;
+				container = $p['getattr'](self, 'tableRow');
+			}
+			if ($p['bool']($p['op_eq'](widget['getParent'](), self))) {
+				return null;
+			}
+			widget['removeFromParent']();
+			td = $m['DOM']['createTD']();
+			$m['DOM']['insertChild'](container, td, beforeIndex);
+			$m['CellPanel']['insert'](self, widget, td, beforeIndex);
+			self['setCellHorizontalAlignment'](widget, $p['getattr'](self, 'horzAlign'));
+			self['setCellVerticalAlignment'](widget, $p['getattr'](self, 'vertAlign'));
+			return null;
+		}
+	, 1, [null,null,['self'],['widget'],['container'],['beforeIndex', null]]);
+		$cls_definition['insert'] = $method;
+		$method = $pyjs__bind_method2('remove', function(widget) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				widget = arguments[1];
+			}
+			var td;
+			if ($p['bool']($p['isinstance'](widget, $p['float_int']))) {
+				widget = self['getWidget'](widget);
+			}
+			if ($p['bool'](!$p['op_eq'](widget['getParent'](), self))) {
+				return false;
+			}
+			td = $m['DOM']['getParent'](widget['getElement']());
+			$m['DOM']['removeChild']($p['getattr'](self, 'tableRow'), td);
+			$m['CellPanel']['remove'](self, widget);
+			return true;
+		}
+	, 1, [null,null,['self'],['widget']]);
+		$cls_definition['remove'] = $method;
+		var $bases = new Array($m['CellPanel']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('HorizontalPanel', $p['tuple']($bases), $data);
+	})();
+	$m['Factory']['registerClass']('pyjamas.ui.HorizontalPanel', 'HorizontalPanel', $m['HorizontalPanel']);
+	return this;
+}; /* end pyjamas.ui.HorizontalPanel */
+
+
+/* end module: pyjamas.ui.HorizontalPanel */
+
+
+/*
+PYJS_DEPS: ['pyjamas.DOM', 'pyjamas', 'pyjamas.Factory', 'pyjamas.ui.CellPanel.CellPanel', 'pyjamas.ui', 'pyjamas.ui.CellPanel']
+*/
+
+--></script>
+<script type="text/javascript"><!--
 /* start module: pyjamas.ui.ComplexPanel */
 $pyjs['loaded_modules']['pyjamas.ui.ComplexPanel'] = function (__mod_name__) {
 	if($pyjs['loaded_modules']['pyjamas.ui.ComplexPanel']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.ui.ComplexPanel'];
@@ -30564,7 +31088,7 @@ function prepare_app() {
         };
         wait();
     }
-    wait_for_loading_modules(app_imported, ['pyjamas.ui','pyjamas.ui.FocusWidget','pyjamas.ui.InnerText','pyjamas.ui.Widget','pyjamas.ui.ClickListener','pygwt','pyjamas.Location','pyjamas.ui.VerticalPanel','sys','pyjamas.ui.ChangeListener','pyjamas.ui.DropHandler','index','pyjamas.ui.TextBoxBase','pyjamas','struct','pyjamas.ui.TextBox','pyjamas.ui.Focus','binascii','pyjamas.ui.Label','urllib','re','json','pyjamas.ui.FormPanel','pyjamas.HTTPRequest','getopt','pyjamas.ui.AbsolutePanel','pyjamas.ui.KeyboardListener','math','pyjamas.ui.Event','pyjamas.Cookies','pyjamas.ui.Button','string','pyjamas.Window','pyjamas.ui.CSS','pyjamas.ui.PasswordTextBox','pyjamas.ui.Panel','pyjamas.Factory','base64','pyjamas.ui.Anchor','pyjamas.ui.CellPanel','datetime','pyjamas.ui.MouseListener','pyjamas.ui.InnerHTML','pyjamas.ui.ComplexPanel','pyjslib','pyjamas.ui.ButtonBase','pyjamas.JSONService','pyjamas.ui.InputListener','pyjamas.ui.RootPanel','pyjamas.ui.SimplePanel','pyjamas.DOM','pyjd','pyjamas.ui.EventObject','pyjamas.EventController','time','pyjamas.ui.HTML','pyjamas.ui.DragHandler','pyjamas.ui.UIObject','pyjamas.ui.FocusListener']);
+    wait_for_loading_modules(app_imported, ['pyjamas.ui','pyjamas.ui.FocusWidget','pyjamas.Window','pyjamas.ui.InnerText','pyjamas.ui.Widget','pyjamas.ui.ClickListener','pygwt','pyjamas.Location','pyjamas.ui.VerticalPanel','sys','pyjamas.ui.ChangeListener','pyjamas.ui.DropHandler','index','pyjamas.ui.TextBoxBase','pyjamas','struct','pyjamas.ui.HorizontalPanel','pyjamas.ui.TextBox','pyjamas.ui.Focus','binascii','pyjamas.ui.Label','urllib','re','json','pyjamas.ui.FormPanel','pyjamas.HTTPRequest','getopt','pyjamas.ui.AbsolutePanel','pyjamas.ui.KeyboardListener','math','pyjamas.ui.Event','pyjamas.Cookies','pyjamas.ui.Button','string','pyjamas.ui.Hyperlink','pyjamas.ui.CSS','pyjamas.ui.PasswordTextBox','pyjamas.History','pyjamas.ui.Panel','pyjamas.Factory','base64','pyjamas.ui.Anchor','pyjamas.ui.CellPanel','datetime','pyjamas.ui.MouseListener','pyjamas.ui.InnerHTML','pyjamas.ui.ComplexPanel','pyjslib','pyjamas.ui.ButtonBase','pyjamas.JSONService','pyjamas.ui.InputListener','pyjamas.ui.RootPanel','pyjamas.ui.SimplePanel','pyjamas.DOM','pyjd','pyjamas.ui.EventObject','pyjamas.EventController','time','pyjamas.ui.HTML','pyjamas.ui.DragHandler','pyjamas.ui.UIObject','pyjamas.ui.FocusListener']);
 }
 
 function pygwtOnLoad(onLoadError, name) {

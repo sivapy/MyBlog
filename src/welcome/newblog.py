@@ -18,78 +18,72 @@ from pyjamas.JSONService import ServiceProxy
 from pyjamas.ui.HorizontalPanel import HorizontalPanel
 from pyjamas.Cookies import getCookie
 import json
+from pyjamas.ui.SimplePanel import SimplePanel
+from pyjamas.ui.TextArea import TextArea
+from pyjamas.ui.DockPanel import DockPanel
 
 
 class newblogform:
     def onModuleLoad(self):
         loggedInUser = getCookie("LoggedInUser")
         loggedInUserJsonData = json.loads(loggedInUser)
+        
         self.username = loggedInUserJsonData["username"]
         
-        self.form=FormPanel()
         self.remote_py = MyBlogService()
         
+        dockPanel = DockPanel(BorderWidth=0, Padding=0,
+                          HorizontalAlignment=HasAlignment.ALIGN_CENTER,
+                          VerticalAlignment=HasAlignment.ALIGN_MIDDLE)
         
-        panel=VerticalPanel(StyleName="signup")
-        self.form.setWidget(panel)
+        dockPanel.setSize('100%', '100%')
         
-        self.logo=Image("Testware_logo.png")
-        self.logo.setStyleName("logo")
-        panel.add(self.logo)
+        headerPanel = HorizontalPanel(StyleName='header')
+        dockPanel.add(headerPanel,  DockPanel.NORTH)
+        dockPanel.setCellHeight(headerPanel, '60px')
+
+
+        self.siteImage = Image("/images/Testware_logo.png")
+        self.siteImage.setStyleName('logo-image')
+        headerPanel.add(self.siteImage)
         
-        header=HTML("<h3>New Blog</h3>")
-        panel.add(header)
+        rightHeaderPanel = VerticalPanel(StyleName='right-header')
+        headerPanel.add(rightHeaderPanel)
         
-        panelform=VerticalPanel(StyleName="innerform")
-       
+        welcomeNoteLabel = Label('Hi %s %s!' % (loggedInUserJsonData["first_name"], loggedInUserJsonData["last_name"]))
+        rightHeaderPanel.add(welcomeNoteLabel)
+        
+        logoutAnchor = Anchor(Widget = HTML('Logout'), Href='/', Title = 'Logout')
+        logoutAnchor.setStyleName('logout')
+        rightHeaderPanel.add(logoutAnchor)
+        
+        panel=HorizontalPanel(StyleName="header2")
+        dockPanel.add(panel,  DockPanel.NORTH)
+        dockPanel.setCellHeight(panel, '50px')
         
         self.blogTitle=TextBox()
-        self.blogTitle.setName("emailsignup")
+        self.blogTitle.setStyleName('blog-title')
         self.blogTitle.setPlaceholder("Blog Title")
-        panelform.add(self.blogTitle)
+        panel.add(self.blogTitle)
         
-        self.blogContent=TextBox()
-        self.blogContent.setName("emailsignup")
-        self.blogContent.setPlaceholder("Blog Content")
-        panelform.add(self.blogContent)
+        self.blogContent=TextArea()
+        self.blogContent.setStyleName('blog-content')
         
-        self.errorlabel=Label()
-        self.errorlabel.setStyleName("errorlabel")
-        panelform.add(self.errorlabel)
+        dockPanel.add(self.blogContent, DockPanel.CENTER)
+        createBlogButton = Button("Create Blog",self)
+        createBlogButton.setStyleName('btn')
+        panel.add(createBlogButton)
         
-        hpanel = HorizontalPanel(BorderWidth=0,HorizontalAlignment=HasAlignment.ALIGN_CENTER,VerticalAlignment=HasAlignment.ALIGN_MIDDLE,Width="100%",Height="50px")
-
-        part1 = Button("Create Blog",self)
-        part1.setStyleName('btn')
-        
-        hpanel.setStyleName("hp")
-        hpanel.add(part1)
-        
-        panel.setCellWidth(part1, "45%")
-        
- 
-        
-        panelform.add(hpanel)
-        
-        
-        panel.add(panelform)
-        
-        self.form.addFormHandler(self)
-        
-        RootPanel().add(self.form)
+        RootPanel().add(dockPanel)
         
         
     def onClick(self, sender):
         self.createBlog()
-    
-    def onSubmitComplete(self,event):
-        Window.alert(event.getResults())
                 
     def createBlog(self):
          self.remote_py.callMethod('createBlog', [self.blogTitle.getText(), self.blogContent.getText(), self.username], self)
          
     def onRemoteResponse(self, response, requestInfo):
-        self.errorlabel.setText('')
         Window.setLocation("/home.html")
 
     def onRemoteError(self, code, error_dict, requestInfo):
@@ -105,5 +99,5 @@ class MyBlogService(ServiceProxy):
 if __name__ == '__main__':
     app = newblogform()
     app.onModuleLoad() 
-    StyleSheetCssFile("./signup.css")
+    StyleSheetCssFile("./newblog.css")
     

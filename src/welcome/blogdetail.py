@@ -18,78 +18,77 @@ from pyjamas.JSONService import ServiceProxy
 from pyjamas.ui.HorizontalPanel import HorizontalPanel
 from pyjamas.Cookies import getCookie
 import json
+from pyjamas.ui.SimplePanel import SimplePanel
+from pyjamas.ui.TextArea import TextArea
+from pyjamas.ui.DockPanel import DockPanel
 
 
-class newblogform:
+class publishblogform:
     def onModuleLoad(self):
         self.blogJsonData = json.loads(getCookie("SelectedBlog"))
+        loggedInUserJsonData = json.loads(getCookie("LoggedInUser"))
         
-        self.form=FormPanel()
         self.remote_py = MyBlogService()
         
+        dockPanel = DockPanel(BorderWidth=0, Padding=0,
+                          HorizontalAlignment=HasAlignment.ALIGN_CENTER,
+                          VerticalAlignment=HasAlignment.ALIGN_MIDDLE)
         
-        panel=VerticalPanel(StyleName="signup")
-        self.form.setWidget(panel)
+        dockPanel.setSize('100%', '100%')
         
-        self.logo=Image("Testware_logo.png")
-        self.logo.setStyleName("logo")
-        panel.add(self.logo)
+        headerPanel = HorizontalPanel(StyleName='header')
+        dockPanel.add(headerPanel,  DockPanel.NORTH)
+        dockPanel.setCellHeight(headerPanel, '60px')
+
+
+        self.siteImage = Image("/images/Testware_logo.png")
+        self.siteImage.setStyleName('logo-image')
+        headerPanel.add(self.siteImage)
         
-        header=HTML("<h3>Publish Blog</h3>")
-        panel.add(header)
+        rightHeaderPanel = VerticalPanel(StyleName='right-header')
+        headerPanel.add(rightHeaderPanel)
         
-        panelform=VerticalPanel(StyleName="innerform")
-       
+        
+        welcomeNoteLabel = Label('Hi %s %s!' % (loggedInUserJsonData["first_name"], loggedInUserJsonData["last_name"]))
+        rightHeaderPanel.add(welcomeNoteLabel)
+        
+        logoutAnchor = Anchor(Widget = HTML('Logout'), Href='/', Title = 'Logout')
+        logoutAnchor.setStyleName('logout')
+        rightHeaderPanel.add(logoutAnchor)
+        
+        
+        panel=HorizontalPanel(StyleName="header2")
+        dockPanel.add(panel,  DockPanel.NORTH)
+        dockPanel.setCellHeight(panel, '50px')
         
         self.blogTitle=TextBox()
+        self.blogTitle.setStyleName('blog-title')
         self.blogTitle.setText(self.blogJsonData["blog_name"])
-        self.blogTitle.setName("emailsignup")
         self.blogTitle.setReadonly(readonly=True)
-        panelform.add(self.blogTitle)
+        panel.add(self.blogTitle)
         
-        self.blogContent=TextBox()
+        
+        self.blogContent=TextArea()
+        self.blogContent.setStyleName('blog-content')
         self.blogContent.setText(self.blogJsonData["blog_content"])
-        self.blogContent.setName("emailsignup")
         self.blogContent.setReadonly(readonly=True)
-        panelform.add(self.blogContent)
         
-        self.errorlabel=Label()
-        self.errorlabel.setStyleName("errorlabel")
-        panelform.add(self.errorlabel)
+        dockPanel.add(self.blogContent, DockPanel.CENTER)
         
-        hpanel = HorizontalPanel(BorderWidth=0,HorizontalAlignment=HasAlignment.ALIGN_CENTER,VerticalAlignment=HasAlignment.ALIGN_MIDDLE,Width="100%",Height="50px")
-
-        part1 = Button("Publish Blog",self)
-        part1.setStyleName('btn')
+        createBlogButton = Button("Publish",self)
+        createBlogButton.setStyleName('btn')
+        panel.add(createBlogButton)
         
-        hpanel.setStyleName("hp")
-        hpanel.add(part1)
-        
-        panel.setCellWidth(part1, "45%")
-        
- 
-        
-        panelform.add(hpanel)
-        
-        
-        panel.add(panelform)
-        
-        self.form.addFormHandler(self)
-        
-        RootPanel().add(self.form)
+        RootPanel().add(dockPanel)
         
         
     def onClick(self, sender):
-        self.createBlog()
-    
-    def onSubmitComplete(self,event):
-        Window.alert(event.getResults())
+        self.publishBlog()
                 
-    def createBlog(self):
+    def publishBlog(self):
          self.remote_py.callMethod('publishBlog', [self.blogJsonData["id"]], self)
          
     def onRemoteResponse(self, response, requestInfo):
-        self.errorlabel.setText('')
         Window.setLocation("/admin.html")
 
     def onRemoteError(self, code, error_dict, requestInfo):
@@ -103,7 +102,7 @@ class MyBlogService(ServiceProxy):
         
         
 if __name__ == '__main__':
-    app = newblogform()
+    app = publishblogform()
     app.onModuleLoad() 
-    StyleSheetCssFile("./signup.css")
+    StyleSheetCssFile("./newblog.css")
     
