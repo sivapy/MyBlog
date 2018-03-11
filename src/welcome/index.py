@@ -15,20 +15,17 @@ from pyjamas.ui import HasAlignment
 from pyjamas.ui.CSS import StyleSheetCssFile
 
 from pyjamas.JSONService import ServiceProxy
+from pyjamas.Cookies import setCookie
+import json
+import datetime
 
-class FormPanelExample:
+class Index:
     def onModuleLoad(self):
         
-        self.remote_py = EchoServicePython()
+        self.remote_py = MyBlogService()
         
         # Create a FormPanel and point it at a service.
         self.form = FormPanel()
-        self.form.setAction("/home.html")
-        
-        # Because we're going to add a FileUpload widget, we'll need to set the
-        # form to use the POST method, and multipart MIME encoding.
-        self.form.setEncoding(FormPanel.ENCODING_MULTIPART)
-        self.form.setMethod(FormPanel.METHOD_POST)
         
         # Create a panel to hold all of the form widgets.
         vp=VerticalPanel(BorderWidth=0,HorizontalAlignment=HasAlignment.ALIGN_CENTER,VerticalAlignment=HasAlignment.ALIGN_MIDDLE,Width="100%",Height="150px")
@@ -87,37 +84,32 @@ class FormPanelExample:
         else:
             self.errorInfoLabel.setText('')
             self.authenticateUser()
-    
-    def onSubmitComplete(self, event):
-        # When the form submission is successfully completed, this event is
-        # fired. Assuming the service returned a response of type text/plain,
-        # we can get the result text here (see the FormPanel documentation for
-        # further explanation).
-        Window.alert(event.getResults())
-    
-#     def onSubmit(self, event):
-#         # This event is fired just before the form is submitted. We can take
-#         # this opportunity to perform validation.
-#         
-#             event.setCancelled(True)
-         
+ 
     def authenticateUser(self):
         self.remote_py.callMethod('authenticateUser', [self.userName.getText(), self.password.getText()], self)
         
-    def onRemoteResponse(self, value, requestInfo):
+    def onRemoteResponse(self, response, requestInfo):
         self.errorInfoLabel.setText('')
+        d = datetime.date.today() + datetime.timedelta(days=1)
+        setCookie("LoggedInUser", response, d, path='/')
+        loggedInUser = json.loads(response)
+        if loggedInUser["is_superuser"] == True:
+            Window.setLocation("/admin.html")
+        else:
+            Window.setLocation("/home.html")
+        
 
     def onRemoteError(self, code, error_dict, requestInfo):
         if code == 401:
             self.errorInfoLabel.setText("Invalid Credentials. Please try again.")
 #             self.erroInfoLabel.setVisible(True)
         
-class EchoServicePython(ServiceProxy):
+class MyBlogService(ServiceProxy):
     def __init__(self):
         ServiceProxy.__init__(self, "http://127.0.0.1:8000/json/", 'jsonrpc', headers=None)
 
 if __name__ == '__main__':
-    app = FormPanelExample()
+    app = Index()
     app.onModuleLoad()
     StyleSheetCssFile("./signup.css")
 
