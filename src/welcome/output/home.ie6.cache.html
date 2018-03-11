@@ -870,6 +870,73 @@ PYJS_DEPS: ['pyjamas.DOM', 'pyjamas']
 
 --></script>
 <script type="text/javascript"><!--
+/* start module: urllib */
+$pyjs['loaded_modules']['urllib'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['urllib']['__was_initialized__']) return $pyjs['loaded_modules']['urllib'];
+	var $m = $pyjs['loaded_modules']['urllib'];
+	$m['__repr__'] = function() { return '<module: urllib>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'urllib';
+	$m['__name__'] = __mod_name__;
+
+
+	$m['quote'] = function(s, safe) {
+		if (typeof safe == 'undefined') safe=arguments['callee']['__args__'][3][1];
+
+		return encodeURIComponent(s);
+	};
+	$m['quote']['__name__'] = 'quote';
+
+	$m['quote']['__bind_type__'] = 0;
+	$m['quote']['__args__'] = [null,null,['s'],['safe', '']];
+	$m['unquote_plus'] = function(st) {
+
+		return decodeURIComponent(st['$$replace']('+', ' '));
+	};
+	$m['unquote_plus']['__name__'] = 'unquote_plus';
+
+	$m['unquote_plus']['__bind_type__'] = 0;
+	$m['unquote_plus']['__args__'] = [null,null,['st']];
+	$m['unquote'] = function(st) {
+
+		return decodeURIComponent(st);
+	};
+	$m['unquote']['__name__'] = 'unquote';
+
+	$m['unquote']['__bind_type__'] = 0;
+	$m['unquote']['__args__'] = [null,null,['st']];
+	$m['urlencode'] = function(d) {
+		var $iter1_nextval,$iter1_type,$iter1_idx,i,$iter1_iter,$add2,s,$add1,$iter1_array,v;
+		s = '';
+		$iter1_iter = d['iteritems']();
+		$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
+		while (typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined') {
+			var $tupleassign1 = $p['__ass_unpack']($iter1_nextval['$nextval'], 2, null);
+			i = $tupleassign1[0];
+			v = $tupleassign1[1];
+			s = $p['__op_add']($add1=s,$add2=$p['sprintf']('%s=%s&', $p['tuple']([i, $m['quote']($p['str'](v))])));
+		}
+		if ($p['bool'](!$p['op_eq'](s, ''))) {
+			s = $p['__getslice'](s, 0, (typeof ($usub1=1)=='number'?
+				-$usub1:
+				$p['op_usub']($usub1)));
+		}
+		return s;
+	};
+	$m['urlencode']['__name__'] = 'urlencode';
+
+	$m['urlencode']['__bind_type__'] = 0;
+	$m['urlencode']['__args__'] = [null,null,['d']];
+	return this;
+}; /* end urllib */
+
+
+/* end module: urllib */
+
+
+
+--></script>
+<script type="text/javascript"><!--
 /* start module: pyjamas.HTTPRequest */
 $pyjs['loaded_modules']['pyjamas.HTTPRequest'] = function (__mod_name__) {
 	if($pyjs['loaded_modules']['pyjamas.HTTPRequest']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.HTTPRequest'];
@@ -6808,6 +6875,558 @@ PYJS_DEPS: ['pyjamas.DOM', 'pyjamas']
 
 --></script>
 <script type="text/javascript"><!--
+/* start module: time */
+$pyjs['loaded_modules']['time'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['time']['__was_initialized__']) return $pyjs['loaded_modules']['time'];
+	var $m = $pyjs['loaded_modules']['time'];
+	$m['__repr__'] = function() { return '<module: time>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'time';
+	$m['__name__'] = __mod_name__;
+	var $sub2,$sub1;
+
+	$m['math'] = $p['___import___']('math', null);
+	$m['timezone'] = 60 * (new Date(new Date()['getFullYear'](), 0, 1))['getTimezoneOffset']();
+	$m['altzone'] = 60 * (new Date(new Date()['getFullYear'](), 6, 1))['getTimezoneOffset']();
+	if ($p['bool'](($p['cmp']($m['altzone'], $m['timezone']) == 1))) {
+		$m['d'] = $m['timezone'];
+		$m['timezone'] = $m['altzone'];
+		$m['altzone'] = $m['d'];
+	}
+	$m['_dst'] = $p['__op_sub']($sub1=$m['timezone'],$sub2=$m['altzone']);
+	$m['d'] = (new Date(new Date()['getFullYear'](), 0, 1));
+	$m['d'] = $p['str']($m['d']['toLocaleString']())['$$split']()['__getitem__']((typeof ($usub1=1)=='number'?
+		-$usub1:
+		$p['op_usub']($usub1)));
+	if ($p['bool']($p['op_eq']($m['d']['__getitem__'](0), '('))) {
+		$m['d'] = $p['__getslice']($m['d'], 1, (typeof ($usub2=1)=='number'?
+			-$usub2:
+			$p['op_usub']($usub2)));
+	}
+	$m['tzname'] = $p['tuple']([$m['d'], null]);
+	delete $m['d'];
+	$m['__c__days'] = $p['list'](['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']);
+	$m['__c__months'] = $p['list'](['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+	$m['time'] = function() {
+
+		return $p['float'](new Date()['getTime']() / 1000.0);
+	};
+	$m['time']['__name__'] = 'time';
+
+	$m['time']['__bind_type__'] = 0;
+	$m['time']['__args__'] = [null,null];
+	$m['struct_time'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'time';
+		$cls_definition['n_fields'] = 9;
+		$cls_definition['n_sequence_fields'] = 9;
+		$cls_definition['n_unnamed_fields'] = 0;
+		$cls_definition['tm_year'] = null;
+		$cls_definition['tm_mon'] = null;
+		$cls_definition['tm_mday'] = null;
+		$cls_definition['tm_hour'] = null;
+		$cls_definition['tm_min'] = null;
+		$cls_definition['tm_sec'] = null;
+		$cls_definition['tm_wday'] = null;
+		$cls_definition['tm_yday'] = null;
+		$cls_definition['tm_isdst'] = null;
+		$method = $pyjs__bind_method2('__init__', function(ttuple) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				ttuple = arguments[1];
+			}
+			if (typeof ttuple == 'undefined') ttuple=arguments['callee']['__args__'][3][1];
+
+			if ($p['bool'](!$p['bool']((ttuple === null)))) {
+				self['tm_year'] = ttuple['__getitem__'](0);
+				self['tm_mon'] = ttuple['__getitem__'](1);
+				self['tm_mday'] = ttuple['__getitem__'](2);
+				self['tm_hour'] = ttuple['__getitem__'](3);
+				self['tm_min'] = ttuple['__getitem__'](4);
+				self['tm_sec'] = ttuple['__getitem__'](5);
+				self['tm_wday'] = ttuple['__getitem__'](6);
+				self['tm_yday'] = ttuple['__getitem__'](7);
+				self['tm_isdst'] = ttuple['__getitem__'](8);
+			}
+			return null;
+		}
+	, 1, [null,null,['self'],['ttuple', null]]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('__str__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var t;
+			t = $p['tuple']([$p['getattr'](self, 'tm_year'), $p['getattr'](self, 'tm_mon'), $p['getattr'](self, 'tm_mday'), $p['getattr'](self, 'tm_hour'), $p['getattr'](self, 'tm_min'), $p['getattr'](self, 'tm_sec'), $p['getattr'](self, 'tm_wday'), $p['getattr'](self, 'tm_yday'), $p['getattr'](self, 'tm_isdst')]);
+			return t['__str__']();
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__str__'] = $method;
+		$method = $pyjs__bind_method2('__repr__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return self['__str__']();
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__repr__'] = $method;
+		$method = $pyjs__bind_method2('__getitem__', function(idx) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				idx = arguments[1];
+			}
+
+			return $p['list']([$p['getattr'](self, 'tm_year'), $p['getattr'](self, 'tm_mon'), $p['getattr'](self, 'tm_mday'), $p['getattr'](self, 'tm_hour'), $p['getattr'](self, 'tm_min'), $p['getattr'](self, 'tm_sec'), $p['getattr'](self, 'tm_wday'), $p['getattr'](self, 'tm_yday'), $p['getattr'](self, 'tm_isdst')])['__getitem__'](idx);
+		}
+	, 1, [null,null,['self'],['idx']]);
+		$cls_definition['__getitem__'] = $method;
+		$method = $pyjs__bind_method2('__getslice__', function(lower, upper) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				lower = arguments[1];
+				upper = arguments[2];
+			}
+
+			return $p['__getslice']($p['list']([$p['getattr'](self, 'tm_year'), $p['getattr'](self, 'tm_mon'), $p['getattr'](self, 'tm_mday'), $p['getattr'](self, 'tm_hour'), $p['getattr'](self, 'tm_min'), $p['getattr'](self, 'tm_sec'), $p['getattr'](self, 'tm_wday'), $p['getattr'](self, 'tm_yday'), $p['getattr'](self, 'tm_isdst')]), lower, upper);
+		}
+	, 1, [null,null,['self'],['lower'],['upper']]);
+		$cls_definition['__getslice__'] = $method;
+		var $bases = new Array($p['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('struct_time', $p['tuple']($bases), $data);
+	})();
+	$m['gmtime'] = function(t) {
+		if (typeof t == 'undefined') t=arguments['callee']['__args__'][2][1];
+		var $add2,$sub3,$div1,$div2,startOfYear,$add6,$add5,tm_year,$add3,tm,$assign1,$add4,$mod2,date,$mod1,$add1,$div3,$div4,$sub4;
+		if ($p['bool']((t === null))) {
+			t = $m['time']();
+		}
+		date = new Date(t*1000);
+		tm = $m['struct_time']();
+		$assign1 = $p['float_int'](date['getUTCFullYear']());
+		tm_year = $assign1;
+		tm['tm_year'] = $assign1;
+		tm['tm_mon'] = $p['__op_add']($add1=$p['float_int'](date['getUTCMonth']()),$add2=1);
+		tm['tm_mday'] = $p['float_int'](date['getUTCDate']());
+		tm['tm_hour'] = $p['float_int'](date['getUTCHours']());
+		tm['tm_min'] = $p['float_int'](date['getUTCMinutes']());
+		tm['tm_sec'] = $p['float_int'](date['getUTCSeconds']());
+		tm['tm_wday'] = (typeof ($mod1=$p['__op_add']($add3=$p['float_int'](date['getUTCDay']()),$add4=6))==typeof ($mod2=7) && typeof $mod1=='number'?
+			(($mod1=$mod1%$mod2)<0&&$mod2>0?$mod1+$mod2:$mod1):
+			$p['op_mod']($mod1,$mod2));
+		tm['tm_isdst'] = 0;
+		startOfYear = new Date('Jan 1 '+ tm_year +' GMT+0000');
+		tm['tm_yday'] = $p['__op_add']($add5=1,$add6=$p['float_int']((typeof ($div3=$p['__op_sub']($sub3=t,$sub4=(typeof ($div1=startOfYear['getTime']())==typeof ($div2=1000) && typeof $div1=='number' && $div2 !== 0?
+			$div1/$div2:
+			$p['op_div']($div1,$div2))))==typeof ($div4=86400) && typeof $div3=='number' && $div4 !== 0?
+			$div3/$div4:
+			$p['op_div']($div3,$div4))));
+		return tm;
+	};
+	$m['gmtime']['__name__'] = 'gmtime';
+
+	$m['gmtime']['__bind_type__'] = 0;
+	$m['gmtime']['__args__'] = [null,null,['t', null]];
+	$m['localtime'] = function(t) {
+		if (typeof t == 'undefined') t=arguments['callee']['__args__'][2][1];
+		var $mod4,$mod3,$sub8,$mul3,$div7,tm,tm_mon,startOfYear,$div5,$sub7,$sub6,$sub5,startOfDay,tm_year,$div8,$add10,$add11,$add12,$add13,date,dt,$mul4,$div6,$mul2,$mul1,dateOffset,$add14,startOfYearOffset,tm_mday,$assign4,$add7,$assign3,$assign2,$add8,$add9;
+		if ($p['bool']((t === null))) {
+			t = $m['time']();
+		}
+		date = new Date(t*1000);
+		dateOffset = date['getTimezoneOffset']();
+		tm = $m['struct_time']();
+		$assign2 = $p['float_int'](date['getFullYear']());
+		tm_year = $assign2;
+		tm['tm_year'] = $assign2;
+		$assign3 = $p['__op_add']($add7=$p['float_int'](date['getMonth']()),$add8=1);
+		tm_mon = $assign3;
+		tm['tm_mon'] = $assign3;
+		$assign4 = $p['float_int'](date['getDate']());
+		tm_mday = $assign4;
+		tm['tm_mday'] = $assign4;
+		tm['tm_hour'] = $p['float_int'](date['getHours']());
+		tm['tm_min'] = $p['float_int'](date['getMinutes']());
+		tm['tm_sec'] = $p['float_int'](date['getSeconds']());
+		tm['tm_wday'] = (typeof ($mod3=$p['__op_add']($add9=$p['float_int'](date['getDay']()),$add10=6))==typeof ($mod4=7) && typeof $mod3=='number'?
+			(($mod3=$mod3%$mod4)<0&&$mod4>0?$mod3+$mod4:$mod3):
+			$p['op_mod']($mod3,$mod4));
+		tm['tm_isdst'] = ($p['bool']($p['op_eq']($m['timezone'], (typeof ($mul1=60)==typeof ($mul2=date['getTimezoneOffset']()) && typeof $mul1=='number'?
+			$mul1*$mul2:
+			$p['op_mul']($mul1,$mul2))))? (0) : (1));
+		startOfYear = new Date(tm_year,0,1);
+		startOfYearOffset = startOfYear['getTimezoneOffset']();
+		startOfDay = new Date(tm_year,tm_mon-1,tm_mday);
+		dt = (typeof ($div5=$p['float']($p['__op_sub']($sub5=startOfDay['getTime'](),$sub6=startOfYear['getTime']())))==typeof ($div6=1000) && typeof $div5=='number' && $div6 !== 0?
+			$div5/$div6:
+			$p['op_div']($div5,$div6));
+		dt = $p['__op_add']($add11=dt,$add12=(typeof ($mul3=60)==typeof ($mul4=$p['__op_sub']($sub7=startOfYearOffset,$sub8=dateOffset)) && typeof $mul3=='number'?
+			$mul3*$mul4:
+			$p['op_mul']($mul3,$mul4)));
+		tm['tm_yday'] = $p['__op_add']($add13=1,$add14=$p['float_int']((typeof ($div7=dt)==typeof ($div8=86400.0) && typeof $div7=='number' && $div8 !== 0?
+			$div7/$div8:
+			$p['op_div']($div7,$div8))));
+		return tm;
+	};
+	$m['localtime']['__name__'] = 'localtime';
+
+	$m['localtime']['__bind_type__'] = 0;
+	$m['localtime']['__args__'] = [null,null,['t', null]];
+	$m['mktime'] = function(t) {
+		var $add16,utc,tm_sec,tm_hour,tm_mday,$sub10,$div10,$div11,$div12,ts,tm_year,$add15,$sub9,$div9,tm_mon,$sub12,date,$sub11,tm_min;
+		tm_year = t['__getitem__'](0);
+		tm_mon = $p['__op_sub']($sub9=t['__getitem__'](1),$sub10=1);
+		tm_mday = t['__getitem__'](2);
+		tm_hour = t['__getitem__'](3);
+		tm_min = t['__getitem__'](4);
+		tm_sec = t['__getitem__'](5);
+		date = new Date(tm_year, tm_mon, tm_mday, tm_hour, tm_min, tm_sec);
+		utc = (typeof ($div9=Date['UTC'](tm_year, tm_mon, tm_mday, tm_hour, tm_min, tm_sec))==typeof ($div10=1000) && typeof $div9=='number' && $div10 !== 0?
+			$div9/$div10:
+			$p['op_div']($div9,$div10));
+		ts = (typeof ($div11=date['getTime']())==typeof ($div12=1000) && typeof $div11=='number' && $div12 !== 0?
+			$div11/$div12:
+			$p['op_div']($div11,$div12));
+		if ($p['bool']($p['op_eq'](t['__getitem__'](8), 0))) {
+			if ($p['bool']($p['op_eq']($p['__op_sub']($sub11=ts,$sub12=utc), $m['timezone']))) {
+				return ts;
+			}
+			return $p['__op_add']($add15=ts,$add16=$m['_dst']);
+		}
+		return ts;
+	};
+	$m['mktime']['__name__'] = 'mktime';
+
+	$m['mktime']['__bind_type__'] = 0;
+	$m['mktime']['__args__'] = [null,null,['t']];
+	$m['strftime'] = function(fmt, t) {
+		if (typeof t == 'undefined') t=arguments['callee']['__args__'][3][1];
+		var firstMonday,tm_hour,tm_sec,tm_wday,$mod5,$mod6,result,remainder,$div14,$add20,$add22,$div13,tm_mon,startOfYear,tm_min,format,$sub13,$and1,$and2,$sub16,$sub15,$sub14,tm_year,$add17,tm_yday,date,firstWeek,$add18,$add19,tm_mday,weekNo,$add21,re_pct;
+		if ($p['bool']((t === null))) {
+			t = $m['localtime']();
+		}
+		else {
+			if ($p['bool'](($p['bool']($and1=!$p['bool']($p['isinstance'](t, $m['struct_time'])))?!$p['op_eq']($p['len'](t), 9):$and1))) {
+				throw ($p['TypeError']('argument must be 9-item sequence, not float'));
+			}
+		}
+		tm_year = t['__getitem__'](0);
+		tm_mon = t['__getitem__'](1);
+		tm_mday = t['__getitem__'](2);
+		tm_hour = t['__getitem__'](3);
+		tm_min = t['__getitem__'](4);
+		tm_sec = t['__getitem__'](5);
+		tm_wday = t['__getitem__'](6);
+		tm_yday = t['__getitem__'](7);
+		date = new Date(tm_year, tm_mon - 1, tm_mday, tm_hour, tm_min, tm_sec);
+		startOfYear = new Date(tm_year,0,1);
+		firstMonday = $p['__op_add']($add19=$p['__op_sub']($sub13=1,$sub14=(typeof ($mod5=$p['__op_add']($add17=startOfYear['getDay'](),$add18=6))==typeof ($mod6=7) && typeof $mod5=='number'?
+			(($mod5=$mod5%$mod6)<0&&$mod6>0?$mod5+$mod6:$mod5):
+			$p['op_mod']($mod5,$mod6))),$add20=7);
+		firstWeek = new Date(tm_year,0,firstMonday);
+		weekNo = $p['__op_sub']($sub15=date['getTime'](),$sub16=firstWeek['getTime']());
+		if ($p['bool'](($p['cmp'](weekNo, 0) == -1))) {
+			weekNo = 0;
+		}
+		else {
+			weekNo = $p['__op_add']($add21=1,$add22=$p['float_int']((typeof ($div13=weekNo)==typeof ($div14=604800000) && typeof $div13=='number' && $div14 !== 0?
+				$div13/$div14:
+				$p['op_div']($div13,$div14))));
+		}
+		format = function(c) {
+			var $sub18,$mod11,$mod10,$mod12,$add25,$add23,$sub17,$add24,$add26,$mod7,$mod9,$mod8;
+			if ($p['bool']($p['op_eq'](c, '%'))) {
+				return '%';
+			}
+			else if ($p['bool']($p['op_eq'](c, 'a'))) {
+				return $p['__getslice'](format('A'), 0, 3);
+			}
+			else if ($p['bool']($p['op_eq'](c, 'A'))) {
+				return $m['__c__days']['__getitem__'](format('w'));
+			}
+			else if ($p['bool']($p['op_eq'](c, 'b'))) {
+				return $p['__getslice'](format('B'), 0, 3);
+			}
+			else if ($p['bool']($p['op_eq'](c, 'B'))) {
+				return $m['__c__months']['__getitem__']($p['__op_sub']($sub17=tm_mon,$sub18=1));
+			}
+			else if ($p['bool']($p['op_eq'](c, 'c'))) {
+				return date['toLocaleString']();
+			}
+			else if ($p['bool']($p['op_eq'](c, 'd'))) {
+				return $p['sprintf']('%02d', tm_mday);
+			}
+			else if ($p['bool']($p['op_eq'](c, 'H'))) {
+				return $p['sprintf']('%02d', tm_hour);
+			}
+			else if ($p['bool']($p['op_eq'](c, 'I'))) {
+				return $p['sprintf']('%02d', (typeof ($mod7=tm_hour)==typeof ($mod8=12) && typeof $mod7=='number'?
+					(($mod7=$mod7%$mod8)<0&&$mod8>0?$mod7+$mod8:$mod7):
+					$p['op_mod']($mod7,$mod8)));
+			}
+			else if ($p['bool']($p['op_eq'](c, 'j'))) {
+				return $p['sprintf']('%03d', tm_yday);
+			}
+			else if ($p['bool']($p['op_eq'](c, 'm'))) {
+				return $p['sprintf']('%02d', tm_mon);
+			}
+			else if ($p['bool']($p['op_eq'](c, 'M'))) {
+				return $p['sprintf']('%02d', tm_min);
+			}
+			else if ($p['bool']($p['op_eq'](c, 'p'))) {
+				if ($p['bool'](($p['cmp'](tm_hour, 12) == -1))) {
+					return 'AM';
+				}
+				return 'PM';
+			}
+			else if ($p['bool']($p['op_eq'](c, 'S'))) {
+				return $p['sprintf']('%02d', tm_sec);
+			}
+			else if ($p['bool']($p['op_eq'](c, 'U'))) {
+				throw ($p['NotImplementedError']($p['sprintf']("strftime format character '%s'", c)));
+			}
+			else if ($p['bool']($p['op_eq'](c, 'w'))) {
+				return $p['sprintf']('%d', (typeof ($mod9=$p['__op_add']($add23=tm_wday,$add24=1))==typeof ($mod10=7) && typeof $mod9=='number'?
+					(($mod9=$mod9%$mod10)<0&&$mod10>0?$mod9+$mod10:$mod9):
+					$p['op_mod']($mod9,$mod10)));
+			}
+			else if ($p['bool']($p['op_eq'](c, 'W'))) {
+				return $p['sprintf']('%d', weekNo);
+			}
+			else if ($p['bool']($p['op_eq'](c, 'x'))) {
+				return $p['sprintf']('%s', date['toLocaleDateString']());
+			}
+			else if ($p['bool']($p['op_eq'](c, 'X'))) {
+				return $p['sprintf']('%s', date['toLocaleTimeString']());
+			}
+			else if ($p['bool']($p['op_eq'](c, 'y'))) {
+				return $p['sprintf']('%02d', (typeof ($mod11=tm_year)==typeof ($mod12=100) && typeof $mod11=='number'?
+					(($mod11=$mod11%$mod12)<0&&$mod12>0?$mod11+$mod12:$mod11):
+					$p['op_mod']($mod11,$mod12)));
+			}
+			else if ($p['bool']($p['op_eq'](c, 'Y'))) {
+				return $p['sprintf']('%04d', tm_year);
+			}
+			else if ($p['bool']($p['op_eq'](c, 'Z'))) {
+				throw ($p['NotImplementedError']($p['sprintf']("strftime format character '%s'", c)));
+			}
+			return $p['__op_add']($add25='%',$add26=c);
+		};
+		format['__name__'] = 'format';
+
+		format['__bind_type__'] = 0;
+		format['__args__'] = [null,null,['c']];
+		result = '';
+		remainder = fmt;
+		re_pct = /([^%]*)%(.)(.*)/;
+var a, fmtChar;
+		while ($p['bool'](remainder)) {
+
+        a = re_pct['exec'](remainder);
+        if (!a) {
+            result += remainder;
+            remainder = false;
+        } else {
+            result += a[1];
+            fmtChar = a[2];
+            remainder = a[3];
+            if (typeof fmtChar != 'undefined') {
+                result += format(fmtChar);
+            }
+        }
+        
+		}
+		return $p['str'](result);
+	};
+	$m['strftime']['__name__'] = 'strftime';
+
+	$m['strftime']['__bind_type__'] = 0;
+	$m['strftime']['__args__'] = [null,null,['fmt'],['t', null]];
+	$m['asctime'] = function(t) {
+		if (typeof t == 'undefined') t=arguments['callee']['__args__'][2][1];
+		var $add28,$sub19,$mod13,$mod14,$sub20,$add27;
+		if ($p['bool']((t === null))) {
+			t = $m['localtime']();
+		}
+		return $p['sprintf']('%s %s %02d %02d:%02d:%02d %04d', $p['tuple']([$p['__getslice']($m['__c__days']['__getitem__']((typeof ($mod13=$p['__op_add']($add27=t['__getitem__'](6),$add28=1))==typeof ($mod14=7) && typeof $mod13=='number'?
+			(($mod13=$mod13%$mod14)<0&&$mod14>0?$mod13+$mod14:$mod13):
+			$p['op_mod']($mod13,$mod14))), 0, 3), $m['__c__months']['__getitem__']($p['__op_sub']($sub19=t['__getitem__'](1),$sub20=1)), t['__getitem__'](2), t['__getitem__'](3), t['__getitem__'](4), t['__getitem__'](5), t['__getitem__'](0)]));
+	};
+	$m['asctime']['__name__'] = 'asctime';
+
+	$m['asctime']['__bind_type__'] = 0;
+	$m['asctime']['__args__'] = [null,null,['t', null]];
+	$m['ctime'] = function(t) {
+		if (typeof t == 'undefined') t=arguments['callee']['__args__'][2][1];
+
+		return $m['asctime']($m['localtime'](t));
+	};
+	$m['ctime']['__name__'] = 'ctime';
+
+	$m['ctime']['__bind_type__'] = 0;
+	$m['ctime']['__args__'] = [null,null,['t', null]];
+
+var _DATE_FORMAT_REGXES = {
+    'Y': new RegExp('^-?[0-9]{4}'),
+    'y': new RegExp('^-?[0-9]{2}'),
+    'd': new RegExp('^[0-9]{2}'),
+    'm': new RegExp('^[0-9]{2}'),
+    'H': new RegExp('^[0-9]{2}'),
+    'M': new RegExp('^[0-9]{2}'),
+    'S': new RegExp('^[0-9]{2}')
+}
+
+/*
+ * _parseData does the actual parsing job needed by `strptime`
+ */
+function _parseDate(datestring, format) {
+    var parsed = {};
+    for (var i1=0,i2=0;i1<format['length'];i1++,i2++) {
+        var c1 = format[i1];
+        var c2 = datestring[i2];
+        if (c1 == '%') {
+            c1 = format[++i1];
+            var data = _DATE_FORMAT_REGXES[c1]['exec'](datestring['substring'](i2));
+            if (!data['length']) {
+                return null;
+            }
+            data = data[0];
+            i2 += data['length']-1;
+            var value = parseInt(data, 10);
+            if (isNaN(value)) {
+                return null;
+            }
+            parsed[c1] = value;
+            continue;
+        }
+        if (c1 != c2) {
+            return null;
+        }
+    }
+    return parsed;
+}
+
+/*
+ * basic implementation of strptime. The only recognized formats
+ * defined in _DATE_FORMAT_REGEXES (i['e']. %Y, %d, %m, %H, %M)
+ */
+function strptime(datestring, format) {
+    var parsed = _parseDate(datestring, format);
+    if (!parsed) {
+        return null;
+    }
+    // create initial date (!!! year=0 means 1900 !!!)
+    var date = new Date(0, 0, 1, 0, 0);
+    date['setFullYear'](0); // reset to year 0
+    if (typeof parsed['Y'] != "undefined") {
+        date['setFullYear'](parsed['Y']);
+    }
+    if (typeof parsed['y'] != "undefined") {
+        date['setFullYear'](2000+parsed['y']);
+    }
+    if (typeof parsed['m'] != "undefined") {
+        if (parsed['m'] < 1 || parsed['m'] > 12) {
+            return null;
+        }
+        // !!! month indexes start at 0 in javascript !!!
+        date['setMonth'](parsed['m'] - 1);
+    }
+    if (typeof parsed['d'] != "undefined") {
+        if (parsed['m'] < 1 || parsed['m'] > 31) {
+            return null;
+        }
+        date['setDate'](parsed['d']);
+    }
+    if (typeof parsed['H'] != "undefined") {
+        if (parsed['H'] < 0 || parsed['H'] > 23) {
+            return null;
+        }
+        date['setHours'](parsed['H']);
+    }
+    if (typeof parsed['M'] != "undefined") {
+        if (parsed['M'] < 0 || parsed['M'] > 59) {
+            return null;
+        }
+        date['setMinutes'](parsed['M']);
+    }
+    if (typeof parsed['S'] != "undefined") {
+        if (parsed['S'] < 0 || parsed['S'] > 59) {
+            return null;
+        }
+        date['setSeconds'](parsed['S']);
+    }
+    // new Date()['setFullYear'](2010,01,31) returns March 3
+    if (typeof parsed['m'] != "undefined" && date['getMonth']() != parsed['m']-1) {
+        // date['getMonth']() and parsed['m'] don't correspond
+        return null;
+    }
+    return date;
+};
+
+	$m['_strptime'] = function(datestring, format) {
+		var $pyjs_try_err;
+		try {
+			return $p['float'](strptime(datestring['valueOf'](), format['valueOf']())['getTime']() / 1000.0);
+		} catch($pyjs_try_err) {
+			var $pyjs_try_err_name = (typeof $pyjs_try_err['__name__'] == 'undefined' ? $pyjs_try_err['name'] : $pyjs_try_err['__name__'] );
+			$pyjs['__last_exception__'] = {'error': $pyjs_try_err, 'module': $m};
+			if (true) {
+				throw ($p['ValueError']($p['sprintf']("Invalid or unsupported values for strptime: '%s', '%s'", $p['tuple']([datestring, format]))));
+			}
+		}
+		return null;
+	};
+	$m['_strptime']['__name__'] = '_strptime';
+
+	$m['_strptime']['__bind_type__'] = 0;
+	$m['_strptime']['__args__'] = [null,null,['datestring'],['format']];
+	$m['strptime'] = function(datestring, format) {
+		var tt,$pyjs_try_err;
+		try {
+			tt = $m['localtime']($p['float'](strptime(datestring['valueOf'](), format['valueOf']())['getTime']() / 1000.0));
+			tt['tm_isdst'] = (typeof ($usub3=1)=='number'?
+				-$usub3:
+				$p['op_usub']($usub3));
+			return tt;
+		} catch($pyjs_try_err) {
+			var $pyjs_try_err_name = (typeof $pyjs_try_err['__name__'] == 'undefined' ? $pyjs_try_err['name'] : $pyjs_try_err['__name__'] );
+			$pyjs['__last_exception__'] = {'error': $pyjs_try_err, 'module': $m};
+			if (true) {
+				throw ($p['ValueError']($p['sprintf']("Invalid or unsupported values for strptime: '%s', '%s'", $p['tuple']([datestring, format]))));
+			}
+		}
+		return null;
+	};
+	$m['strptime']['__name__'] = 'strptime';
+
+	$m['strptime']['__bind_type__'] = 0;
+	$m['strptime']['__args__'] = [null,null,['datestring'],['format']];
+	return this;
+}; /* end time */
+
+
+/* end module: time */
+
+
+/*
+PYJS_DEPS: ['math']
+*/
+
+--></script>
+<script type="text/javascript"><!--
 /* start module: pyjamas.ui.MouseListener */
 $pyjs['loaded_modules']['pyjamas.ui.MouseListener'] = function (__mod_name__) {
 	if($pyjs['loaded_modules']['pyjamas.ui.MouseListener']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.ui.MouseListener'];
@@ -7912,6 +8531,150 @@ $pyjs['loaded_modules']['pyjamas.ui.Focus'] = function (__mod_name__) {
 
 /*
 PYJS_DEPS: ['pyjd', 'pyjamas.DOM', 'pyjamas']
+*/
+
+--></script>
+<script type="text/javascript"><!--
+/* start module: pyjamas.Cookies */
+$pyjs['loaded_modules']['pyjamas.Cookies'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['pyjamas.Cookies']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.Cookies'];
+	if(typeof $pyjs['loaded_modules']['pyjamas'] == 'undefined' || !$pyjs['loaded_modules']['pyjamas']['__was_initialized__']) $p['___import___']('pyjamas', null);
+	var $m = $pyjs['loaded_modules']['pyjamas.Cookies'];
+	$m['__repr__'] = function() { return '<module: pyjamas.Cookies>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'pyjamas.Cookies';
+	$m['__name__'] = __mod_name__;
+	$pyjs['loaded_modules']['pyjamas']['Cookies'] = $pyjs['loaded_modules']['pyjamas.Cookies'];
+
+
+	$m['pyjd'] = $p['___import___']('pyjd', 'pyjamas');
+	if ($p['bool']($p['getattr']($m['pyjd'], 'is_desktop'))) {
+		$m['SimpleCookie'] = $p['___import___']('Cookie.SimpleCookie', 'pyjamas', null, false);
+		$m['urllib'] = $p['___import___']('urllib', 'pyjamas');
+		$m['datetime'] = $p['___import___']('datetime', 'pyjamas');
+		$m['strip'] = $p['___import___']('string.strip', 'pyjamas', null, false);
+	}
+	$m['getCookie'] = function(cookie_name) {
+
+
+	var results = document['cookie']['match'] ( '(^|;) ?' +
+                        cookie_name + '=([^;]*)(;|$)' );
+
+	if ( results )
+		return ( decodeURIComponent ( results[2] ) );
+	else
+		return null;
+
+    
+	};
+	$m['getCookie']['__name__'] = 'getCookie';
+
+	$m['getCookie']['__bind_type__'] = 0;
+	$m['getCookie']['__args__'] = [null,null,['cookie_name']];
+	$m['getCookie2'] = function(cookie_name) {
+		var cs,cookiestr,c;
+		cookiestr = $p['getattr']($doc, 'cookie');
+		c = $m['SimpleCookie']($p['str'](cookiestr));
+		cs = c['get'](cookie_name, null);
+		$p['printFunc'](['getCookie2', cookiestr, 'name', cookie_name, 'val', cs], 1);
+		if ($p['bool'](cs)) {
+			return $p['getattr'](cs, 'value');
+		}
+		return null;
+	};
+	$m['getCookie2']['__name__'] = 'getCookie2';
+
+	$m['getCookie2']['__bind_type__'] = 0;
+	$m['getCookie2']['__args__'] = [null,null,['cookie_name']];
+	$m['setCookie'] = function(name, value, expires, domain, path, secure) {
+		if (typeof domain == 'undefined') domain=arguments['callee']['__args__'][5][1];
+		if (typeof path == 'undefined') path=arguments['callee']['__args__'][6][1];
+		if (typeof secure == 'undefined') secure=arguments['callee']['__args__'][7][1];
+
+
+    if (expires instanceof Date) expires = expires['getTime']();
+    if ($p['isUndefined'](domain)) domain = null;
+    if ($p['isUndefined'](path)) path = null;
+    if ($p['isUndefined'](secure)) secure = false;
+
+    var today = new Date();
+    var expiration = new Date();
+    if (!expires) expires = 0;
+    expiration['setTime'](today['getTime']() + expires);
+
+    var c = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+    c += ';expires=' + expiration['toGMTString']();
+
+    if (domain)
+        c += ';domain=' + domain;
+    if (path)
+        c += ';path=' + path;
+    if (secure)
+        c += ';secure';
+
+    $doc['cookie'] = c;
+    
+	};
+	$m['setCookie']['__name__'] = 'setCookie';
+
+	$m['setCookie']['__bind_type__'] = 0;
+	$m['setCookie']['__args__'] = [null,null,['name'],['value'],['expires'],['domain', null],['path', null],['secure', false]];
+	$m['get_crumbs'] = function() {
+		var c,docCookie;
+		docCookie = $p['getattr']($doc, 'cookie');
+		c = $m['SimpleCookie'](docCookie);
+		c = $pyjs_kwargs_call(c, 'output', null, null, [{'header':''}]);
+		return $p['map']($m['strip'], c['$$split']('\n'));
+	};
+	$m['get_crumbs']['__name__'] = 'get_crumbs';
+
+	$m['get_crumbs']['__bind_type__'] = 0;
+	$m['get_crumbs']['__args__'] = [null,null];
+	$m['loadCookies'] = function() {
+
+
+    var cookies = {};
+
+    var docCookie = $doc['cookie'];
+
+    if (docCookie && docCookie != '') {
+        var crumbs = docCookie['split'](';');
+        for (var i = 0; i < crumbs['length']; ++i) {
+			alert(crumbs['length']);
+            var name, value;
+
+            var eqIdx = crumbs[i]['indexOf']('=');
+            if (eqIdx == -1) {
+                name = crumbs[i];
+                value = '';
+            } else {
+                name = crumbs[i]['substring'](0, eqIdx);
+                value = crumbs[i]['substring'](eqIdx + 1);
+            }
+
+			alert(name);
+			alert(value);
+
+        cookies[decodeURIComponent(name)] = decodeURIComponent(value);
+        }
+    }
+
+    return cookies;
+    
+	};
+	$m['loadCookies']['__name__'] = 'loadCookies';
+
+	$m['loadCookies']['__bind_type__'] = 0;
+	$m['loadCookies']['__args__'] = [null,null];
+	return this;
+}; /* end pyjamas.Cookies */
+
+
+/* end module: pyjamas.Cookies */
+
+
+/*
+PYJS_DEPS: ['pyjd', 'Cookie.SimpleCookie', 'Cookie', 'urllib', 'datetime', 'string.strip', 'string']
 */
 
 --></script>
@@ -11939,6 +12702,486 @@ PYJS_DEPS: ['pyjamas.DOM', 'pyjamas', 'pyjamas.ui.Event', 'pyjamas.ui']
 
 --></script>
 <script type="text/javascript"><!--
+/* start module: string */
+$pyjs['loaded_modules']['string'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['string']['__was_initialized__']) return $pyjs['loaded_modules']['string'];
+	var $m = $pyjs['loaded_modules']['string'];
+	$m['__repr__'] = function() { return '<module: string>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'string';
+	$m['__name__'] = __mod_name__;
+	var $add14,$add11,$add12,$add13,$add2,$add3,$add1,$add6,$add7,$add4,$add5,$add10,$add8,$add9;
+
+	$m['whitespace'] = ' \t\n\r\x0b\x0c';
+	$m['lowercase'] = 'abcdefghijklmnopqrstuvwxyz';
+	$m['uppercase'] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$m['letters'] = $p['__op_add']($add1=$m['lowercase'],$add2=$m['uppercase']);
+	$m['ascii_lowercase'] = $m['lowercase'];
+	$m['ascii_uppercase'] = $m['uppercase'];
+	$m['ascii_letters'] = $p['__op_add']($add3=$m['ascii_lowercase'],$add4=$m['ascii_uppercase']);
+	$m['digits'] = '0123456789';
+	$m['hexdigits'] = $p['__op_add']($add7=$p['__op_add']($add5=$m['digits'],$add6='abcdef'),$add8='ABCDEF');
+	$m['octdigits'] = '01234567';
+	$m['punctuation'] = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+	$m['printable'] = $p['__op_add']($add13=$p['__op_add']($add11=$p['__op_add']($add9=$m['digits'],$add10=$m['letters']),$add12=$m['punctuation']),$add14=$m['whitespace']);
+	$m['l'] = $p['map']($p['chr'], $p['xrange'](256));
+	$m['_idmap'] = $p['str']('')['join']($m['l']);
+	delete $m['l'];
+	$m['capwords'] = function(s, sep) {
+		if (typeof sep == 'undefined') sep=arguments['callee']['__args__'][3][1];
+		var $iter1_nextval,$iter1_type,$iter1_iter,$iter1_array,x,$iter1_idx;
+		if ($p['bool']((sep === null))) {
+			sep = ' ';
+		}
+		return sep['join'](function(){
+var $generator_state = [0], $generator_exc = [null], $yield_value = null, $exc = null, $is_executing=false;
+			var $generator = function () {};
+			$generator['next'] = function (noStop) {
+			
+				var $res;
+				$yield_value = $exc = null;
+				try {
+					$res = $generator['$genfunc']();
+					$is_executing=false;
+					if (typeof $res == 'undefined') {
+						if (noStop === true) {
+							$generator_state[0] = -1;
+							return;
+						}
+						throw $p['StopIteration']();
+					}
+				} catch (e) {
+			
+					$is_executing=false;
+					$generator_state[0] = -1;
+					if (noStop === true && $p['isinstance'](e, $p['StopIteration'])) {
+						return;
+					}
+					throw e;
+				}
+				return $res;
+			};
+			$generator['__iter__'] = function () {return $generator;};
+			$generator['send'] = function ($val) {
+			
+				$yield_value = $val;
+				$exc = null;
+				try {
+					var $res = $generator['$genfunc']();
+					if (typeof $res == 'undefined') throw $p['StopIteration']();
+				} catch (e) {
+			
+					$generator_state[0] = -1;
+					$is_executing=false;
+					throw e;
+				}
+				$is_executing=false;
+				return $res;
+			};
+			$generator['$$throw'] = function ($exc_type, $exc_value) {
+			
+				$yield_value = null;
+				$exc=(typeof $exc_value == 'undefined' ? $exc_type() :
+														($p['isinstance']($exc_value, $exc_type)
+														 ? $exc_value : $exc_type($exc_value)));
+				try {
+					var $res = $generator['$genfunc']();
+				} catch (e) {
+			
+					$generator_state[0] = -1;
+					$is_executing=false;
+					throw (e);
+				}
+				$is_executing=false;
+				return $res;
+			};
+			$generator['close'] = function () {
+			
+				$yield_value = null;
+				$exc=$p['GeneratorExit']();
+				try {
+					var $res = $generator['$genfunc']();
+					$is_executing=false;
+					if (typeof $res != 'undefined') throw $p['RuntimeError']('generator ignored GeneratorExit');
+				} catch (e) {
+			
+					$generator_state[0] = -1;
+					$is_executing=false;
+					if ($p['isinstance'](e, $p['StopIteration']) || $p['isinstance'](e, $p['GeneratorExit'])) return null;
+					throw (e);
+				}
+				return null;
+			};
+			$generator['$genfunc'] = function () {
+				var $yielding = false;
+				if ($is_executing) throw $p['ValueError']('generator already executing');
+				$is_executing = true;
+			
+			if (typeof $generator_state[0] == 'undefined' || $generator_state[0] === 0) {
+				for (var $i = 0 ; $i < ($generator_state['length']<2?2:$generator_state['length']); $i++) $generator_state[$i]=0;
+				if (typeof $exc != 'undefined' && $exc !== null) {
+					$yielding = null;
+					$generator_state[0] = -1;
+					throw $exc;
+				}
+				$iter1_iter = s['$$split'](sep);
+				$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
+				$generator_state[0]=1;
+			}
+			if ($generator_state[0] == 1) {
+				$generator_state[1] = 0;
+				$generator_state[0]=2;
+			}
+			if ($generator_state[0] == 2) {
+				for (;($generator_state[1] > 0 || typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined');$generator_state[1] = 0) {
+					if (typeof $generator_state[1] == 'undefined' || $generator_state[1] === 0) {
+						for (var $i = 1 ; $i < ($generator_state['length']<3?3:$generator_state['length']); $i++) $generator_state[$i]=0;
+						x = $iter1_nextval['$nextval'];
+						$yield_value = x['capitalize']();
+						$yielding = true;
+						$generator_state[1] = 1;
+						return $yield_value;
+						$generator_state[1]=1;
+					}
+					if ($generator_state[1] == 1) {
+						if (typeof $exc != 'undefined' && $exc !== null) {
+							$yielding = null;
+							$generator_state[1] = -1;
+							throw $exc;
+						}
+						$generator_state[1]=2;
+					}
+					if ($generator_state[1] == 2) {
+					}
+				}
+				$generator_state[0]=3;
+			}
+			if ($generator_state[0] == 3) {
+				$generator_state[0]=4;
+			}
+			if ($generator_state[0] == 4) {
+			}
+
+				return;
+			};
+			return $generator;
+		}()
+);
+	};
+	$m['capwords']['__name__'] = 'capwords';
+
+	$m['capwords']['__bind_type__'] = 0;
+	$m['capwords']['__args__'] = [null,null,['s'],['sep', null]];
+	$m['_idmapL'] = null;
+	$m['maketrans'] = function(fromstr, tostr) {
+		var $iter2_nextval,$iter2_type,$iter2_iter,i,$iter2_idx,L,$iter2_array;
+		if ($p['bool'](!$p['op_eq']($p['len'](fromstr), $p['len'](tostr)))) {
+
+			var $pyjs__raise_expr1 = $p['ValueError'];
+			var $pyjs__raise_expr2 = 'maketrans arguments must have same length';
+			if ($pyjs__raise_expr2 !== null && $pyjs__raise_expr1['__is_instance__'] === true) {
+				throw $p['TypeError']('instance exception may not have a separate value');
+			}
+			if ($p['isinstance']($pyjs__raise_expr2, $p['tuple'])) {
+				throw ($pyjs__raise_expr1['apply']($pyjs__raise_expr1, $pyjs__raise_expr2['getArray']()));
+			} else {
+				throw ($pyjs__raise_expr1($pyjs__raise_expr2));
+			}
+
+		}
+		if ($p['bool'](!$p['bool']($m['_idmapL']))) {
+			$m['_idmapL'] = $p['list']($m['_idmap']);
+		}
+		L = $p['__getslice']($m['_idmapL'], 0, null);
+		fromstr = $p['map']($p['ord'], fromstr);
+		$iter2_iter = $p['range']($p['len'](fromstr));
+		$iter2_nextval=$p['__iter_prepare']($iter2_iter,false);
+		while (typeof($p['__wrapped_next']($iter2_nextval)['$nextval']) != 'undefined') {
+			i = $iter2_nextval['$nextval'];
+			L['__setitem__'](fromstr['__getitem__'](i), tostr['__getitem__'](i));
+		}
+		return ''['join'](L);
+	};
+	$m['maketrans']['__name__'] = 'maketrans';
+
+	$m['maketrans']['__bind_type__'] = 0;
+	$m['maketrans']['__args__'] = [null,null,['fromstr'],['tostr']];
+	$m['_re'] = $p['___import___']('re', null, null, false);
+	$m['_multimap'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'string';
+		$method = $pyjs__bind_method2('__init__', function(primary, secondary) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				primary = arguments[1];
+				secondary = arguments[2];
+			}
+
+			self['_primary'] = primary;
+			self['_secondary'] = secondary;
+			return null;
+		}
+	, 1, [null,null,['self'],['primary'],['secondary']]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('__getitem__', function(key) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				key = arguments[1];
+			}
+			var $pyjs_try_err;
+			try {
+				return $p['getattr'](self, '_primary')['__getitem__'](key);
+			} catch($pyjs_try_err) {
+				var $pyjs_try_err_name = (typeof $pyjs_try_err['__name__'] == 'undefined' ? $pyjs_try_err['name'] : $pyjs_try_err['__name__'] );
+				$pyjs['__last_exception__'] = {'error': $pyjs_try_err, 'module': $m};
+				if (($pyjs_try_err_name == $p['KeyError']['__name__'])||$p['_isinstance']($pyjs_try_err,$p['KeyError'])) {
+					return $p['getattr'](self, '_secondary')['__getitem__'](key);
+				} else { $pyjs['__active_exception_stack__'] = $pyjs['__last_exception_stack__']; $pyjs['__last_exception_stack__'] = null; throw $pyjs_try_err; }
+			}
+			return null;
+		}
+	, 1, [null,null,['self'],['key']]);
+		$cls_definition['__getitem__'] = $method;
+		var $bases = new Array(pyjslib['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('_multimap', $p['tuple']($bases), $data);
+	})();
+	$m['Template'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'string';
+		$cls_definition['delimiter'] = '$';
+		$cls_definition['idpattern'] = '[_a-z][_a-z0-9]*';
+		$cls_definition['regexp'] = '%(delim)s(?:(%(delim)s)|(%(id)s)|{(%(id)s)}|())';
+		$method = $pyjs__bind_method2('__init__', function(template) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				template = arguments[1];
+			}
+
+			self['_definePattern']();
+			self['template'] = template;
+			return null;
+		}
+	, 1, [null,null,['self'],['template']]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('_definePattern', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var $add15,$add16,$mod1,$mod2,regexp;
+			regexp = (typeof ($mod1=$p['getattr'](self, 'regexp'))==typeof ($mod2=$p['dict']([['delim', $p['__op_add']($add15='\\',$add16=$p['getattr'](self, 'delimiter'))], ['id', $p['getattr'](self, 'idpattern')]])) && typeof $mod1=='number'?
+				(($mod1=$mod1%$mod2)<0&&$mod2>0?$mod1+$mod2:$mod1):
+				$p['op_mod']($mod1,$mod2));
+			self['pattern'] = $m['_re']['compile'](regexp, $p['getattr']($m['_re'], 'IGNORECASE'));
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['_definePattern'] = $method;
+		$method = $pyjs__bind_method2('_invalid', function(mo) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				mo = arguments[1];
+			}
+			var i,$add20,j,$add19,$add17,$add18;
+			i = mo['start']();
+			j = $p['min']($p['__op_add']($add17=i,$add18=10), $p['len']($p['getattr'](self, 'template')));
+			throw ($p['ValueError']($p['__op_add']($add19='Invalid placeholder in string: ',$add20=$p['__getslice']($p['getattr'](self, 'template'), i, j))));
+			return null;
+		}
+	, 1, [null,null,['self'],['mo']]);
+		$cls_definition['_invalid'] = $method;
+		$method = $pyjs__bind_method2('substitute', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+				var args = $p['tuple']($pyjs_array_slice['call'](arguments,0,arguments['length']-1));
+
+				var kws = arguments['length'] >= 1 ? arguments[arguments['length']-1] : arguments[arguments['length']];
+				if (kws === null || typeof kws != 'object' || kws['__name__'] != 'dict' || typeof kws['$pyjs_is_kwarg'] == 'undefined') {
+					if (typeof kws != 'undefined') args['__array']['push'](kws);
+					var kws = arguments[arguments['length']+1];
+				} else {
+					delete kws['$pyjs_is_kwarg'];
+				}
+			} else {
+				var self = arguments[0];
+				var args = $p['tuple']($pyjs_array_slice['call'](arguments,1,arguments['length']-1));
+
+				var kws = arguments['length'] >= 2 ? arguments[arguments['length']-1] : arguments[arguments['length']];
+				if (kws === null || typeof kws != 'object' || kws['__name__'] != 'dict' || typeof kws['$pyjs_is_kwarg'] == 'undefined') {
+					if (typeof kws != 'undefined') args['__array']['push'](kws);
+					kws = arguments[arguments['length']+1];
+				} else {
+					delete kws['$pyjs_is_kwarg'];
+				}
+			}
+			if (typeof kws == 'undefined') {
+				kws = $p['__empty_dict']();
+				if (typeof self != 'undefined') {
+					if (self !== null && typeof self['$pyjs_is_kwarg'] != 'undefined') {
+						kws = self;
+						self = arguments[1];
+					}
+				} else {
+				}
+			}
+			var convert,mapping;
+			if ($p['bool'](($p['cmp']($p['len'](args), 1) == 1))) {
+				throw ($p['TypeError']('Too many positional arguments'));
+			}
+			if ($p['bool'](!$p['bool'](args))) {
+				mapping = kws;
+			}
+			else if ($p['bool'](kws)) {
+				mapping = $m['_multimap'](kws, args['__getitem__'](0));
+			}
+			else {
+				mapping = args['__getitem__'](0);
+			}
+			convert = function(mo) {
+				var $or1,named,val,$or2;
+				named = ($p['bool']($or1=mo['group'](2))?$or1:mo['group'](3));
+				if ($p['bool']((named !== null))) {
+					val = mapping['__getitem__'](named);
+					return $p['sprintf']('%s', $p['tuple']([val]));
+				}
+				if ($p['bool']((mo['group'](1) !== null))) {
+					return $p['getattr'](self, 'delimiter');
+				}
+				if ($p['bool']((mo['group'](4) !== null))) {
+					self['_invalid'](mo);
+				}
+				throw ($p['ValueError']('Unrecognized named group in pattern', $p['getattr'](self, 'pattern')));
+				return null;
+			};
+			convert['__name__'] = 'convert';
+
+			convert['__bind_type__'] = 0;
+			convert['__args__'] = [null,null,['mo']];
+			return self['pattern']['sub'](convert, $p['getattr'](self, 'template'));
+		}
+	, 1, ['args',['kws'],['self']]);
+		$cls_definition['substitute'] = $method;
+		$method = $pyjs__bind_method2('safe_substitute', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+				var args = $p['tuple']($pyjs_array_slice['call'](arguments,0,arguments['length']-1));
+
+				var kws = arguments['length'] >= 1 ? arguments[arguments['length']-1] : arguments[arguments['length']];
+				if (kws === null || typeof kws != 'object' || kws['__name__'] != 'dict' || typeof kws['$pyjs_is_kwarg'] == 'undefined') {
+					if (typeof kws != 'undefined') args['__array']['push'](kws);
+					var kws = arguments[arguments['length']+1];
+				} else {
+					delete kws['$pyjs_is_kwarg'];
+				}
+			} else {
+				var self = arguments[0];
+				var args = $p['tuple']($pyjs_array_slice['call'](arguments,1,arguments['length']-1));
+
+				var kws = arguments['length'] >= 2 ? arguments[arguments['length']-1] : arguments[arguments['length']];
+				if (kws === null || typeof kws != 'object' || kws['__name__'] != 'dict' || typeof kws['$pyjs_is_kwarg'] == 'undefined') {
+					if (typeof kws != 'undefined') args['__array']['push'](kws);
+					kws = arguments[arguments['length']+1];
+				} else {
+					delete kws['$pyjs_is_kwarg'];
+				}
+			}
+			if (typeof kws == 'undefined') {
+				kws = $p['__empty_dict']();
+				if (typeof self != 'undefined') {
+					if (self !== null && typeof self['$pyjs_is_kwarg'] != 'undefined') {
+						kws = self;
+						self = arguments[1];
+					}
+				} else {
+				}
+			}
+			var convert,mapping;
+			if ($p['bool'](($p['cmp']($p['len'](args), 1) == 1))) {
+				throw ($p['TypeError']('Too many positional arguments'));
+			}
+			if ($p['bool'](!$p['bool'](args))) {
+				mapping = kws;
+			}
+			else if ($p['bool'](kws)) {
+				mapping = $m['_multimap'](kws, args['__getitem__'](0));
+			}
+			else {
+				mapping = args['__getitem__'](0);
+			}
+			convert = function(mo) {
+				var $add28,named,$add21,braced,$add22,$add25,$add24,$add27,$add26,$pyjs_try_err,$add23;
+				named = mo['group'](2);
+				if ($p['bool']((named !== null))) {
+					try {
+						return $p['sprintf']('%s', $p['tuple']([mapping['__getitem__'](named)]));
+					} catch($pyjs_try_err) {
+						var $pyjs_try_err_name = (typeof $pyjs_try_err['__name__'] == 'undefined' ? $pyjs_try_err['name'] : $pyjs_try_err['__name__'] );
+						$pyjs['__last_exception__'] = {'error': $pyjs_try_err, 'module': $m};
+						if (($pyjs_try_err_name == $p['KeyError']['__name__'])||$p['_isinstance']($pyjs_try_err,$p['KeyError'])) {
+							return $p['__op_add']($add21=$p['getattr'](self, 'delimiter'),$add22=named);
+						} else { $pyjs['__active_exception_stack__'] = $pyjs['__last_exception_stack__']; $pyjs['__last_exception_stack__'] = null; throw $pyjs_try_err; }
+					}
+				}
+				braced = mo['group'](3);
+				if ($p['bool']((braced !== null))) {
+					try {
+						return $p['sprintf']('%s', $p['tuple']([mapping['__getitem__'](braced)]));
+					} catch($pyjs_try_err) {
+						var $pyjs_try_err_name = (typeof $pyjs_try_err['__name__'] == 'undefined' ? $pyjs_try_err['name'] : $pyjs_try_err['__name__'] );
+						$pyjs['__last_exception__'] = {'error': $pyjs_try_err, 'module': $m};
+						if (($pyjs_try_err_name == $p['KeyError']['__name__'])||$p['_isinstance']($pyjs_try_err,$p['KeyError'])) {
+							return $p['__op_add']($add27=$p['__op_add']($add25=$p['__op_add']($add23=$p['getattr'](self, 'delimiter'),$add24='{'),$add26=braced),$add28='}');
+						} else { $pyjs['__active_exception_stack__'] = $pyjs['__last_exception_stack__']; $pyjs['__last_exception_stack__'] = null; throw $pyjs_try_err; }
+					}
+				}
+				if ($p['bool']((mo['group'](1) !== null))) {
+					return $p['getattr'](self, 'delimiter');
+				}
+				if ($p['bool']((mo['group'](4) !== null))) {
+					return $p['getattr'](self, 'delimiter');
+				}
+				throw ($p['ValueError']('Unrecognized named group in pattern', $p['getattr'](self, 'pattern')));
+				return null;
+			};
+			convert['__name__'] = 'convert';
+
+			convert['__bind_type__'] = 0;
+			convert['__args__'] = [null,null,['mo']];
+			return self['pattern']['sub'](convert, $p['getattr'](self, 'template'));
+		}
+	, 1, ['args',['kws'],['self']]);
+		$cls_definition['safe_substitute'] = $method;
+		var $bases = new Array(pyjslib['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('Template', $p['tuple']($bases), $data);
+	})();
+	return this;
+}; /* end string */
+
+
+/* end module: string */
+
+
+/*
+PYJS_DEPS: ['re']
+*/
+
+--></script>
+<script type="text/javascript"><!--
 /* start module: pyjamas.ui.FocusListener */
 $pyjs['loaded_modules']['pyjamas.ui.FocusListener'] = function (__mod_name__) {
 	if($pyjs['loaded_modules']['pyjamas.ui.FocusListener']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.ui.FocusListener'];
@@ -12913,6 +14156,919 @@ $pyjs['loaded_modules']['pyjd'] = function (__mod_name__) {
 /* end module: pyjd */
 
 
+
+--></script>
+<script type="text/javascript"><!--
+/* start module: datetime */
+$pyjs['loaded_modules']['datetime'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['datetime']['__was_initialized__']) return $pyjs['loaded_modules']['datetime'];
+	var $m = $pyjs['loaded_modules']['datetime'];
+	$m['__repr__'] = function() { return '<module: datetime>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'datetime';
+	$m['__name__'] = __mod_name__;
+
+
+	$m['__c__days'] = $p['___import___']('time.__c__days', null, null, false);
+	$m['__c__months'] = $p['___import___']('time.__c__months', null, null, false);
+	$m['strftime'] = $p['___import___']('time.strftime', null, null, false);
+	$m['localtime'] = $p['___import___']('time.localtime', null, null, false);
+	$m['gmtime'] = $p['___import___']('time.gmtime', null, null, false);
+	$m['_strptime'] = $p['___import___']('time._strptime', null, null, false);
+	$m['MINYEAR'] = 1;
+	$m['MAXYEAR'] = 1000000;
+	$m['__Jan_01_0001'] = (new Date((new Date('Jan 1 1971'))['getTime']() - 62167132800000))['getTime']();
+	$m['date'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'datetime';
+		$method = $pyjs__bind_method2('__init__', function(year, month, day, d) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				year = arguments[1];
+				month = arguments[2];
+				day = arguments[3];
+				d = arguments[4];
+			}
+			if (typeof d == 'undefined') d=arguments['callee']['__args__'][6][1];
+			var $add2,$add1;
+			if ($p['bool']((d === null))) {
+				d = new Date(year, month - 1, day, 0, 0, 0, 0);
+			}
+			self['_d'] = d;
+			self['year'] = d['getFullYear']();
+			self['month'] = $p['__op_add']($add1=d['getMonth'](),$add2=1.0);
+			self['day'] = d['getDate']();
+			return null;
+		}
+	, 1, [null,null,['self'],['year'],['month'],['day'],['d', null]]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('today', function() {
+    var self = this['prototype'];
+
+			return $pyjs_kwargs_call(null, $m['date'], null, null, [{'d':new Date()}]);
+		}
+	, 2, [null,null,['self']]);
+		$cls_definition['today'] = $method;
+		$method = $pyjs__bind_method2('fromtimestamp', function(timestamp) {
+    var self = this['prototype'];
+			var d,$mul1,$mul2;
+			d = new Date();
+			d['setTime']((typeof ($mul1=timestamp)==typeof ($mul2=1000.0) && typeof $mul1=='number'?
+				$mul1*$mul2:
+				$p['op_mul']($mul1,$mul2)));
+			return $pyjs_kwargs_call(null, $m['date'], null, null, [{'d':d}, 0, 0, 0]);
+		}
+	, 2, [null,null,['self'],['timestamp']]);
+		$cls_definition['fromtimestamp'] = $method;
+		$method = $pyjs__bind_method2('fromordinal', function(ordinal) {
+    var self = this['prototype'];
+			var d,$add3,t,$add4,$sub2,$sub1,$mul4,$mul3;
+			t = $p['__op_add']($add3=$m['__Jan_01_0001'],$add4=(typeof ($mul3=$p['__op_sub']($sub1=ordinal,$sub2=1))==typeof ($mul4=86400000.0) && typeof $mul3=='number'?
+				$mul3*$mul4:
+				$p['op_mul']($mul3,$mul4)));
+			d = new Date(t);
+			return $pyjs_kwargs_call(null, $m['date'], null, null, [{'d':d}, 0, 0, 0]);
+		}
+	, 2, [null,null,['self'],['ordinal']]);
+		$cls_definition['fromordinal'] = $method;
+		$method = $pyjs__bind_method2('ctime', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return $p['sprintf']('%s %s %2d %02d:%02d:%02d %04d', $p['tuple']([$p['__getslice']($m['__c__days']['__getitem__'](self['_d']['getDay']()), 0, 3), $p['__getslice']($m['__c__months']['__getitem__'](self['_d']['getMonth']()), 0, 3), self['_d']['getDate'](), self['_d']['getHours'](), self['_d']['getMinutes'](), self['_d']['getSeconds'](), self['_d']['getFullYear']()]));
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['ctime'] = $method;
+		$method = $pyjs__bind_method2('isocalendar', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var isoweeknr,isoyear,isoweekday,$assign1,_d;
+			$assign1 = null;
+			isoyear = $assign1;
+			isoweeknr = $assign1;
+			isoweekday = $assign1;
+			_d = $p['getattr'](self, '_d');
+
+            var gregdaynumber = function(year, month, day) {
+                var y = year;
+                var m = month;
+                if (month < 3) {
+                    y--;
+                    m += 12;
+                }
+                return Math['floor'](365.25 * y) - Math['floor'](y / 100) + Math['floor'](y / 400) + Math['floor'](30.6 * (m + 1)) + day - 62;
+            };
+
+            var year = _d['getFullYear']();
+            var month = _d['getMonth']();
+            var day = _d['getDate']();
+            var wday = _d['getDay']();
+
+            isoweekday = ((wday + 6) % 7) + 1;
+            isoyear = year;
+
+            var d0 = gregdaynumber(year, 1, 0);
+            var weekday0 = ((d0 + 4) % 7) + 1;
+
+            var d = gregdaynumber(year, month + 1, day);
+            isoweeknr = Math['floor']((d - d0 + weekday0 + 6) / 7) - Math['floor']((weekday0 + 3) / 7);
+
+            if ((month == 11) && ((day - isoweekday) > 27)) {
+                isoweeknr = 1;
+                isoyear = isoyear + 1;
+            }
+
+            if ((month == 0) && ((isoweekday - day) > 3)) {
+                d0 = gregdaynumber(year - 1, 1, 0);
+                weekday0 = ((d0 + 4) % 7) + 1;
+                isoweeknr = Math['floor']((d - d0 + weekday0 + 6) / 7) - Math['floor']((weekday0 + 3) / 7);
+                isoyear--;
+            }
+        
+			return $p['tuple']([isoyear, isoweeknr, isoweekday]);
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['isocalendar'] = $method;
+		$method = $pyjs__bind_method2('isoformat', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return $p['sprintf']('%04d-%02d-%02d', $p['tuple']([$p['getattr'](self, 'year'), $p['getattr'](self, 'month'), $p['getattr'](self, 'day')]));
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['isoformat'] = $method;
+		$method = $pyjs__bind_method2('isoweekday', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var $add5,$mod1,$add7,$mod2,$add6,$add8;
+			return $p['__op_add']($add7=(typeof ($mod1=$p['__op_add']($add5=self['_d']['getDay'](),$add6=6))==typeof ($mod2=7) && typeof $mod1=='number'?
+				(($mod1=$mod1%$mod2)<0&&$mod2>0?$mod1+$mod2:$mod1):
+				$p['op_mod']($mod1,$mod2)),$add8=1);
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['isoweekday'] = $method;
+		$method = $pyjs__bind_method2('$$replace', function(year, month, day) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				year = arguments[1];
+				month = arguments[2];
+				day = arguments[3];
+			}
+			if (typeof year == 'undefined') year=arguments['callee']['__args__'][3][1];
+			if (typeof month == 'undefined') month=arguments['callee']['__args__'][4][1];
+			if (typeof day == 'undefined') day=arguments['callee']['__args__'][5][1];
+
+			if ($p['bool']((year === null))) {
+				year = $p['getattr'](self, 'year');
+			}
+			if ($p['bool']((month === null))) {
+				month = $p['getattr'](self, 'month');
+			}
+			if ($p['bool']((day === null))) {
+				day = $p['getattr'](self, 'day');
+			}
+			return $m['date'](year, month, day);
+		}
+	, 1, [null,null,['self'],['year', null],['month', null],['day', null]]);
+		$cls_definition['$$replace'] = $method;
+		$method = $pyjs__bind_method2('strftime', function(format) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				format = arguments[1];
+			}
+
+			return $m['strftime'](format, self['timetuple']());
+		}
+	, 1, [null,null,['self'],['format']]);
+		$cls_definition['strftime'] = $method;
+		$method = $pyjs__bind_method2('timetuple', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var $div2,tm,$div1,$assign2;
+			tm = $m['localtime']($p['float_int']((typeof ($div1=self['_d']['getTime']())==typeof ($div2=1000.0) && typeof $div1=='number' && $div2 !== 0?
+				$div1/$div2:
+				$p['op_div']($div1,$div2))));
+			$assign2 = 0;
+			tm['tm_hour'] = $assign2;
+			tm['tm_min'] = $assign2;
+			tm['tm_sec'] = $assign2;
+			return tm;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['timetuple'] = $method;
+		$method = $pyjs__bind_method2('toordinal', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var $add10,$sub3,$div3,$add9,$div4,$sub4;
+			return $p['__op_add']($add9=1,$add10=$p['float_int']((typeof ($div3=$p['__op_sub']($sub3=self['_d']['getTime'](),$sub4=$m['__Jan_01_0001']))==typeof ($div4=86400000.0) && typeof $div3=='number' && $div4 !== 0?
+				$div3/$div4:
+				$p['op_div']($div3,$div4))));
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['toordinal'] = $method;
+		$method = $pyjs__bind_method2('weekday', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var $mod4,$mod3,$add11,$add12;
+			return (typeof ($mod3=$p['__op_add']($add11=self['_d']['getDay'](),$add12=6))==typeof ($mod4=7) && typeof $mod3=='number'?
+				(($mod3=$mod3%$mod4)<0&&$mod4>0?$mod3+$mod4:$mod3):
+				$p['op_mod']($mod3,$mod4));
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['weekday'] = $method;
+		$method = $pyjs__bind_method2('__str__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return self['isoformat']();
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__str__'] = $method;
+		$method = $pyjs__bind_method2('__cmp__', function(other) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				other = arguments[1];
+			}
+			var a,b,$or1,$or2;
+			if ($p['bool'](($p['bool']($or1=$p['isinstance'](other, $m['date']))?$or1:$p['isinstance'](other, (typeof datetime == "undefined"?$m['datetime']:datetime))))) {
+				a = self['_d']['getTime']();
+				b = other['_d']['getTime']();
+				if ($p['bool'](($p['cmp'](a, b) == -1))) {
+					return (typeof ($usub1=1)=='number'?
+						-$usub1:
+						$p['op_usub']($usub1));
+				}
+				else if ($p['bool']($p['op_eq'](a, b))) {
+					return 0;
+				}
+			}
+			else {
+				throw ($p['TypeError']('expected date or datetime object'));
+			}
+			return 1;
+		}
+	, 1, [null,null,['self'],['other']]);
+		$cls_definition['__cmp__'] = $method;
+		$method = $pyjs__bind_method2('__add__', function(other) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				other = arguments[1];
+			}
+			var $add14,$add13;
+			if ($p['bool']($p['isinstance'](other, (typeof timedelta == "undefined"?$m['timedelta']:timedelta)))) {
+				return $m['date']($p['getattr'](self, 'year'), $p['getattr'](self, 'month'), $p['__op_add']($add13=$p['getattr'](self, 'day'),$add14=$p['getattr'](other, 'days')));
+			}
+			else {
+				throw ($p['TypeError']('expected timedelta object'));
+			}
+			return null;
+		}
+	, 1, [null,null,['self'],['other']]);
+		$cls_definition['__add__'] = $method;
+		$method = $pyjs__bind_method2('__sub__', function(other) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				other = arguments[1];
+			}
+			var $mod8,$or4,$or3,$sub8,$sub7,$mod7,$div7,$mod5,$div8,$mod6,diff,$div6,$sub6,$sub5,$div5;
+			if ($p['bool'](($p['bool']($or3=$p['isinstance'](other, $m['date']))?$or3:$p['isinstance'](other, (typeof datetime == "undefined"?$m['datetime']:datetime))))) {
+				diff = $p['__op_sub']($sub5=self['_d']['getTime'](),$sub6=other['_d']['getTime']());
+				return $pyjs_kwargs_call(null, (typeof timedelta == "undefined"?$m['timedelta']:timedelta), null, null, [{'milliseconds':(typeof ($mod7=diff)==typeof ($mod8=86400000) && typeof $mod7=='number'?
+					(($mod7=$mod7%$mod8)<0&&$mod8>0?$mod7+$mod8:$mod7):
+					$p['op_mod']($mod7,$mod8))}, $p['float_int']((typeof ($div5=diff)==typeof ($div6=86400000.0) && typeof $div5=='number' && $div6 !== 0?
+					$div5/$div6:
+					$p['op_div']($div5,$div6))), (typeof ($mod5=$p['float_int']((typeof ($div7=diff)==typeof ($div8=1000.0) && typeof $div7=='number' && $div8 !== 0?
+					$div7/$div8:
+					$p['op_div']($div7,$div8))))==typeof ($mod6=86400) && typeof $mod5=='number'?
+					(($mod5=$mod5%$mod6)<0&&$mod6>0?$mod5+$mod6:$mod5):
+					$p['op_mod']($mod5,$mod6))]);
+			}
+			else if ($p['bool']($p['isinstance'](other, (typeof timedelta == "undefined"?$m['timedelta']:timedelta)))) {
+				return $m['date']($p['getattr'](self, 'year'), $p['getattr'](self, 'month'), $p['__op_sub']($sub7=$p['getattr'](self, 'day'),$sub8=$p['getattr'](other, 'days')));
+			}
+			else {
+				throw ($p['TypeError']('expected date or datetime object'));
+			}
+			return null;
+		}
+	, 1, [null,null,['self'],['other']]);
+		$cls_definition['__sub__'] = $method;
+		var $bases = new Array(pyjslib['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('date', $p['tuple']($bases), $data);
+	})();
+	$m['time'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'datetime';
+		$method = $pyjs__bind_method2('__init__', function(hour, minute, second, microsecond, tzinfo, d) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				hour = arguments[1];
+				minute = arguments[2];
+				second = arguments[3];
+				microsecond = arguments[4];
+				tzinfo = arguments[5];
+				d = arguments[6];
+			}
+			if (typeof minute == 'undefined') minute=arguments['callee']['__args__'][4][1];
+			if (typeof second == 'undefined') second=arguments['callee']['__args__'][5][1];
+			if (typeof microsecond == 'undefined') microsecond=arguments['callee']['__args__'][6][1];
+			if (typeof tzinfo == 'undefined') tzinfo=arguments['callee']['__args__'][7][1];
+			if (typeof d == 'undefined') d=arguments['callee']['__args__'][8][1];
+			var $mul6,$mul5;
+			if ($p['bool'](!$p['op_eq'](tzinfo, null))) {
+				throw ($p['NotImplementedError']('tzinfo'));
+			}
+			if ($p['bool']((d === null))) {
+				d = new Date(1970, 1, 1, hour, minute, second, 0.5 + microsecond / 1000.0);
+			}
+			self['_d'] = d;
+			self['hour'] = d['getHours']();
+			self['minute'] = d['getMinutes']();
+			self['second'] = d['getSeconds']();
+			self['microsecond'] = (typeof ($mul5=d['getMilliseconds']())==typeof ($mul6=1000.0) && typeof $mul5=='number'?
+				$mul5*$mul6:
+				$p['op_mul']($mul5,$mul6));
+			self['tzinfo'] = null;
+			return null;
+		}
+	, 1, [null,null,['self'],['hour'],['minute', 0],['second', 0],['microsecond', 0],['tzinfo', null],['d', null]]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('dst', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			throw ($p['NotImplementedError']('dst'));
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['dst'] = $method;
+		$method = $pyjs__bind_method2('isoformat', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var $add16,$add15,t;
+			t = $p['sprintf']('%02d:%02d:%02d', $p['tuple']([$p['getattr'](self, 'hour'), $p['getattr'](self, 'minute'), $p['getattr'](self, 'second')]));
+			if ($p['bool']($p['getattr'](self, 'microsecond'))) {
+				t = $p['__op_add']($add15=t,$add16=$p['sprintf']('.%06d', $p['getattr'](self, 'microsecond')));
+			}
+			return t;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['isoformat'] = $method;
+		$method = $pyjs__bind_method2('$$replace', function(hour, minute, second, microsecond, tzinfo) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				hour = arguments[1];
+				minute = arguments[2];
+				second = arguments[3];
+				microsecond = arguments[4];
+				tzinfo = arguments[5];
+			}
+			if (typeof hour == 'undefined') hour=arguments['callee']['__args__'][3][1];
+			if (typeof minute == 'undefined') minute=arguments['callee']['__args__'][4][1];
+			if (typeof second == 'undefined') second=arguments['callee']['__args__'][5][1];
+			if (typeof microsecond == 'undefined') microsecond=arguments['callee']['__args__'][6][1];
+			if (typeof tzinfo == 'undefined') tzinfo=arguments['callee']['__args__'][7][1];
+
+			if ($p['bool'](!$p['op_eq'](tzinfo, null))) {
+				throw ($p['NotImplementedError']('tzinfo'));
+			}
+			if ($p['bool']((hour === null))) {
+				hour = $p['getattr'](self, 'hour');
+			}
+			if ($p['bool']((minute === null))) {
+				minute = $p['getattr'](self, 'minute');
+			}
+			if ($p['bool']((second === null))) {
+				second = $p['getattr'](self, 'second');
+			}
+			if ($p['bool']((microsecond === null))) {
+				microsecond = $p['getattr'](self, 'microsecond');
+			}
+			return $m['time'](hour, minute, second, microsecond);
+		}
+	, 1, [null,null,['self'],['hour', null],['minute', null],['second', null],['microsecond', null],['tzinfo', null]]);
+		$cls_definition['$$replace'] = $method;
+		$method = $pyjs__bind_method2('strftime', function(format) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				format = arguments[1];
+			}
+			var $div9,$div10;
+			return $m['strftime'](format, $m['localtime']($p['float_int']((typeof ($div9=self['_d']['getTime']())==typeof ($div10=1000.0) && typeof $div9=='number' && $div10 !== 0?
+				$div9/$div10:
+				$p['op_div']($div9,$div10)))));
+		}
+	, 1, [null,null,['self'],['format']]);
+		$cls_definition['strftime'] = $method;
+		$method = $pyjs__bind_method2('tzname', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['tzname'] = $method;
+		$method = $pyjs__bind_method2('utcoffset', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['utcoffset'] = $method;
+		$method = $pyjs__bind_method2('__str__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return self['isoformat']();
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__str__'] = $method;
+		var $bases = new Array(pyjslib['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('time', $p['tuple']($bases), $data);
+	})();
+	$m['datetime'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'datetime';
+		$method = $pyjs__bind_method2('__init__', function(year, month, day, hour, minute, second, microsecond, tzinfo, d) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				year = arguments[1];
+				month = arguments[2];
+				day = arguments[3];
+				hour = arguments[4];
+				minute = arguments[5];
+				second = arguments[6];
+				microsecond = arguments[7];
+				tzinfo = arguments[8];
+				d = arguments[9];
+			}
+			if (typeof hour == 'undefined') hour=arguments['callee']['__args__'][6][1];
+			if (typeof minute == 'undefined') minute=arguments['callee']['__args__'][7][1];
+			if (typeof second == 'undefined') second=arguments['callee']['__args__'][8][1];
+			if (typeof microsecond == 'undefined') microsecond=arguments['callee']['__args__'][9][1];
+			if (typeof tzinfo == 'undefined') tzinfo=arguments['callee']['__args__'][10][1];
+			if (typeof d == 'undefined') d=arguments['callee']['__args__'][11][1];
+
+			if ($p['bool']((d === null))) {
+				d = new Date(year, month - 1, day, hour, minute, second, 0.5 + microsecond / 1000.0);
+			}
+			$pyjs_kwargs_call($m['date'], '__init__', null, null, [{'d':d}, self, 0, 0, 0]);
+			$pyjs_kwargs_call($m['time'], '__init__', null, null, [{'d':d}, self, 0]);
+			return null;
+		}
+	, 1, [null,null,['self'],['year'],['month'],['day'],['hour', 0],['minute', 0],['second', 0],['microsecond', 0],['tzinfo', null],['d', null]]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('combine', function(date, time) {
+    var self = this['prototype'];
+
+			return $m['datetime']($p['getattr'](date, 'year'), $p['getattr'](date, 'month'), $p['getattr'](date, 'day'), $p['getattr'](time, 'hour'), $p['getattr'](time, 'minute'), $p['getattr'](time, 'second'), $p['getattr'](time, 'microsecond'));
+		}
+	, 2, [null,null,['self'],['date'],['time']]);
+		$cls_definition['combine'] = $method;
+		$method = $pyjs__bind_method2('fromtimestamp', function(timestamp, tz) {
+    var self = this['prototype'];
+			if (typeof tz == 'undefined') tz=arguments['callee']['__args__'][4][1];
+			var d,$mul8,$mul7;
+			if ($p['bool'](!$p['op_eq'](tz, null))) {
+				throw ($p['NotImplementedError']('tz'));
+			}
+			d = new Date();
+			d['setTime']((typeof ($mul7=timestamp)==typeof ($mul8=1000.0) && typeof $mul7=='number'?
+				$mul7*$mul8:
+				$p['op_mul']($mul7,$mul8)));
+			return $pyjs_kwargs_call(null, $m['datetime'], null, null, [{'d':d}, 0, 0, 0]);
+		}
+	, 2, [null,null,['self'],['timestamp'],['tz', null]]);
+		$cls_definition['fromtimestamp'] = $method;
+		$method = $pyjs__bind_method2('fromordinal', function(ordinal) {
+    var self = this['prototype'];
+			var d,$mul10,$sub10,$sub9,$mul9;
+			d = new Date();
+			d['setTime']((typeof ($mul9=$p['__op_sub']($sub9=ordinal,$sub10=719163.0))==typeof ($mul10=86400000.0) && typeof $mul9=='number'?
+				$mul9*$mul10:
+				$p['op_mul']($mul9,$mul10)));
+			return $pyjs_kwargs_call(null, $m['datetime'], null, null, [{'d':d}, 0, 0, 0]);
+		}
+	, 2, [null,null,['self'],['ordinal']]);
+		$cls_definition['fromordinal'] = $method;
+		$method = $pyjs__bind_method2('now', function(tz) {
+    var self = this['prototype'];
+			if (typeof tz == 'undefined') tz=arguments['callee']['__args__'][3][1];
+
+			if ($p['bool'](!$p['op_eq'](tz, null))) {
+				throw ($p['NotImplementedError']('tz'));
+			}
+			return $pyjs_kwargs_call(null, $m['datetime'], null, null, [{'d':new Date()}, 0, 0, 0]);
+		}
+	, 2, [null,null,['self'],['tz', null]]);
+		$cls_definition['now'] = $method;
+		$method = $pyjs__bind_method2('strptime', function(datestring, format) {
+    var self = this['prototype'];
+
+			return self['fromtimestamp']($m['_strptime'](datestring, format));
+		}
+	, 2, [null,null,['self'],['datestring'],['format']]);
+		$cls_definition['strptime'] = $method;
+		$method = $pyjs__bind_method2('utcfromtimestamp', function(timestamp) {
+    var self = this['prototype'];
+			var tm;
+			tm = $m['gmtime'](timestamp);
+			return $m['datetime']($p['getattr'](tm, 'tm_year'), $p['getattr'](tm, 'tm_mon'), $p['getattr'](tm, 'tm_mday'), $p['getattr'](tm, 'tm_hour'), $p['getattr'](tm, 'tm_min'), $p['getattr'](tm, 'tm_sec'));
+		}
+	, 2, [null,null,['self'],['timestamp']]);
+		$cls_definition['utcfromtimestamp'] = $method;
+		$method = $pyjs__bind_method2('utcnow', function() {
+    var self = this['prototype'];
+			var d,$div12,$div11;
+			d = new Date();
+			return $m['datetime']['utcfromtimestamp']($p['float_int']((typeof ($div11=d['getTime']())==typeof ($div12=1000.0) && typeof $div11=='number' && $div12 !== 0?
+				$div11/$div12:
+				$p['op_div']($div11,$div12))));
+		}
+	, 2, [null,null,['self']]);
+		$cls_definition['utcnow'] = $method;
+		$method = $pyjs__bind_method2('timetuple', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var $div14,$div13;
+			return $m['localtime']($p['float_int']((typeof ($div13=self['_d']['getTime']())==typeof ($div14=1000.0) && typeof $div13=='number' && $div14 !== 0?
+				$div13/$div14:
+				$p['op_div']($div13,$div14))));
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['timetuple'] = $method;
+		$method = $pyjs__bind_method2('astimezone', function(tz) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				tz = arguments[1];
+			}
+
+			throw ($p['NotImplementedError']('astimezone'));
+			return null;
+		}
+	, 1, [null,null,['self'],['tz']]);
+		$cls_definition['astimezone'] = $method;
+		$method = $pyjs__bind_method2('date', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return $m['date']($p['getattr'](self, 'year'), $p['getattr'](self, 'month'), $p['getattr'](self, 'day'));
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['date'] = $method;
+		$method = $pyjs__bind_method2('time', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return $m['time']($p['getattr'](self, 'hour'), $p['getattr'](self, 'minute'), $p['getattr'](self, 'second'), $p['getattr'](self, 'microsecond'));
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['time'] = $method;
+		$method = $pyjs__bind_method2('$$replace', function(year, month, day, hour, minute, second, microsecond, tzinfo) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				year = arguments[1];
+				month = arguments[2];
+				day = arguments[3];
+				hour = arguments[4];
+				minute = arguments[5];
+				second = arguments[6];
+				microsecond = arguments[7];
+				tzinfo = arguments[8];
+			}
+			if (typeof year == 'undefined') year=arguments['callee']['__args__'][3][1];
+			if (typeof month == 'undefined') month=arguments['callee']['__args__'][4][1];
+			if (typeof day == 'undefined') day=arguments['callee']['__args__'][5][1];
+			if (typeof hour == 'undefined') hour=arguments['callee']['__args__'][6][1];
+			if (typeof minute == 'undefined') minute=arguments['callee']['__args__'][7][1];
+			if (typeof second == 'undefined') second=arguments['callee']['__args__'][8][1];
+			if (typeof microsecond == 'undefined') microsecond=arguments['callee']['__args__'][9][1];
+			if (typeof tzinfo == 'undefined') tzinfo=arguments['callee']['__args__'][10][1];
+
+			if ($p['bool'](!$p['op_eq'](tzinfo, null))) {
+				throw ($p['NotImplementedError']('tzinfo'));
+			}
+			if ($p['bool']((year === null))) {
+				year = $p['getattr'](self, 'year');
+			}
+			if ($p['bool']((month === null))) {
+				month = $p['getattr'](self, 'month');
+			}
+			if ($p['bool']((day === null))) {
+				day = $p['getattr'](self, 'day');
+			}
+			if ($p['bool']((hour === null))) {
+				hour = $p['getattr'](self, 'hour');
+			}
+			if ($p['bool']((minute === null))) {
+				minute = $p['getattr'](self, 'minute');
+			}
+			if ($p['bool']((second === null))) {
+				second = $p['getattr'](self, 'second');
+			}
+			if ($p['bool']((microsecond === null))) {
+				microsecond = $p['getattr'](self, 'microsecond');
+			}
+			return $m['datetime'](year, month, day, hour, minute, second, microsecond);
+		}
+	, 1, [null,null,['self'],['year', null],['month', null],['day', null],['hour', null],['minute', null],['second', null],['microsecond', null],['tzinfo', null]]);
+		$cls_definition['$$replace'] = $method;
+		$method = $pyjs__bind_method2('timetz', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			throw ($p['NotImplementedError']('timetz'));
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['timetz'] = $method;
+		$method = $pyjs__bind_method2('utctimetuple', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var $div15,$div16;
+			return $m['gmtime']((typeof ($div15=self['_d']['getTime']())==typeof ($div16=1000.0) && typeof $div15=='number' && $div16 !== 0?
+				$div15/$div16:
+				$p['op_div']($div15,$div16)));
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['utctimetuple'] = $method;
+		$method = $pyjs__bind_method2('isoformat', function(sep) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				sep = arguments[1];
+			}
+			if (typeof sep == 'undefined') sep=arguments['callee']['__args__'][3][1];
+			var $add17,$add18,t;
+			t = $p['sprintf']('%04d-%02d-%02d%s%02d:%02d:%02d', $p['tuple']([$p['getattr'](self, 'year'), $p['getattr'](self, 'month'), $p['getattr'](self, 'day'), sep, $p['getattr'](self, 'hour'), $p['getattr'](self, 'minute'), $p['getattr'](self, 'second')]));
+			if ($p['bool']($p['getattr'](self, 'microsecond'))) {
+				t = $p['__op_add']($add17=t,$add18=$p['sprintf']('.%06d', $p['getattr'](self, 'microsecond')));
+			}
+			return t;
+		}
+	, 1, [null,null,['self'],['sep', 'T']]);
+		$cls_definition['isoformat'] = $method;
+		$method = $pyjs__bind_method2('__add__', function(other) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				other = arguments[1];
+			}
+			var $div17,month,second,year,$add26,$mod9,$add28,$div18,$div19,$add21,$add20,$add22,$add25,$add24,$add27,day,$mod11,$mod10,$mod12,microsecond,$add19,minute,$div20,d,hour,$add23;
+			if ($p['bool']($p['isinstance'](other, (typeof timedelta == "undefined"?$m['timedelta']:timedelta)))) {
+				year = $p['getattr'](self, 'year');
+				month = $p['getattr'](self, 'month');
+				day = $p['__op_add']($add19=$p['getattr'](self, 'day'),$add20=$p['getattr'](other, 'days'));
+				hour = $p['__op_add']($add21=$p['getattr'](self, 'hour'),$add22=(typeof ($div17=$p['getattr'](other, 'seconds'))==typeof ($div18=3600.0) && typeof $div17=='number' && $div18 !== 0?
+					$div17/$div18:
+					$p['op_div']($div17,$div18)));
+				minute = $p['__op_add']($add23=$p['getattr'](self, 'minute'),$add24=(typeof ($mod9=(typeof ($div19=$p['getattr'](other, 'seconds'))==typeof ($div20=60.0) && typeof $div19=='number' && $div20 !== 0?
+					$div19/$div20:
+					$p['op_div']($div19,$div20)))==typeof ($mod10=60) && typeof $mod9=='number'?
+					(($mod9=$mod9%$mod10)<0&&$mod10>0?$mod9+$mod10:$mod9):
+					$p['op_mod']($mod9,$mod10)));
+				second = $p['__op_add']($add25=$p['getattr'](self, 'second'),$add26=(typeof ($mod11=$p['getattr'](other, 'seconds'))==typeof ($mod12=60) && typeof $mod11=='number'?
+					(($mod11=$mod11%$mod12)<0&&$mod12>0?$mod11+$mod12:$mod11):
+					$p['op_mod']($mod11,$mod12)));
+				microsecond = $p['__op_add']($add27=$p['getattr'](self, 'microsecond'),$add28=$p['getattr'](other, 'microseconds'));
+				d = new Date(year, month, day, hour, minute, second, microsecond);
+				return $pyjs_kwargs_call(null, $m['datetime'], null, null, [{'d':d}]);
+			}
+			else {
+				throw ($p['TypeError']('expected timedelta object'));
+			}
+			return null;
+		}
+	, 1, [null,null,['self'],['other']]);
+		$cls_definition['__add__'] = $method;
+		$method = $pyjs__bind_method2('__sub__', function(other) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				other = arguments[1];
+			}
+			var $mod20,$mod15,$sub20,$sub21,$sub19,month,$div27,second,$mod16,$sub22,year,diff,$sub18,$mod19,$or5,$mod14,$mod17,$or6,$mod13,$sub13,$sub12,$sub11,$sub17,$sub16,$sub15,$sub14,microsecond,$mod18,day,minute,d,$div21,$div23,$div22,$div25,$div24,hour,$div26,$div28;
+			if ($p['bool'](($p['bool']($or5=$p['isinstance'](other, $m['date']))?$or5:$p['isinstance'](other, $m['datetime'])))) {
+				diff = $p['__op_sub']($sub11=self['_d']['getTime'](),$sub12=other['_d']['getTime']());
+				return $pyjs_kwargs_call(null, (typeof timedelta == "undefined"?$m['timedelta']:timedelta), null, null, [{'milliseconds':(typeof ($mod15=diff)==typeof ($mod16=86400000) && typeof $mod15=='number'?
+					(($mod15=$mod15%$mod16)<0&&$mod16>0?$mod15+$mod16:$mod15):
+					$p['op_mod']($mod15,$mod16))}, $p['float_int']((typeof ($div21=diff)==typeof ($div22=86400000.0) && typeof $div21=='number' && $div22 !== 0?
+					$div21/$div22:
+					$p['op_div']($div21,$div22))), (typeof ($mod13=$p['float_int']((typeof ($div23=diff)==typeof ($div24=1000.0) && typeof $div23=='number' && $div24 !== 0?
+					$div23/$div24:
+					$p['op_div']($div23,$div24))))==typeof ($mod14=86400) && typeof $mod13=='number'?
+					(($mod13=$mod13%$mod14)<0&&$mod14>0?$mod13+$mod14:$mod13):
+					$p['op_mod']($mod13,$mod14))]);
+			}
+			else if ($p['bool']($p['isinstance'](other, (typeof timedelta == "undefined"?$m['timedelta']:timedelta)))) {
+				year = $p['getattr'](self, 'year');
+				month = $p['getattr'](self, 'month');
+				day = $p['__op_sub']($sub13=$p['getattr'](self, 'day'),$sub14=$p['getattr'](other, 'days'));
+				hour = $p['__op_sub']($sub15=$p['getattr'](self, 'hour'),$sub16=(typeof ($div25=$p['getattr'](other, 'seconds'))==typeof ($div26=3600.0) && typeof $div25=='number' && $div26 !== 0?
+					$div25/$div26:
+					$p['op_div']($div25,$div26)));
+				minute = $p['__op_sub']($sub17=$p['getattr'](self, 'minute'),$sub18=(typeof ($mod17=(typeof ($div27=$p['getattr'](other, 'seconds'))==typeof ($div28=60.0) && typeof $div27=='number' && $div28 !== 0?
+					$div27/$div28:
+					$p['op_div']($div27,$div28)))==typeof ($mod18=60) && typeof $mod17=='number'?
+					(($mod17=$mod17%$mod18)<0&&$mod18>0?$mod17+$mod18:$mod17):
+					$p['op_mod']($mod17,$mod18)));
+				second = $p['__op_sub']($sub19=$p['getattr'](self, 'second'),$sub20=(typeof ($mod19=$p['getattr'](other, 'seconds'))==typeof ($mod20=60) && typeof $mod19=='number'?
+					(($mod19=$mod19%$mod20)<0&&$mod20>0?$mod19+$mod20:$mod19):
+					$p['op_mod']($mod19,$mod20)));
+				microsecond = $p['__op_sub']($sub21=$p['getattr'](self, 'microsecond'),$sub22=$p['getattr'](other, 'microseconds'));
+				d = new Date(year, month, day, hour, minute, second, microsecond);
+				return $pyjs_kwargs_call(null, $m['datetime'], null, null, [{'d':d}]);
+			}
+			else {
+				throw ($p['TypeError']('expected date or datetime object'));
+			}
+			return null;
+		}
+	, 1, [null,null,['self'],['other']]);
+		$cls_definition['__sub__'] = $method;
+		$method = $pyjs__bind_method2('__str__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			return self['isoformat'](' ');
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__str__'] = $method;
+		var $bases = new Array($m['date'],$m['time']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('datetime', $p['tuple']($bases), $data);
+	})();
+	$m['timedelta'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'datetime';
+		$method = $pyjs__bind_method2('__init__', function(days, seconds, microseconds, milliseconds, minutes, hours, weeks) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				days = arguments[1];
+				seconds = arguments[2];
+				microseconds = arguments[3];
+				milliseconds = arguments[4];
+				minutes = arguments[5];
+				hours = arguments[6];
+				weeks = arguments[7];
+			}
+			if (typeof days == 'undefined') days=arguments['callee']['__args__'][3][1];
+			if (typeof seconds == 'undefined') seconds=arguments['callee']['__args__'][4][1];
+			if (typeof microseconds == 'undefined') microseconds=arguments['callee']['__args__'][5][1];
+			if (typeof milliseconds == 'undefined') milliseconds=arguments['callee']['__args__'][6][1];
+			if (typeof minutes == 'undefined') minutes=arguments['callee']['__args__'][7][1];
+			if (typeof hours == 'undefined') hours=arguments['callee']['__args__'][8][1];
+			if (typeof weeks == 'undefined') weeks=arguments['callee']['__args__'][9][1];
+			var $add35,$add29,$mul17,$mul16,$mul15,$mul14,$mul13,$mul12,$mul11,$add32,$add33,$add30,$add31,$add36,$add34,$mul18;
+			self['days'] = $p['__op_add']($add29=(typeof ($mul11=weeks)==typeof ($mul12=7.0) && typeof $mul11=='number'?
+				$mul11*$mul12:
+				$p['op_mul']($mul11,$mul12)),$add30=days);
+			self['seconds'] = $p['__op_add']($add33=$p['__op_add']($add31=(typeof ($mul13=hours)==typeof ($mul14=3600.0) && typeof $mul13=='number'?
+				$mul13*$mul14:
+				$p['op_mul']($mul13,$mul14)),$add32=(typeof ($mul15=minutes)==typeof ($mul16=60.0) && typeof $mul15=='number'?
+				$mul15*$mul16:
+				$p['op_mul']($mul15,$mul16))),$add34=seconds);
+			self['microseconds'] = $p['__op_add']($add35=(typeof ($mul17=milliseconds)==typeof ($mul18=1000.0) && typeof $mul17=='number'?
+				$mul17*$mul18:
+				$p['op_mul']($mul17,$mul18)),$add36=microseconds);
+			return null;
+		}
+	, 1, [null,null,['self'],['days', 0],['seconds', 0],['microseconds', 0],['milliseconds', 0],['minutes', 0],['hours', 0],['weeks', 0]]);
+		$cls_definition['__init__'] = $method;
+		var $bases = new Array(pyjslib['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('timedelta', $p['tuple']($bases), $data);
+	})();
+	$m['tzinfo'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'datetime';
+		var $bases = new Array($p['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('tzinfo', $p['tuple']($bases), $data);
+	})();
+	$m['date']['min'] = $m['date'](1, 1, 1);
+	$m['date']['max'] = $m['date'](9999, 12, 31);
+	$m['date']['resolution'] = $m['timedelta'](1);
+	$m['time']['min'] = $m['time'](0, 0);
+	$m['time']['max'] = $m['time'](23, 59, 59, 999999);
+	$m['time']['resolution'] = $m['timedelta'](0, 0, 1);
+	$m['datetime']['min'] = $m['datetime'](1, 1, 1, 0, 0);
+	$m['datetime']['max'] = $m['datetime'](9999, 12, 31, 23, 59, 59, 999999);
+	$m['datetime']['resolution'] = $m['timedelta'](0, 0, 1);
+	$m['timedelta']['min'] = $m['timedelta']((typeof ($usub2=999999999)=='number'?
+		-$usub2:
+		$p['op_usub']($usub2)));
+	$m['timedelta']['max'] = $pyjs_kwargs_call(null, $m['timedelta'], null, null, [{'hours':23, 'minutes':59, 'seconds':59, 'microseconds':999999}, 999999999]);
+	$m['timedelta']['resolution'] = $m['timedelta'](0, 0, 1);
+	return this;
+}; /* end datetime */
+
+
+/* end module: datetime */
+
+
+/*
+PYJS_DEPS: ['time.__c__days', 'time', 'time.__c__months', 'time.strftime', 'time.localtime', 'time.gmtime', 'time._strptime']
+*/
 
 --></script>
 <script type="text/javascript"><!--
@@ -26173,7 +28329,9 @@ $pyjs['loaded_modules']['home'] = function (__mod_name__) {
 	$m['Button'] = $p['___import___']('pyjamas.ui.Button.Button', null, null, false);
 	$m['Grid'] = $p['___import___']('pyjamas.ui.Grid.Grid', null, null, false);
 	$m['Window'] = $p['___import___']('pyjamas.Window', null, null, false);
+	$m['datetime'] = $p['___import___']('datetime.datetime', null, null, false);
 	$m['json'] = $p['___import___']('json', null);
+	$m['getCookie'] = $p['___import___']('pyjamas.Cookies.getCookie', null, null, false);
 	$m['ServiceProxy'] = $p['___import___']('pyjamas.JSONService.ServiceProxy', null, null, false);
 	$m['Home'] = (function(){
 		var $cls_definition = new Object();
@@ -26185,8 +28343,10 @@ $pyjs['loaded_modules']['home'] = function (__mod_name__) {
 			} else {
 				var self = arguments[0];
 			}
-			var totalPage,pageButton,$iter1_nextval,$iter1_type,logoutAnchor,page,headerPanel,$iter1_iter,$add2,rightHeaderPanel,$add1,$iter1_array,pagePanel,$sub2,$sub1,welcomeNoteLabel,paginnationPanel,$iter1_idx;
-			self['remote_py'] = (typeof EchoServicePython == "undefined"?$m['EchoServicePython']:EchoServicePython)();
+			var welcomeNoteLabel,headerPanel,$iter1_iter,pagePanel,$iter1_array,$sub2,$sub1,newBlogAnchor,$iter1_nextval,loggedInUser,pageButton,logoutAnchor,loggedInUserJsonData,paginnationPanel,totalPage,$iter1_type,$add2,rightHeaderPanel,$add1,$iter1_idx,page;
+			loggedInUser = $m['getCookie']('LoggedInUser');
+			loggedInUserJsonData = $m['json']['loads'](loggedInUser);
+			self['remote_py'] = (typeof MyBlogService == "undefined"?$m['MyBlogService']:MyBlogService)();
 			self['root'] = $m['RootPanel']();
 			self['rightPanel'] = $m['SimplePanel']();
 			pagePanel = $pyjs_kwargs_call(null, $m['VerticalPanel'], null, null, [{'StyleName':'content-style'}]);
@@ -26197,11 +28357,14 @@ $pyjs['loaded_modules']['home'] = function (__mod_name__) {
 			headerPanel['add']($p['getattr'](self, 'siteImage'));
 			rightHeaderPanel = $pyjs_kwargs_call(null, $m['VerticalPanel'], null, null, [{'StyleName':'right-header'}]);
 			headerPanel['add'](rightHeaderPanel);
-			welcomeNoteLabel = $m['Label']('Welcome Nandha!');
+			welcomeNoteLabel = $m['Label']($p['sprintf']('Welcome %s %s!', $p['tuple']([loggedInUserJsonData['__getitem__']('first_name'), loggedInUserJsonData['__getitem__']('last_name')])));
 			rightHeaderPanel['add'](welcomeNoteLabel);
-			logoutAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']('Logout'), 'Href':'/login.html', 'Title':'Logout'}]);
+			logoutAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']('Logout'), 'Href':'/', 'Title':'Logout'}]);
 			logoutAnchor['setStyleName']('logout');
 			rightHeaderPanel['add'](logoutAnchor);
+			newBlogAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']('Create New Blog'), 'Href':'/newblog.html', 'Title':'NewBlog'}]);
+			newBlogAnchor['setStyleName']('logout');
+			rightHeaderPanel['add'](newBlogAnchor);
 			self['absolultutePanel'] = $pyjs_kwargs_call(null, $m['AbsolutePanel'], null, null, [{'StyleName':'detail-style'}]);
 			pagePanel['add']($p['getattr'](self, 'absolultutePanel'));
 			self['blogs'] = $p['list']([]);
@@ -26225,7 +28388,7 @@ $pyjs['loaded_modules']['home'] = function (__mod_name__) {
 				self['absolultutePanel']['add'](paginnationPanel);
 			}
 			$m['RootPanel']()['add'](pagePanel);
-			self['remote_py']['callMethod']('getBlogs', $p['list']([]), self);
+			self['remote_py']['callMethod']('getBlogs', $p['list']([loggedInUserJsonData['__getitem__']('username')]), self);
 			return null;
 		}
 	, 1, [null,null,['self']]);
@@ -26314,7 +28477,7 @@ $pyjs['loaded_modules']['home'] = function (__mod_name__) {
 		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
 		return $p['_create_class']('Home', $p['tuple']($bases), $data);
 	})();
-	$m['EchoServicePython'] = (function(){
+	$m['MyBlogService'] = (function(){
 		var $cls_definition = new Object();
 		var $method;
 		$cls_definition['__module__'] = 'home';
@@ -26333,7 +28496,7 @@ $pyjs['loaded_modules']['home'] = function (__mod_name__) {
 		var $bases = new Array($m['ServiceProxy']);
 		var $data = $p['dict']();
 		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
-		return $p['_create_class']('EchoServicePython', $p['tuple']($bases), $data);
+		return $p['_create_class']('MyBlogService', $p['tuple']($bases), $data);
 	})();
 	if ($p['bool']($p['op_eq']((typeof __name__ == "undefined"?$m['__name__']:__name__), '__main__'))) {
 		$m['app'] = $m['Home']();
@@ -26348,7 +28511,7 @@ $pyjs['loaded_modules']['home'] = function (__mod_name__) {
 
 
 /*
-PYJS_DEPS: ['pyjamas.ui.HorizontalPanel.HorizontalPanel', 'pyjamas', 'pyjamas.ui', 'pyjamas.ui.HorizontalPanel', 'pyjamas.ui.Label.Label', 'pyjamas.ui.Label', 'pyjamas.ui.VerticalPanel.VerticalPanel', 'pyjamas.ui.VerticalPanel', 'pyjamas.ui.Anchor.Anchor', 'pyjamas.ui.Anchor', 'pyjamas.ui.HTML.HTML', 'pyjamas.ui.HTML', 'pyjamas.ui.RootPanel.RootPanel', 'pyjamas.ui.RootPanel', 'pyjamas.ui.Sink.SinkList', 'pyjamas.ui.Sink', 'pyjamas.ui.DockPanel.DockPanel', 'pyjamas.ui.DockPanel', 'pyjamas.ui.HasAlignment', 'pyjamas.ui.Image.Image', 'pyjamas.ui.Image', 'pyjamas.ui.CSS.StyleSheetCssFile', 'pyjamas.ui.CSS', 'pyjamas.ui.SimplePanel.SimplePanel', 'pyjamas.ui.SimplePanel', 'pyjamas.ui.ScrollPanel.ScrollPanel', 'pyjamas.ui.ScrollPanel', 'pyjamas.ui.AbsolutePanel.AbsolutePanel', 'pyjamas.ui.AbsolutePanel', 'pyjamas.ui.Button.Button', 'pyjamas.ui.Button', 'pyjamas.ui.Grid.Grid', 'pyjamas.ui.Grid', 'pyjamas.Window', 'json', 'pyjamas.JSONService.ServiceProxy', 'pyjamas.JSONService']
+PYJS_DEPS: ['pyjamas.ui.HorizontalPanel.HorizontalPanel', 'pyjamas', 'pyjamas.ui', 'pyjamas.ui.HorizontalPanel', 'pyjamas.ui.Label.Label', 'pyjamas.ui.Label', 'pyjamas.ui.VerticalPanel.VerticalPanel', 'pyjamas.ui.VerticalPanel', 'pyjamas.ui.Anchor.Anchor', 'pyjamas.ui.Anchor', 'pyjamas.ui.HTML.HTML', 'pyjamas.ui.HTML', 'pyjamas.ui.RootPanel.RootPanel', 'pyjamas.ui.RootPanel', 'pyjamas.ui.Sink.SinkList', 'pyjamas.ui.Sink', 'pyjamas.ui.DockPanel.DockPanel', 'pyjamas.ui.DockPanel', 'pyjamas.ui.HasAlignment', 'pyjamas.ui.Image.Image', 'pyjamas.ui.Image', 'pyjamas.ui.CSS.StyleSheetCssFile', 'pyjamas.ui.CSS', 'pyjamas.ui.SimplePanel.SimplePanel', 'pyjamas.ui.SimplePanel', 'pyjamas.ui.ScrollPanel.ScrollPanel', 'pyjamas.ui.ScrollPanel', 'pyjamas.ui.AbsolutePanel.AbsolutePanel', 'pyjamas.ui.AbsolutePanel', 'pyjamas.ui.Button.Button', 'pyjamas.ui.Button', 'pyjamas.ui.Grid.Grid', 'pyjamas.ui.Grid', 'pyjamas.Window', 'datetime.datetime', 'datetime', 'json', 'pyjamas.Cookies.getCookie', 'pyjamas.Cookies', 'pyjamas.JSONService.ServiceProxy', 'pyjamas.JSONService']
 */
 
 --></script>
@@ -29961,6 +32124,864 @@ PYJS_DEPS: ['pyjamas.DOM', 'pyjamas', 'pyjamas.Factory', 'pyjamas.ui.Widget.Widg
 */
 
 --></script>
+<script type="text/javascript"><!--
+/* start module: re */
+$pyjs['loaded_modules']['re'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['re']['__was_initialized__']) return $pyjs['loaded_modules']['re'];
+	var $m = $pyjs['loaded_modules']['re'];
+	$m['__repr__'] = function() { return '<module: re>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 're';
+	$m['__name__'] = __mod_name__;
+	var $iter1_iter,$iter1_array,$iter1_nextval,$iter1_type,$iter1_idx;
+
+	$m['$assign1'] = 1;
+	$m['I'] = $m['$assign1'];
+	$m['IGNORECASE'] = $m['$assign1'];
+	$m['$assign2'] = 2;
+	$m['L'] = $m['$assign2'];
+	$m['LOCALE'] = $m['$assign2'];
+	$m['$assign3'] = 4;
+	$m['U'] = $m['$assign3'];
+	$m['UNICODE'] = $m['$assign3'];
+	$m['$assign4'] = 8;
+	$m['M'] = $m['$assign4'];
+	$m['MULTILINE'] = $m['$assign4'];
+	$m['$assign5'] = 16;
+	$m['S'] = $m['$assign5'];
+	$m['DOTALL'] = $m['$assign5'];
+	$m['$assign6'] = 32;
+	$m['X'] = $m['$assign6'];
+	$m['VERBOSE'] = $m['$assign6'];
+	$m['match'] = function(pattern, string, flags) {
+		if (typeof flags == 'undefined') flags=arguments['callee']['__args__'][4][1];
+
+		return $m['compile'](pattern, flags)['match'](string);
+	};
+	$m['match']['__name__'] = 'match';
+
+	$m['match']['__bind_type__'] = 0;
+	$m['match']['__args__'] = [null,null,['pattern'],['string'],['flags', 0]];
+	$m['search'] = function(pattern, string, flags) {
+		if (typeof flags == 'undefined') flags=arguments['callee']['__args__'][4][1];
+
+		return $m['compile'](pattern, flags)['search'](string);
+	};
+	$m['search']['__name__'] = 'search';
+
+	$m['search']['__bind_type__'] = 0;
+	$m['search']['__args__'] = [null,null,['pattern'],['string'],['flags', 0]];
+	$m['sub'] = function(pattern, repl, string, count) {
+		if (typeof count == 'undefined') count=arguments['callee']['__args__'][5][1];
+
+		return $m['compile'](pattern, 0)['sub'](repl, string, count);
+	};
+	$m['sub']['__name__'] = 'sub';
+
+	$m['sub']['__bind_type__'] = 0;
+	$m['sub']['__args__'] = [null,null,['pattern'],['repl'],['string'],['count', 0]];
+	$m['subn'] = function(pattern, repl, string, count) {
+		if (typeof count == 'undefined') count=arguments['callee']['__args__'][5][1];
+
+		return $m['compile'](pattern, 0)['subn'](repl, string, count);
+	};
+	$m['subn']['__name__'] = 'subn';
+
+	$m['subn']['__bind_type__'] = 0;
+	$m['subn']['__args__'] = [null,null,['pattern'],['repl'],['string'],['count', 0]];
+	$m['$$split'] = function(pattern, string, maxsplit) {
+		if (typeof maxsplit == 'undefined') maxsplit=arguments['callee']['__args__'][4][1];
+
+		return $m['compile'](pattern, 0)['$$split'](string, maxsplit);
+	};
+	$m['$$split']['__name__'] = 'split';
+
+	$m['$$split']['__bind_type__'] = 0;
+	$m['$$split']['__args__'] = [null,null,['pattern'],['string'],['maxsplit', 0]];
+	$m['findall'] = function(pattern, string, flags) {
+		if (typeof flags == 'undefined') flags=arguments['callee']['__args__'][4][1];
+
+		return $m['compile'](pattern, flags)['findall'](string);
+	};
+	$m['findall']['__name__'] = 'findall';
+
+	$m['findall']['__bind_type__'] = 0;
+	$m['findall']['__args__'] = [null,null,['pattern'],['string'],['flags', 0]];
+	$m['finditer'] = function(pattern, string, flags) {
+		if (typeof flags == 'undefined') flags=arguments['callee']['__args__'][4][1];
+
+		return $m['compile'](pattern, flags)['finditer'](string);
+	};
+	$m['finditer']['__name__'] = 'finditer';
+
+	$m['finditer']['__bind_type__'] = 0;
+	$m['finditer']['__args__'] = [null,null,['pattern'],['string'],['flags', 0]];
+	$m['compile'] = function(pattern, flags) {
+		if (typeof flags == 'undefined') flags=arguments['callee']['__args__'][3][1];
+
+		return (typeof SRE_Pattern == "undefined"?$m['SRE_Pattern']:SRE_Pattern)(pattern, flags, (typeof _compile == "undefined"?$m['_compile']:_compile)(pattern, flags));
+	};
+	$m['compile']['__name__'] = 'compile';
+
+	$m['compile']['__bind_type__'] = 0;
+	$m['compile']['__args__'] = [null,null,['pattern'],['flags', 0]];
+	$m['purge'] = function() {
+
+		$m['_cache']['clear']();
+		$m['_cache_repl']['clear']();
+		return null;
+	};
+	$m['purge']['__name__'] = 'purge';
+
+	$m['purge']['__bind_type__'] = 0;
+	$m['purge']['__args__'] = [null,null];
+	$m['template'] = function(pattern, flags) {
+		if (typeof flags == 'undefined') flags=arguments['callee']['__args__'][3][1];
+
+		throw ($p['NotImplementedError']('re.template'));
+		return null;
+	};
+	$m['template']['__name__'] = 'template';
+
+	$m['template']['__bind_type__'] = 0;
+	$m['template']['__args__'] = [null,null,['pattern'],['flags', 0]];
+	$m['_alphanum'] = $p['dict']([]);
+	$iter1_iter = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890';
+	$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
+	while (typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined') {
+		$m['c'] = $iter1_nextval['$nextval'];
+		$m['_alphanum']['__setitem__']($m['c'], 1);
+	}
+	delete $m['c'];
+	$m['escape'] = function(pattern) {
+		var c,$iter2_nextval,$iter2_type,$iter2_iter,i,$iter2_idx,$add2,s,$add1,alphanum,$iter2_array;
+		s = $p['list'](pattern);
+		alphanum = $m['_alphanum'];
+		$iter2_iter = $p['range']($p['len'](pattern));
+		$iter2_nextval=$p['__iter_prepare']($iter2_iter,false);
+		while (typeof($p['__wrapped_next']($iter2_nextval)['$nextval']) != 'undefined') {
+			i = $iter2_nextval['$nextval'];
+			c = pattern['__getitem__'](i);
+			if ($p['bool'](!alphanum['__contains__'](c))) {
+				if ($p['bool']($p['op_eq'](c, '\x00'))) {
+					s['__setitem__'](i, '\\000');
+				}
+				else {
+					s['__setitem__'](i, $p['__op_add']($add1='\\',$add2=c));
+				}
+			}
+		}
+		return $p['__getslice'](pattern, 0, 0)['join'](s);
+	};
+	$m['escape']['__name__'] = 'escape';
+
+	$m['escape']['__bind_type__'] = 0;
+	$m['escape']['__args__'] = [null,null,['pattern']];
+	$m['__inline_flags_re__'] = new RegExp("[(][?][iLmsux]+[)]");
+	$m['_cache'] = $p['dict']([]);
+	$m['_cache_repl'] = $p['dict']([]);
+	$m['_MAXCACHE'] = 100;
+	$m['_compile'] = function(pat, flags) {
+		if (typeof flags == 'undefined') flags=arguments['callee']['__args__'][3][1];
+		var $iter5_nextval,$iter5_array,$iter3_type,backslash,$iter5_iter,$iter4_type,$iter5_type,$iter4_iter,$iter3_idx,$add3,$iter3_nextval,brack,$iter3_iter,$iter5_idx,$sub3,$sub2,$sub1,spat,$sub4,flgs,$and1,$and2,$add6,$add10,$add11,$add12,$iter3_array,c,cachekey,i,$iter4_nextval,m,$iter4_idx,p,$add7,$add4,$add5,$iter4_array,$add8,$add9;
+		cachekey = $p['tuple']([pat, flags]);
+		p = $m['_cache']['get'](cachekey);
+		if ($p['bool']((p !== null))) {
+			return p;
+		}
+		flgs = '';
+		while ($p['bool'](true)) {
+			m = $m['__inline_flags_re__']['Exec'](pat);
+			if ($p['bool'](m === null)) {
+				m = null;
+				break;
+			}
+			pat = pat['$$replace']($m['__inline_flags_re__'], '');
+			$iter3_iter = $p['list'](m);
+			$iter3_nextval=$p['__iter_prepare']($iter3_iter,false);
+			while (typeof($p['__wrapped_next']($iter3_nextval)['$nextval']) != 'undefined') {
+				m = $iter3_nextval['$nextval'];
+				if ($p['bool'](m === null)) {
+					continue;
+				}
+				$iter4_iter = $p['str'](m);
+				$iter4_nextval=$p['__iter_prepare']($iter4_iter,false);
+				while (typeof($p['__wrapped_next']($iter4_nextval)['$nextval']) != 'undefined') {
+					c = $iter4_nextval['$nextval'];
+					if ($p['bool']($p['list'](['(', '?', ')'])['__contains__'](c))) {
+					}
+					else if ($p['bool']($p['op_eq'](c, 'i'))) {
+						flags |= $m['IGNORECASE'];
+					}
+					else if ($p['bool']($p['op_eq'](c, 'L'))) {
+						flags |= $m['LOCALE'];
+					}
+					else if ($p['bool']($p['op_eq'](c, 'm'))) {
+						flags |= $m['MULTILINE'];
+					}
+					else if ($p['bool']($p['op_eq'](c, 's'))) {
+						flags |= $m['DOTALL'];
+					}
+					else if ($p['bool']($p['op_eq'](c, 'u'))) {
+						flags |= $m['UNICODE'];
+					}
+					else if ($p['bool']($p['op_eq'](c, 'x'))) {
+						flags |= $m['VERBOSE'];
+					}
+				}
+			}
+		}
+		if ($p['bool'](flags)) {
+			if ($p['bool']((flags)&($m['LOCALE']))) {
+				throw ($p['NotImplementedError']('L/LOCALE flag is not implemented'));
+			}
+			if ($p['bool']((flags)&($m['UNICODE']))) {
+				throw ($p['NotImplementedError']('U/UNICODE flag is not implemented'));
+			}
+			if ($p['bool']((flags)&($m['VERBOSE']))) {
+				throw ($p['NotImplementedError']('X/VERBOSE flag is not implemented'));
+			}
+			if ($p['bool']((flags)&($m['DOTALL']))) {
+				p = '';
+				brack = (typeof ($usub1=1)=='number'?
+					-$usub1:
+					$p['op_usub']($usub1));
+				backslash = (typeof ($usub2=2)=='number'?
+					-$usub2:
+					$p['op_usub']($usub2));
+				$iter5_iter = $p['enumerate'](pat);
+				$iter5_nextval=$p['__iter_prepare']($iter5_iter,false);
+				while (typeof($p['__wrapped_next']($iter5_nextval)['$nextval']) != 'undefined') {
+					var $tupleassign1 = $p['__ass_unpack']($iter5_nextval['$nextval'], 2, null);
+					i = $tupleassign1[0];
+					c = $tupleassign1[1];
+					if ($p['bool'](!$p['op_eq'](backslash, $p['__op_sub']($sub1=i,$sub2=1)))) {
+						if ($p['bool'](($p['cmp'](brack, 0) == -1))) {
+							if ($p['bool']($p['op_eq'](c, '['))) {
+								brack = i;
+							}
+							else if ($p['bool']($p['op_eq'](c, '.'))) {
+								c = '[\\s\\S]';
+							}
+							else if ($p['bool']($p['op_eq'](c, '\\'))) {
+								backslash = i;
+							}
+						}
+						else {
+							if ($p['bool'](($p['bool']($and1=$p['op_eq'](c, ']'))?!$p['op_eq'](brack, $p['__op_sub']($sub3=i,$sub4=1)):$and1))) {
+								brack = (typeof ($usub3=1)=='number'?
+									-$usub3:
+									$p['op_usub']($usub3));
+							}
+						}
+					}
+					p = $p['__op_add']($add3=p,$add4=c);
+				}
+				pat = p;
+			}
+			if ($p['bool']((flags)&($m['IGNORECASE']))) {
+				flgs = $p['__op_add']($add5=flgs,$add6='i');
+			}
+			if ($p['bool']((flags)&($m['MULTILINE']))) {
+				flgs = $p['__op_add']($add7=flgs,$add8='m');
+			}
+		}
+		spat = $p['__op_add']($add11=$p['__op_add']($add9='([\\s\\S]*?)(',$add10=pat),$add12=')[\\s\\S]*');
+		p = $p['tuple']([new RegExp(pat, flgs), new RegExp(spat, flgs), new RegExp(pat, "g"+flgs)]);
+		if ($p['bool'](((($p['cmp']($p['len']($m['_cache']), $m['_MAXCACHE']))|1) == 1))) {
+			$m['_cache']['clear']();
+		}
+		$m['_cache']['__setitem__'](cachekey, p);
+		return p;
+	};
+	$m['_compile']['__name__'] = '_compile';
+
+	$m['_compile']['__bind_type__'] = 0;
+	$m['_compile']['__args__'] = [null,null,['pat'],['flags', 0]];
+	$m['SRE_Match'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 're';
+		$method = $pyjs__bind_method2('__init__', function(re, string, pos, endpos, groups, start, lastindex, lastgroup) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				re = arguments[1];
+				string = arguments[2];
+				pos = arguments[3];
+				endpos = arguments[4];
+				groups = arguments[5];
+				start = arguments[6];
+				lastindex = arguments[7];
+				lastgroup = arguments[8];
+			}
+			var $add14,$add13;
+			self['_groups'] = groups;
+			self['_start'] = start;
+			self['_end'] = $p['__op_add']($add13=start,$add14=$p['len'](groups['__getitem__'](0)));
+			self['re'] = re;
+			self['string'] = string;
+			self['pos'] = pos;
+			self['endpos'] = endpos;
+			self['lastindex'] = lastindex;
+			self['lastgroup'] = lastgroup;
+			return null;
+		}
+	, 1, [null,null,['self'],['re'],['string'],['pos'],['endpos'],['groups'],['start'],['lastindex'],['lastgroup']]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('start', function(group) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				group = arguments[1];
+			}
+			if (typeof group == 'undefined') group=arguments['callee']['__args__'][3][1];
+			var substr,idx;
+			if ($p['bool'](!$p['op_eq'](group, 0))) {
+				substr = self['group'](group);
+				if ($p['bool'](substr)) {
+					idx = self['string']['index'](substr, $p['getattr'](self, '_start'));
+					return idx;
+				}
+				throw ($p['NotImplementedError']('group argument not supported'));
+			}
+			return $p['getattr'](self, '_start');
+		}
+	, 1, [null,null,['self'],['group', 0]]);
+		$cls_definition['start'] = $method;
+		$method = $pyjs__bind_method2('end', function(group) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				group = arguments[1];
+			}
+			if (typeof group == 'undefined') group=arguments['callee']['__args__'][3][1];
+			var idx,$add15,substr,$add16;
+			if ($p['bool'](!$p['op_eq'](group, 0))) {
+				substr = self['group'](group);
+				if ($p['bool'](substr)) {
+					idx = self['string']['index'](substr, $p['getattr'](self, '_start'));
+					return $p['__op_add']($add15=idx,$add16=$p['len'](substr));
+				}
+				throw ($p['NotImplementedError']('group argument not supported'));
+			}
+			return $p['getattr'](self, '_end');
+		}
+	, 1, [null,null,['self'],['group', 0]]);
+		$cls_definition['end'] = $method;
+		$method = $pyjs__bind_method2('span', function(group) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				group = arguments[1];
+			}
+			if (typeof group == 'undefined') group=arguments['callee']['__args__'][3][1];
+
+			return $p['tuple']([self['start'](group), self['end'](group)]);
+		}
+	, 1, [null,null,['self'],['group', 0]]);
+		$cls_definition['span'] = $method;
+		$method = $pyjs__bind_method2('expand', function(template) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				template = arguments[1];
+			}
+
+			throw ($p['NotImplementedError']('expand'));
+			return null;
+		}
+	, 1, [null,null,['self'],['template']]);
+		$cls_definition['expand'] = $method;
+		$method = $pyjs__bind_method2('groups', function($$default) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				$$default = arguments[1];
+			}
+			if (typeof $$default == 'undefined') $$default=arguments['callee']['__args__'][3][1];
+			var $$default;
+			return $p['tuple'](function(){
+				var $iter6_idx,$iter6_type,$collcomp1,$iter6_array,x,$iter6_iter,$iter6_nextval;
+	$collcomp1 = $p['list']();
+			$iter6_iter = $p['__getslice']($p['getattr'](self, '_groups'), 1, null);
+			$iter6_nextval=$p['__iter_prepare']($iter6_iter,false);
+			while (typeof($p['__wrapped_next']($iter6_nextval)['$nextval']) != 'undefined') {
+				x = $iter6_nextval['$nextval'];
+				$collcomp1['append'](($p['bool']((x !== null))? (x) : ($$default)));
+			}
+
+	return $collcomp1;}());
+		}
+	, 1, [null,null,['self'],['$$default', null]]);
+		$cls_definition['groups'] = $method;
+		$method = $pyjs__bind_method2('groupdict', function($$default) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				$$default = arguments[1];
+			}
+			if (typeof $$default == 'undefined') $$default=arguments['callee']['__args__'][3][1];
+			var $$default;
+			throw ($p['NotImplementedError']('groupdict'));
+			return null;
+		}
+	, 1, [null,null,['self'],['$$default', null]]);
+		$cls_definition['groupdict'] = $method;
+		$method = $pyjs__bind_method2('group', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+				var args = $p['tuple']($pyjs_array_slice['call'](arguments,0,arguments['length']));
+
+			} else {
+				var self = arguments[0];
+				var args = $p['tuple']($pyjs_array_slice['call'](arguments,1,arguments['length']));
+
+			}
+			var grouplist,$iter7_array,group,$iter7_nextval,$iter7_iter,$iter7_idx,$iter7_type;
+			if ($p['bool']($p['op_eq']($p['len'](args), 0))) {
+				args = $p['tuple']([0]);
+			}
+			grouplist = $p['list']([]);
+			$iter7_iter = args;
+			$iter7_nextval=$p['__iter_prepare']($iter7_iter,false);
+			while (typeof($p['__wrapped_next']($iter7_nextval)['$nextval']) != 'undefined') {
+				group = $iter7_nextval['$nextval'];
+				grouplist['append']($p['getattr'](self, '_groups')['__getitem__'](group));
+			}
+			if ($p['bool']($p['op_eq']($p['len'](grouplist), 1))) {
+				return grouplist['__getitem__'](0);
+			}
+			else {
+				return $p['tuple'](grouplist);
+			}
+			return null;
+		}
+	, 1, ['args',null,['self']]);
+		$cls_definition['group'] = $method;
+		$method = $pyjs__bind_method2('__copy__', function() {
+			if (this['__is_instance__'] === true) {
+			} else {
+			}
+
+
+			var $pyjs__raise_expr1 = $p['TypeError'];
+			var $pyjs__raise_expr2 = 'cannot copy this pattern object';
+			if ($pyjs__raise_expr2 !== null && $pyjs__raise_expr1['__is_instance__'] === true) {
+				throw $p['TypeError']('instance exception may not have a separate value');
+			}
+			if ($p['isinstance']($pyjs__raise_expr2, $p['tuple'])) {
+				throw ($pyjs__raise_expr1['apply']($pyjs__raise_expr1, $pyjs__raise_expr2['getArray']()));
+			} else {
+				throw ($pyjs__raise_expr1($pyjs__raise_expr2));
+			}
+
+			return null;
+		}
+	, 1, [null,null]);
+		$cls_definition['__copy__'] = $method;
+		$method = $pyjs__bind_method2('__deepcopy__', function() {
+			if (this['__is_instance__'] === true) {
+			} else {
+			}
+
+
+			var $pyjs__raise_expr1 = $p['TypeError'];
+			var $pyjs__raise_expr2 = 'cannot copy this pattern object';
+			if ($pyjs__raise_expr2 !== null && $pyjs__raise_expr1['__is_instance__'] === true) {
+				throw $p['TypeError']('instance exception may not have a separate value');
+			}
+			if ($p['isinstance']($pyjs__raise_expr2, $p['tuple'])) {
+				throw ($pyjs__raise_expr1['apply']($pyjs__raise_expr1, $pyjs__raise_expr2['getArray']()));
+			} else {
+				throw ($pyjs__raise_expr1($pyjs__raise_expr2));
+			}
+
+			return null;
+		}
+	, 1, [null,null]);
+		$cls_definition['__deepcopy__'] = $method;
+		var $bases = new Array(pyjslib['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('SRE_Match', $p['tuple']($bases), $data);
+	})();
+	$m['SRE_Pattern'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 're';
+		$method = $pyjs__bind_method2('__init__', function(pat, flags, code) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				pat = arguments[1];
+				flags = arguments[2];
+				code = arguments[3];
+			}
+
+			self['pat'] = pat;
+			self['flags'] = flags;
+			self['match_code'] = code['__getitem__'](0);
+			self['search_code'] = code['__getitem__'](1);
+			self['findall_code'] = code['__getitem__'](2);
+			return null;
+		}
+	, 1, [null,null,['self'],['pat'],['flags'],['code']]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('match', function(string, pos, endpos) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				string = arguments[1];
+				pos = arguments[2];
+				endpos = arguments[3];
+			}
+			if (typeof pos == 'undefined') pos=arguments['callee']['__args__'][4][1];
+			if (typeof endpos == 'undefined') endpos=arguments['callee']['__args__'][5][1];
+			var _groups,$iter9_array,$iter8_idx,$iter9_iter,i,$iter9_nextval,$iter8_array,$iter9_type,$iter8_iter,groups,$iter8_type,$iter9_idx,$iter8_nextval;
+			if ($p['bool'](!$p['bool']((endpos === null)))) {
+				string = $p['__getslice'](string, 0, endpos);
+			}
+			else {
+				endpos = $p['len'](string);
+			}
+			if ($p['bool']($p['op_eq'](pos, 0))) {
+				groups = self['match_code']['Exec'](string);
+				if ($p['bool'](groups === null)) {
+					return null;
+				}
+				_groups = $p['list']([]);
+				$iter8_iter = $p['list'](groups);
+				$iter8_nextval=$p['__iter_prepare']($iter8_iter,false);
+				while (typeof($p['__wrapped_next']($iter8_nextval)['$nextval']) != 'undefined') {
+					i = $iter8_nextval['$nextval'];
+					if ($p['bool'](i === null)) {
+						_groups['append'](null);
+					}
+					else {
+						_groups['append']($p['str'](i));
+					}
+				}
+				groups = _groups;
+			}
+			else if ($p['bool'](((($p['cmp'](pos, $p['len'](string)))|1) == 1))) {
+				return null;
+			}
+			else {
+				groups = self['match_code']['Exec']($p['__getslice'](string, pos, null));
+				if ($p['bool'](groups === null)) {
+					return null;
+				}
+				if ($p['bool'](!$p['op_eq']($p['getattr'](groups, 'index'), 0))) {
+					return null;
+				}
+				_groups = $p['list']([]);
+				$iter9_iter = $p['list'](groups);
+				$iter9_nextval=$p['__iter_prepare']($iter9_iter,false);
+				while (typeof($p['__wrapped_next']($iter9_nextval)['$nextval']) != 'undefined') {
+					i = $iter9_nextval['$nextval'];
+					if ($p['bool'](i === null)) {
+						_groups['append'](null);
+					}
+					else {
+						_groups['append']($p['str'](i));
+					}
+				}
+				groups = _groups;
+			}
+			return $m['SRE_Match'](self, string, pos, endpos, groups, pos, null, null);
+		}
+	, 1, [null,null,['self'],['string'],['pos', 0],['endpos', null]]);
+		$cls_definition['match'] = $method;
+		$method = $pyjs__bind_method2('search', function(string, pos, endpos) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				string = arguments[1];
+				pos = arguments[2];
+				endpos = arguments[3];
+			}
+			if (typeof pos == 'undefined') pos=arguments['callee']['__args__'][4][1];
+			if (typeof endpos == 'undefined') endpos=arguments['callee']['__args__'][5][1];
+			var _groups,$iter10_nextval,i,$iter11_iter,$iter11_type,$add18,$iter10_array,$add17,groups,$iter11_array,$iter10_type,$iter10_iter,$iter11_idx,$iter11_nextval,$iter10_idx;
+			if ($p['bool'](!$p['bool']((endpos === null)))) {
+				string = $p['__getslice'](string, 0, endpos);
+			}
+			if ($p['bool']($p['op_eq'](pos, 0))) {
+				groups = self['search_code']['Exec'](string);
+				if ($p['bool'](groups === null)) {
+					return null;
+				}
+				_groups = $p['list']([]);
+				$iter10_iter = $p['list'](groups);
+				$iter10_nextval=$p['__iter_prepare']($iter10_iter,false);
+				while (typeof($p['__wrapped_next']($iter10_nextval)['$nextval']) != 'undefined') {
+					i = $iter10_nextval['$nextval'];
+					if ($p['bool'](i === null)) {
+						_groups['append'](null);
+					}
+					else {
+						_groups['append']($p['str'](i));
+					}
+				}
+				groups = _groups;
+			}
+			else if ($p['bool'](((($p['cmp'](pos, $p['len'](string)))|1) == 1))) {
+				return null;
+			}
+			else {
+				groups = self['search_code']['Exec']($p['__getslice'](string, pos, null));
+				if ($p['bool'](groups === null)) {
+					return null;
+				}
+				_groups = $p['list']([]);
+				$iter11_iter = $p['list'](groups);
+				$iter11_nextval=$p['__iter_prepare']($iter11_iter,false);
+				while (typeof($p['__wrapped_next']($iter11_nextval)['$nextval']) != 'undefined') {
+					i = $iter11_nextval['$nextval'];
+					if ($p['bool'](i === null)) {
+						_groups['append'](null);
+					}
+					else {
+						_groups['append']($p['str'](i));
+					}
+				}
+				groups = _groups;
+			}
+			return $m['SRE_Match'](self, string, pos, endpos, $p['__getslice'](groups, 2, null), $p['__op_add']($add17=pos,$add18=$p['len'](groups['__getitem__'](1))), null, null);
+		}
+	, 1, [null,null,['self'],['string'],['pos', 0],['endpos', null]]);
+		$cls_definition['search'] = $method;
+		$method = $pyjs__bind_method2('findall', function(string, pos, endpos) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				string = arguments[1];
+				pos = arguments[2];
+				endpos = arguments[3];
+			}
+			if (typeof pos == 'undefined') pos=arguments['callee']['__args__'][4][1];
+			if (typeof endpos == 'undefined') endpos=arguments['callee']['__args__'][5][1];
+			var all,span,m;
+			if ($p['bool'](!$p['bool']((endpos === null)))) {
+				string = $p['__getslice'](string, 0, endpos);
+			}
+			all = $p['list']([]);
+			while ($p['bool'](true)) {
+				m = self['search'](string, pos);
+				if ($p['bool']((m === null))) {
+					break;
+				}
+				span = m['span']();
+				if ($p['bool'](!$p['bool'](m['groups']()))) {
+					all['append']($p['__getslice'](string, span['__getitem__'](0), span['__getitem__'](1)));
+				}
+				else {
+					all['append']($p['tuple'](function(){
+						var group,$or2,$iter12_type,$iter12_array,$collcomp2,$iter12_iter,$or1,$iter12_idx,$iter12_nextval;
+	$collcomp2 = $p['list']();
+					$iter12_iter = m['groups']();
+					$iter12_nextval=$p['__iter_prepare']($iter12_iter,false);
+					while (typeof($p['__wrapped_next']($iter12_nextval)['$nextval']) != 'undefined') {
+						group = $iter12_nextval['$nextval'];
+						$collcomp2['append'](($p['bool']($or1=group)?$or1:''));
+					}
+
+	return $collcomp2;}()));
+				}
+				pos = span['__getitem__'](1);
+			}
+			return all;
+			return $p['list']($p['__getslice'](string, pos, null)['match']($p['getattr'](self, 'findall_code')));
+		}
+	, 1, [null,null,['self'],['string'],['pos', 0],['endpos', null]]);
+		$cls_definition['findall'] = $method;
+		$method = $pyjs__bind_method2('sub', function(repl, string, count) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				repl = arguments[1];
+				string = arguments[2];
+				count = arguments[3];
+			}
+			if (typeof count == 'undefined') count=arguments['callee']['__args__'][5][1];
+
+			return self['subn'](repl, string, count)['__getitem__'](0);
+		}
+	, 1, [null,null,['self'],['repl'],['string'],['count', 0]]);
+		$cls_definition['sub'] = $method;
+		$method = $pyjs__bind_method2('subn', function(repl, string, count) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				repl = arguments[1];
+				string = arguments[2];
+				count = arguments[3];
+			}
+			if (typeof count == 'undefined') count=arguments['callee']['__args__'][5][1];
+			var span,$sub6,$add21,res,$add22,m,pos,n,subst,$add26,$add20,$add24,$add25,$add19,$sub5,$add23;
+			res = '';
+			n = 0;
+			subst = repl;
+			pos = 0;
+			while ($p['bool'](((($p['cmp'](count, 0))|1) == 1))) {
+				m = self['search'](string, pos);
+				if ($p['bool']((m === null))) {
+					break;
+				}
+				span = m['span']();
+				if ($p['bool']($p['callable'](repl))) {
+					subst = repl(m);
+				}
+				res = $p['__op_add']($add19=res,$add20=$p['__getslice'](string, pos, span['__getitem__'](0)));
+				res = $p['__op_add']($add21=res,$add22=subst);
+				pos = span['__getitem__'](1);
+				n = $p['__op_add']($add23=n,$add24=1);
+				if ($p['bool'](count)) {
+					if ($p['bool']($p['op_eq'](count, 1))) {
+						break;
+					}
+					count = $p['__op_sub']($sub5=count,$sub6=1);
+				}
+			}
+			return $p['tuple']([$p['__op_add']($add25=res,$add26=$p['__getslice'](string, pos, null)), n]);
+		}
+	, 1, [null,null,['self'],['repl'],['string'],['count', 0]]);
+		$cls_definition['subn'] = $method;
+		$method = $pyjs__bind_method2('$$split', function(string, maxsplit) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				string = arguments[1];
+				maxsplit = arguments[2];
+			}
+			if (typeof maxsplit == 'undefined') maxsplit=arguments['callee']['__args__'][4][1];
+			var span,m,pos,splitted;
+			splitted = $p['list']([]);
+			pos = 0;
+			while ($p['bool'](((($p['cmp'](maxsplit, 0))|1) == 1))) {
+				m = self['search'](string, pos);
+				if ($p['bool']((m === null))) {
+					break;
+				}
+				span = m['span']();
+				splitted['append']($p['__getslice'](string, pos, span['__getitem__'](0)));
+				pos = span['__getitem__'](1);
+			}
+			if ($p['bool'](($p['cmp'](pos, $p['len'](string)) == -1))) {
+				splitted['append']($p['__getslice'](string, pos, null));
+			}
+			return splitted;
+		}
+	, 1, [null,null,['self'],['string'],['maxsplit', 0]]);
+		$cls_definition['$$split'] = $method;
+		$method = $pyjs__bind_method2('finditer', function(string, pos, endpos) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				string = arguments[1];
+				pos = arguments[2];
+				endpos = arguments[3];
+			}
+			if (typeof pos == 'undefined') pos=arguments['callee']['__args__'][4][1];
+			if (typeof endpos == 'undefined') endpos=arguments['callee']['__args__'][5][1];
+
+			return self['findall'](string, pos, endpos)['__iter__']();
+		}
+	, 1, [null,null,['self'],['string'],['pos', 0],['endpos', null]]);
+		$cls_definition['finditer'] = $method;
+		$method = $pyjs__bind_method2('scanner', function(string, start, end) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				string = arguments[1];
+				start = arguments[2];
+				end = arguments[3];
+			}
+			if (typeof start == 'undefined') start=arguments['callee']['__args__'][4][1];
+			if (typeof end == 'undefined') end=arguments['callee']['__args__'][5][1];
+
+			throw ($p['NotImplementedError']('scanner'));
+			return null;
+		}
+	, 1, [null,null,['self'],['string'],['start', 0],['end', null]]);
+		$cls_definition['scanner'] = $method;
+		$method = $pyjs__bind_method2('__copy__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+
+			var $pyjs__raise_expr1 = $p['TypeError'];
+			var $pyjs__raise_expr2 = 'cannot copy this pattern object';
+			if ($pyjs__raise_expr2 !== null && $pyjs__raise_expr1['__is_instance__'] === true) {
+				throw $p['TypeError']('instance exception may not have a separate value');
+			}
+			if ($p['isinstance']($pyjs__raise_expr2, $p['tuple'])) {
+				throw ($pyjs__raise_expr1['apply']($pyjs__raise_expr1, $pyjs__raise_expr2['getArray']()));
+			} else {
+				throw ($pyjs__raise_expr1($pyjs__raise_expr2));
+			}
+
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__copy__'] = $method;
+		$method = $pyjs__bind_method2('__deepcopy__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+
+			var $pyjs__raise_expr1 = $p['TypeError'];
+			var $pyjs__raise_expr2 = 'cannot copy this pattern object';
+			if ($pyjs__raise_expr2 !== null && $pyjs__raise_expr1['__is_instance__'] === true) {
+				throw $p['TypeError']('instance exception may not have a separate value');
+			}
+			if ($p['isinstance']($pyjs__raise_expr2, $p['tuple'])) {
+				throw ($pyjs__raise_expr1['apply']($pyjs__raise_expr1, $pyjs__raise_expr2['getArray']()));
+			} else {
+				throw ($pyjs__raise_expr1($pyjs__raise_expr2));
+			}
+
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__deepcopy__'] = $method;
+		var $bases = new Array(pyjslib['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('SRE_Pattern', $p['tuple']($bases), $data);
+	})();
+	return this;
+}; /* end re */
+
+
+/* end module: re */
+
+
+
+--></script>
 
 <!--
 /* late static js libs */
@@ -30039,7 +33060,7 @@ function prepare_app() {
         };
         wait();
     }
-    wait_for_loading_modules(app_imported, ['pyjamas.ui.DropHandler','pyjamas.ui','pyjamas.ui.FocusWidget','pyjamas.Window','pyjamas.ui.InnerText','pyjamas.ui.Widget','pygwt','pyjamas.ui.ClickListener','pyjamas.ui.AbsolutePanel','pyjamas.Location','pyjamas.ui.VerticalPanel','sys','pyjamas.ui.ChangeListener','home','pyjamas.ui.ScrollPanel','pyjamas','struct','pyjamas.ui.HorizontalPanel','pyjamas.ui.RowFormatter','pyjamas.ui.Focus','binascii','pyjamas.ui.CellPanel','json','pyjamas.HTTPRequest','getopt','pyjamas.ui.MouseListener','pyjamas.ui.KeyboardListener','pyjamas.ui.Grid','pyjamas.ui.Event','pyjamas.ui.Button','pyjamas.EventController','pyjamas.ui.Hyperlink','pyjamas.ui.CSS','pyjamas.History','pyjamas.ui.Label','pyjamas.ui.Panel','pyjamas.ui.ComplexPanel','base64','pyjamas.ui.Composite','pyjd','pyjamas.ui.DockPanel','pyjamas.ui.Image','pyjamas.ui.InnerHTML','pyjamas.Factory','pyjslib','pyjamas.ui.ButtonBase','pyjamas.ui.DragHandler','pyjamas.JSONService','pyjamas.ui.InputListener','pyjamas.ui.RootPanel','pyjamas.ui.UIObject','pyjamas.ui.SimplePanel','pyjamas.DOM','pyjamas.ui.Anchor','math','pyjamas.ui.HTMLTable','pyjamas.ui.HTML','pyjamas.ui.Sink','pyjamas.ui.CellFormatter','pyjamas.ui.FocusListener']);
+    wait_for_loading_modules(app_imported, ['pyjamas.ui.DropHandler','pyjamas.ui','pyjamas.ui.FocusWidget','pyjamas.Window','pyjamas.ui.InnerText','pyjamas.ui.Widget','pygwt','pyjamas.ui.ClickListener','pyjamas.ui.AbsolutePanel','pyjamas.Location','pyjamas.ui.VerticalPanel','sys','pyjamas.ui.ChangeListener','home','pyjamas.ui.ScrollPanel','pyjamas','struct','pyjamas.ui.HorizontalPanel','pyjamas.ui.RowFormatter','pyjamas.ui.Focus','binascii','pyjamas.ui.CellPanel','urllib','re','json','pyjamas.HTTPRequest','getopt','pyjamas.ui.MouseListener','pyjamas.ui.KeyboardListener','pyjamas.ui.Grid','pyjamas.ui.Event','pyjamas.Cookies','pyjamas.ui.Button','string','pyjamas.ui.Hyperlink','pyjamas.ui.CSS','pyjamas.History','pyjamas.ui.Label','pyjamas.ui.Panel','pyjamas.Factory','base64','pyjamas.ui.Composite','pyjd','pyjamas.ui.DockPanel','datetime','pyjamas.ui.Image','pyjamas.EventController','pyjamas.ui.InnerHTML','pyjamas.ui.ComplexPanel','pyjslib','pyjamas.ui.ButtonBase','pyjamas.ui.DragHandler','pyjamas.JSONService','pyjamas.ui.InputListener','pyjamas.ui.RootPanel','pyjamas.ui.UIObject','pyjamas.ui.SimplePanel','pyjamas.DOM','pyjamas.ui.Anchor','math','pyjamas.ui.HTMLTable','time','pyjamas.ui.HTML','pyjamas.ui.Sink','pyjamas.ui.CellFormatter','pyjamas.ui.FocusListener']);
 }
 
 function pygwtOnLoad(onLoadError, name) {

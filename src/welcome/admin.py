@@ -23,17 +23,15 @@ from pyjamas.ui.Grid import Grid
 from pyjamas import Window
 from datetime import datetime
 import json
-from pyjamas.Cookies import getCookie
+from pyjamas.Cookies import setCookie, getCookie
 
 from pyjamas.JSONService import ServiceProxy
 
 
 class Home:
     def onModuleLoad(self):
-        
         loggedInUser = getCookie("LoggedInUser")
         loggedInUserJsonData = json.loads(loggedInUser)
-        
         self.remote_py = MyBlogService()
         
         # Create a panel to hold all of the form widgets
@@ -61,10 +59,6 @@ class Home:
         logoutAnchor.setStyleName('logout')
         rightHeaderPanel.add(logoutAnchor)
         
-        newBlogAnchor = Anchor(Widget = HTML('Create New Blog'), Href='/newblog.html', Title = 'NewBlog')
-        newBlogAnchor.setStyleName('logout')
-        rightHeaderPanel.add(newBlogAnchor)
-        
         self.absolultutePanel = AbsolutePanel(StyleName='detail-style')
         pagePanel.add(self.absolultutePanel)
         
@@ -85,6 +79,8 @@ class Home:
 #         self.g.setCellPadding(4)
 #         self.g.setCellSpacing(1)
 
+        self.g.addTableListener(self)
+
         self.updatePageDisplay()
 
         self.absolultutePanel.add(self.g)
@@ -99,7 +95,7 @@ class Home:
         
         RootPanel().add(pagePanel)
         
-        self.remote_py.callMethod('getBlogs', [loggedInUserJsonData["username"]], self)
+        self.remote_py.callMethod('getAllUnPublishedBlogs', [], self)
 
     def onClick(self, sender):
         self.updatePageDisplay()
@@ -114,7 +110,7 @@ class Home:
             for x in range(1):
                 json_data = json.loads(self.blogs[y])
                 blogPanel = VerticalPanel()
-                blogTitleAnchor = Anchor(Widget = HTML('%s' % json_data["blog_name"]), Href='/login.html')
+                blogTitleAnchor = Anchor(Widget = HTML('%s' % json_data["blog_name"]), Href='/blogdetail.html')
                 blogTitleAnchor.setStyleName('blog-search-title')
                 blogPanel.add(blogTitleAnchor)
                 blogDetails = Label()
@@ -131,6 +127,10 @@ class Home:
 
     def onRemoteError(self, code, error_dict, requestInfo):
         pass
+    
+    def onCellClicked(self, sender, row, col):
+        self.row = row
+        setCookie("SelectedBlog", self.blogs[row], 10000, path='/')
                 
 class MyBlogService(ServiceProxy):
     def __init__(self):
