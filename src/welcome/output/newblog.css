@@ -30,6 +30,13 @@ body {
 	width: 100%;
 }
 
+.center-header {
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+}
+
 .header2 {
 	background-color:#fdfcff;
 	width: 100%;

@@ -4,7 +4,7 @@
 <script><!--
 var $wnd = parent;
 var $doc = $wnd['document'];
-var $moduleName = "admin";
+var $moduleName = "home2";
 var $pyjs = new Object();
 var $p = null, pyjslib, sys;
 $pyjs['global_namespace'] = this;
@@ -31,7 +31,7 @@ $pyjs['in_try_except'] = 0;
  * prepare app system vars
  */
 $pyjs['platform'] = 'opera';
-$pyjs['appname'] = 'admin';
+$pyjs['appname'] = 'home2';
 $pyjs['loadpath'] = './';
 
 // For google closure compiler:
@@ -44,7 +44,7 @@ window['$pyjs'] = $pyjs;
 
 </head>
 <body onload="if ($wnd && $wnd['__pygwt_modController']) $wnd['__pygwt_modController']['done']($pyjs['appname']);">
-<font face='arial' size='-1'>This script is part of module</font> <code>admin</code>
+<font face='arial' size='-1'>This script is part of module</font> <code>home2</code>
 
 
 <!--
@@ -15555,513 +15555,6 @@ PYJS_DEPS: ['pyjamas.DOM', 'pyjamas']
 
 --></script>
 <script type="text/javascript"><!--
-/* start module: admin */
-$pyjs['loaded_modules']['admin'] = function (__mod_name__) {
-	if($pyjs['loaded_modules']['admin']['__was_initialized__']) return $pyjs['loaded_modules']['admin'];
-	var $m = $pyjs['loaded_modules']['admin'];
-	$m['__repr__'] = function() { return '<module: admin>'; };
-	$m['__was_initialized__'] = true;
-	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'admin';
-	$m['__name__'] = __mod_name__;
-
-
-	$m['HorizontalPanel'] = $p['___import___']('pyjamas.ui.HorizontalPanel.HorizontalPanel', null, null, false);
-	$m['Label'] = $p['___import___']('pyjamas.ui.Label.Label', null, null, false);
-	$m['VerticalPanel'] = $p['___import___']('pyjamas.ui.VerticalPanel.VerticalPanel', null, null, false);
-	$m['Anchor'] = $p['___import___']('pyjamas.ui.Anchor.Anchor', null, null, false);
-	$m['HTML'] = $p['___import___']('pyjamas.ui.HTML.HTML', null, null, false);
-	$m['RootPanel'] = $p['___import___']('pyjamas.ui.RootPanel.RootPanel', null, null, false);
-	$m['SinkList'] = $p['___import___']('pyjamas.ui.Sink.SinkList', null, null, false);
-	$m['DockPanel'] = $p['___import___']('pyjamas.ui.DockPanel.DockPanel', null, null, false);
-	$m['HasAlignment'] = $p['___import___']('pyjamas.ui.HasAlignment', null, null, false);
-	$m['Image'] = $p['___import___']('pyjamas.ui.Image.Image', null, null, false);
-	$m['StyleSheetCssFile'] = $p['___import___']('pyjamas.ui.CSS.StyleSheetCssFile', null, null, false);
-	$m['SimplePanel'] = $p['___import___']('pyjamas.ui.SimplePanel.SimplePanel', null, null, false);
-	$m['ScrollPanel'] = $p['___import___']('pyjamas.ui.ScrollPanel.ScrollPanel', null, null, false);
-	$m['AbsolutePanel'] = $p['___import___']('pyjamas.ui.AbsolutePanel.AbsolutePanel', null, null, false);
-	$m['Button'] = $p['___import___']('pyjamas.ui.Button.Button', null, null, false);
-	$m['Grid'] = $p['___import___']('pyjamas.ui.Grid.Grid', null, null, false);
-	$m['DOM'] = $p['___import___']('pyjamas.DOM', null, null, false);
-	$m['Window'] = $p['___import___']('pyjamas.Window', null, null, false);
-	$m['datetime'] = $p['___import___']('datetime.datetime', null, null, false);
-	$m['Tree'] = $p['___import___']('pyjamas.ui.Tree.Tree', null, null, false);
-	$m['TreeItem'] = $p['___import___']('pyjamas.ui.TreeItem.TreeItem', null, null, false);
-	$m['json'] = $p['___import___']('json', null);
-	$m['getCookie'] = $p['___import___']('pyjamas.Cookies.getCookie', null, null, false);
-	$m['setCookie'] = $p['___import___']('pyjamas.Cookies.setCookie', null, null, false);
-	$m['ServiceProxy'] = $p['___import___']('pyjamas.JSONService.ServiceProxy', null, null, false);
-	$m['Admin'] = (function(){
-		var $cls_definition = new Object();
-		var $method;
-		$cls_definition['__module__'] = 'admin';
-		$method = $pyjs__bind_method2('onModuleLoad', function() {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-			}
-			var newBlogAnchor,loggedInUser,logoutAnchor,tree,rightHeaderPanel,unpublishedItem,dockPanel,headerDockPanel,welcomeNoteLabel,s1;
-			loggedInUser = $m['getCookie']('LoggedInUser');
-			self['loggedInUserJsonData'] = $m['json']['loads'](loggedInUser);
-			self['remote_py'] = (typeof MyBlogService == "undefined"?$m['MyBlogService']:MyBlogService)();
-			dockPanel = $pyjs_kwargs_call(null, $m['DockPanel'], null, null, [{'BorderWidth':0, 'Padding':0, 'HorizontalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_LEFT'), 'VerticalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_TOP')}]);
-			dockPanel['setSize']('100%', '100%');
-			headerDockPanel = $pyjs_kwargs_call(null, $m['DockPanel'], null, null, [{'BorderWidth':0, 'Padding':0, 'HorizontalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_LEFT'), 'VerticalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_CENTER')}]);
-			headerDockPanel['setStyleName']('header');
-			headerDockPanel['setWidth']('100%');
-			dockPanel['add'](headerDockPanel, $p['getattr']($m['DockPanel'], 'NORTH'));
-			dockPanel['setCellHeight'](headerDockPanel, '60px');
-			self['siteImage'] = $m['Image']('/images/Testware_logo.png');
-			self['siteImage']['setStyleName']('logo-image');
-			headerDockPanel['add']($p['getattr'](self, 'siteImage'), $p['getattr']($m['DockPanel'], 'WEST'));
-			headerDockPanel['setCellWidth']($p['getattr'](self, 'siteImage'), '30%');
-			self['pageTitle'] = $m['Label']('Unpublished Blogs');
-			self['pageTitle']['setStyleName']('center-header');
-			headerDockPanel['add']($p['getattr'](self, 'pageTitle'), $p['getattr']($m['DockPanel'], 'CENTER'));
-			headerDockPanel['setCellWidth']($p['getattr'](self, 'pageTitle'), '40%');
-			rightHeaderPanel = $pyjs_kwargs_call(null, $m['VerticalPanel'], null, null, [{'StyleName':'right-header'}]);
-			headerDockPanel['add'](rightHeaderPanel, $p['getattr']($m['DockPanel'], 'EAST'));
-			headerDockPanel['setCellWidth'](rightHeaderPanel, '30%');
-			welcomeNoteLabel = $m['Label']($p['sprintf']('Hi %s %s!', $p['tuple']([$p['getattr'](self, 'loggedInUserJsonData')['__getitem__']('first_name'), $p['getattr'](self, 'loggedInUserJsonData')['__getitem__']('last_name')])));
-			rightHeaderPanel['add'](welcomeNoteLabel);
-			logoutAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']('Logout'), 'Href':'/', 'Title':'Logout'}]);
-			logoutAnchor['setStyleName']('logout');
-			rightHeaderPanel['add'](logoutAnchor);
-			newBlogAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']('Create New Blog'), 'Href':'/newblog.html', 'Title':'NewBlog'}]);
-			newBlogAnchor['setStyleName']('logout');
-			rightHeaderPanel['add'](newBlogAnchor);
-			tree = $m['Tree']();
-			tree['addTreeListener'](self);
-			tree['setStyleName']('side-menu');
-			dockPanel['add'](tree, $p['getattr']($m['DockPanel'], 'WEST'));
-			dockPanel['setCellWidth'](tree, '60px');
-			s1 = self['createItem']('Blogs');
-			unpublishedItem = $pyjs_kwargs_call(self, 'createItem', null, null, [{'value':0}, 'Unpublished']);
-			self['selectedItem'] = unpublishedItem;
-			s1['addItem'](unpublishedItem);
-			s1['addItem']($pyjs_kwargs_call(self, 'createItem', null, null, [{'value':1}, 'Published']));
-			$pyjs_kwargs_call(s1, 'setState', null, null, [{'fireEvents':false}, true]);
-			tree['addItem'](s1);
-			self['absolultutePanel'] = $pyjs_kwargs_call(null, $m['AbsolutePanel'], null, null, [{'StyleName':'detail-style'}]);
-			dockPanel['add']($p['getattr'](self, 'absolultutePanel'), $p['getattr']($m['DockPanel'], 'CENTER'));
-			self['blogs'] = $p['list']([]);
-			self['g'] = $m['Grid']();
-			$m['RootPanel']()['add'](dockPanel);
-			self['remote_py']['callMethod']('getAllUnpublishedBlogs', $p['list']([]), self);
-			return null;
-		}
-	, 1, [null,null,['self']]);
-		$cls_definition['onModuleLoad'] = $method;
-		$method = $pyjs__bind_method2('updatePageDisplay', function() {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-			}
-			var blogTitleAnchor,$iter2_nextval,$iter1_nextval,$iter1_type,$iter2_iter,blogContent,blogPanel,blogDetails,$iter1_iter,$add2,$iter2_idx,$add1,$iter1_array,x,y,$iter2_type,json_data,$iter2_array,$iter1_idx;
-			self['g']['removeFromParent']();
-			self['g'] = $m['Grid']();
-			self['g']['setStyleName']('content-style');
-			self['g']['addTableListener'](self);
-			$iter1_iter = $p['range']($p['len']($p['getattr'](self, 'blogs')));
-			$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
-			while (typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined') {
-				y = $iter1_nextval['$nextval'];
-				$iter2_iter = $p['range'](1);
-				$iter2_nextval=$p['__iter_prepare']($iter2_iter,false);
-				while (typeof($p['__wrapped_next']($iter2_nextval)['$nextval']) != 'undefined') {
-					x = $iter2_nextval['$nextval'];
-					json_data = $m['json']['loads']($p['getattr'](self, 'blogs')['__getitem__'](y));
-					blogPanel = $m['VerticalPanel']();
-					blogTitleAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']($p['sprintf']('%s', json_data['__getitem__']('blog_name'))), 'Href':'/blogdetail.html'}]);
-					blogTitleAnchor['setStyleName']('blog-search-title');
-					blogPanel['add'](blogTitleAnchor);
-					blogDetails = $m['Label']();
-					blogDetails['setStyleName']('blog-details');
-					blogContent = json_data['__getitem__']('blog_content');
-					if ($p['bool'](($p['cmp']($p['len'](blogContent), 200) == 1))) {
-						blogContent = $p['__op_add']($add1=$p['__getslice'](blogContent, 0, 200),$add2='......');
-					}
-					blogDetails['setText']($p['sprintf']('%s', blogContent));
-					blogPanel['add'](blogDetails);
-					self['g']['add'](blogPanel, y, x);
-				}
-			}
-			self['absolultutePanel']['add']($p['getattr'](self, 'g'));
-			return null;
-		}
-	, 1, [null,null,['self']]);
-		$cls_definition['updatePageDisplay'] = $method;
-		$method = $pyjs__bind_method2('createItem', function($$label, value) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				$$label = arguments[1];
-				value = arguments[2];
-			}
-			if (typeof value == 'undefined') value=arguments['callee']['__args__'][4][1];
-			var item,$$label;
-			item = $m['TreeItem']($$label);
-			$m['DOM']['setStyleAttribute'](item['getElement'](), 'cursor', 'pointer');
-			if ($p['bool']((value !== null))) {
-				item['setUserObject'](value);
-			}
-			return item;
-		}
-	, 1, [null,null,['self'],['$$label'],['value', null]]);
-		$cls_definition['createItem'] = $method;
-		$method = $pyjs__bind_method2('onTreeItemSelected', function(item) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				item = arguments[1];
-			}
-			var value;
-			self['selectedItem'] = item;
-			value = item['getUserObject']();
-			if ($p['bool']($p['op_eq'](value, 0))) {
-				self['remote_py']['callMethod']('getAllUnpublishedBlogs', $p['list']([]), self);
-			}
-			else if ($p['bool']($p['op_eq'](value, 1))) {
-				self['remote_py']['callMethod']('getAllPublishedBlogs', $p['list']([]), self);
-			}
-			return null;
-		}
-	, 1, [null,null,['self'],['item']]);
-		$cls_definition['onTreeItemSelected'] = $method;
-		$method = $pyjs__bind_method2('onTreeItemStateChanged', function(item) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				item = arguments[1];
-			}
-
- 			return null;
-		}
-	, 1, [null,null,['self'],['item']]);
-		$cls_definition['onTreeItemStateChanged'] = $method;
-		$method = $pyjs__bind_method2('onRemoteResponse', function(response, requestInfo) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				response = arguments[1];
-				requestInfo = arguments[2];
-			}
-			var value;
-			self['blogs'] = response;
-			self['updatePageDisplay']();
-			value = self['selectedItem']['getUserObject']();
-			if ($p['bool']($p['op_eq'](value, 0))) {
-				self['pageTitle']['setText']('Unpublished Blogs');
-			}
-			else if ($p['bool']($p['op_eq'](value, 1))) {
-				self['pageTitle']['setText']('Published Blogs');
-			}
-			return null;
-		}
-	, 1, [null,null,['self'],['response'],['requestInfo']]);
-		$cls_definition['onRemoteResponse'] = $method;
-		$method = $pyjs__bind_method2('onRemoteError', function(code, error_dict, requestInfo) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				code = arguments[1];
-				error_dict = arguments[2];
-				requestInfo = arguments[3];
-			}
-
- 			return null;
-		}
-	, 1, [null,null,['self'],['code'],['error_dict'],['requestInfo']]);
-		$cls_definition['onRemoteError'] = $method;
-		$method = $pyjs__bind_method2('onCellClicked', function(sender, row, col) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				sender = arguments[1];
-				row = arguments[2];
-				col = arguments[3];
-			}
-			var value;
-			$pyjs_kwargs_call(null, $m['setCookie'], null, null, [{'path':'/'}, 'SelectedBlog', $p['getattr'](self, 'blogs')['__getitem__'](row), 10000]);
-			value = self['selectedItem']['getUserObject']();
-			if ($p['bool']($p['op_eq'](value, 0))) {
-				$pyjs_kwargs_call(null, $m['setCookie'], null, null, [{'path':'/'}, 'ShowPublishButton', 'True', 10000]);
-			}
-			else if ($p['bool']($p['op_eq'](value, 1))) {
-				$pyjs_kwargs_call(null, $m['setCookie'], null, null, [{'path':'/'}, 'ShowPublishButton', 'False', 10000]);
-			}
-			return null;
-		}
-	, 1, [null,null,['self'],['sender'],['row'],['col']]);
-		$cls_definition['onCellClicked'] = $method;
-		var $bases = new Array(pyjslib['object']);
-		var $data = $p['dict']();
-		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
-		return $p['_create_class']('Admin', $p['tuple']($bases), $data);
-	})();
-	$m['MyBlogService'] = (function(){
-		var $cls_definition = new Object();
-		var $method;
-		$cls_definition['__module__'] = 'admin';
-		$method = $pyjs__bind_method2('__init__', function() {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-			}
-
-			$pyjs_kwargs_call($m['ServiceProxy'], '__init__', null, null, [{'headers':null}, self, 'http://127.0.0.1:8000/json/', 'jsonrpc']);
-			return null;
-		}
-	, 1, [null,null,['self']]);
-		$cls_definition['__init__'] = $method;
-		var $bases = new Array($m['ServiceProxy']);
-		var $data = $p['dict']();
-		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
-		return $p['_create_class']('MyBlogService', $p['tuple']($bases), $data);
-	})();
-	if ($p['bool']($p['op_eq']((typeof __name__ == "undefined"?$m['__name__']:__name__), '__main__'))) {
-		$m['app'] = $m['Admin']();
-		$m['app']['onModuleLoad']();
-		$m['StyleSheetCssFile']('./home.css');
-	}
-	return this;
-}; /* end admin */
-
-
-/* end module: admin */
-
-
-/*
-PYJS_DEPS: ['pyjamas.ui.HorizontalPanel.HorizontalPanel', 'pyjamas', 'pyjamas.ui', 'pyjamas.ui.HorizontalPanel', 'pyjamas.ui.Label.Label', 'pyjamas.ui.Label', 'pyjamas.ui.VerticalPanel.VerticalPanel', 'pyjamas.ui.VerticalPanel', 'pyjamas.ui.Anchor.Anchor', 'pyjamas.ui.Anchor', 'pyjamas.ui.HTML.HTML', 'pyjamas.ui.HTML', 'pyjamas.ui.RootPanel.RootPanel', 'pyjamas.ui.RootPanel', 'pyjamas.ui.Sink.SinkList', 'pyjamas.ui.Sink', 'pyjamas.ui.DockPanel.DockPanel', 'pyjamas.ui.DockPanel', 'pyjamas.ui.HasAlignment', 'pyjamas.ui.Image.Image', 'pyjamas.ui.Image', 'pyjamas.ui.CSS.StyleSheetCssFile', 'pyjamas.ui.CSS', 'pyjamas.ui.SimplePanel.SimplePanel', 'pyjamas.ui.SimplePanel', 'pyjamas.ui.ScrollPanel.ScrollPanel', 'pyjamas.ui.ScrollPanel', 'pyjamas.ui.AbsolutePanel.AbsolutePanel', 'pyjamas.ui.AbsolutePanel', 'pyjamas.ui.Button.Button', 'pyjamas.ui.Button', 'pyjamas.ui.Grid.Grid', 'pyjamas.ui.Grid', 'pyjamas.DOM', 'pyjamas.Window', 'datetime.datetime', 'datetime', 'pyjamas.ui.Tree.Tree', 'pyjamas.ui.Tree', 'pyjamas.ui.TreeItem.TreeItem', 'pyjamas.ui.TreeItem', 'json', 'pyjamas.Cookies.getCookie', 'pyjamas.Cookies', 'pyjamas.Cookies.setCookie', 'pyjamas.JSONService.ServiceProxy', 'pyjamas.JSONService']
-*/
-
---></script>
-<script type="text/javascript"><!--
-/* start module: sets */
-$pyjs['loaded_modules']['sets'] = function (__mod_name__) {
-	if($pyjs['loaded_modules']['sets']['__was_initialized__']) return $pyjs['loaded_modules']['sets'];
-	var $m = $pyjs['loaded_modules']['sets'];
-	$m['__repr__'] = function() { return '<module: sets>'; };
-	$m['__was_initialized__'] = true;
-	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'sets';
-	$m['__name__'] = __mod_name__;
-
-
-	$m['Set'] = (function(){
-		var $cls_definition = new Object();
-		var $method;
-		$cls_definition['__module__'] = 'sets';
-		$method = $pyjs__bind_method2('__init__', function(data) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				data = arguments[1];
-			}
-			if (typeof data == 'undefined') data=arguments['callee']['__args__'][3][1];
-
-
-        self['__object'] = {};
-        self['update'](data);
-        
-		}
-	, 1, [null,null,['self'],['data', null]]);
-		$cls_definition['__init__'] = $method;
-		$method = $pyjs__bind_method2('add', function(value) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				value = arguments[1];
-			}
-
-    self['__object'][pyjslib['hash'](value)] = value;
-		}
-	, 1, [null,null,['self'],['value']]);
-		$cls_definition['add'] = $method;
-		$method = $pyjs__bind_method2('clear', function() {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-			}
-
-    self['__object'] = {};
-		}
-	, 1, [null,null,['self']]);
-		$cls_definition['clear'] = $method;
-		$method = $pyjs__bind_method2('__contains__', function(value) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				value = arguments[1];
-			}
-
-    return (self['__object'][pyjslib['hash'](value)]) ? true : false;
-		}
-	, 1, [null,null,['self'],['value']]);
-		$cls_definition['__contains__'] = $method;
-		$method = $pyjs__bind_method2('discard', function(value) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				value = arguments[1];
-			}
-
-    delete self['__object'][pyjslib['hash'](value)];
-		}
-	, 1, [null,null,['self'],['value']]);
-		$cls_definition['discard'] = $method;
-		$method = $pyjs__bind_method2('issubset', function(items) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				items = arguments[1];
-			}
-
-
-        for (var i in self['__object']) {
-            if (!items['__contains__'](i)) return false;
-            }
-        return true;
-        
-		}
-	, 1, [null,null,['self'],['items']]);
-		$cls_definition['issubset'] = $method;
-		$method = $pyjs__bind_method2('issuperset', function(items) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				items = arguments[1];
-			}
-
-
-        for (var i in items) {
-            if (!self['__contains__'](i)) return false;
-            }
-        return true;
-        
-		}
-	, 1, [null,null,['self'],['items']]);
-		$cls_definition['issuperset'] = $method;
-		$method = $pyjs__bind_method2('__iter__', function() {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-			}
-
-
-        var items=new pyjslib['list']();
-        for (var key in self['__object']) items['append'](self['__object'][key]);
-        return items['__iter__']();
-        
-		}
-	, 1, [null,null,['self']]);
-		$cls_definition['__iter__'] = $method;
-		$method = $pyjs__bind_method2('__len__', function() {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-			}
-			var size;
-			size = 0;
-
-        for (var i in self['__object']) size++;
-        
-			return size;
-		}
-	, 1, [null,null,['self']]);
-		$cls_definition['__len__'] = $method;
-		$method = $pyjs__bind_method2('pop', function() {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-			}
-
-
-        for (var key in self['__object']) {
-            var value = self['__object'][key];
-            delete self['__object'][key];
-            return value;
-            }
-        
-		}
-	, 1, [null,null,['self']]);
-		$cls_definition['pop'] = $method;
-		$method = $pyjs__bind_method2('remove', function(value) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				value = arguments[1];
-			}
-
-			self['discard'](value);
-			return null;
-		}
-	, 1, [null,null,['self'],['value']]);
-		$cls_definition['remove'] = $method;
-		$method = $pyjs__bind_method2('update', function(data) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				data = arguments[1];
-			}
-
-
-        if (pyjslib['isArray'](data)) {
-            for (var i in data) {
-                self['__object'][pyjslib['hash'](data[i])]=data[i];
-            }
-        }
-        else if (pyjslib['isIteratable'](data)) {
-            var iter=data['__iter__']();
-            var i=0;
-            try {
-                while (true) {
-                    var item=iter['next']();
-                    self['__object'][pyjslib['hash'](item)]=item;
-                }
-            }
-            catch (e) {
-                if (e != pyjslib['StopIteration']) throw e;
-            }
-        }
-        
-		}
-	, 1, [null,null,['self'],['data']]);
-		$cls_definition['update'] = $method;
-		var $bases = new Array(pyjslib['object']);
-		var $data = $p['dict']();
-		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
-		return $p['_create_class']('Set', $p['tuple']($bases), $data);
-	})();
-	return this;
-}; /* end sets */
-
-
-/* end module: sets */
-
-
-
---></script>
-<script type="text/javascript"><!--
 /* start module: pyjamas.ui.RowFormatter */
 $pyjs['loaded_modules']['pyjamas.ui.RowFormatter'] = function (__mod_name__) {
 	if($pyjs['loaded_modules']['pyjamas.ui.RowFormatter']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.ui.RowFormatter'];
@@ -16304,6 +15797,223 @@ $pyjs['loaded_modules']['pyjamas.ui.RowFormatter'] = function (__mod_name__) {
 /*
 PYJS_DEPS: ['pyjamas.DOM', 'pyjamas', 'pyjamas.ui.Applier', 'pyjamas.ui']
 */
+
+--></script>
+<script type="text/javascript"><!--
+/* start module: sets */
+$pyjs['loaded_modules']['sets'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['sets']['__was_initialized__']) return $pyjs['loaded_modules']['sets'];
+	var $m = $pyjs['loaded_modules']['sets'];
+	$m['__repr__'] = function() { return '<module: sets>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'sets';
+	$m['__name__'] = __mod_name__;
+
+
+	$m['Set'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'sets';
+		$method = $pyjs__bind_method2('__init__', function(data) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				data = arguments[1];
+			}
+			if (typeof data == 'undefined') data=arguments['callee']['__args__'][3][1];
+
+
+        self['__object'] = {};
+        self['update'](data);
+        
+		}
+	, 1, [null,null,['self'],['data', null]]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('add', function(value) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				value = arguments[1];
+			}
+
+    self['__object'][pyjslib['hash'](value)] = value;
+		}
+	, 1, [null,null,['self'],['value']]);
+		$cls_definition['add'] = $method;
+		$method = $pyjs__bind_method2('clear', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+    self['__object'] = {};
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['clear'] = $method;
+		$method = $pyjs__bind_method2('__contains__', function(value) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				value = arguments[1];
+			}
+
+    return (self['__object'][pyjslib['hash'](value)]) ? true : false;
+		}
+	, 1, [null,null,['self'],['value']]);
+		$cls_definition['__contains__'] = $method;
+		$method = $pyjs__bind_method2('discard', function(value) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				value = arguments[1];
+			}
+
+    delete self['__object'][pyjslib['hash'](value)];
+		}
+	, 1, [null,null,['self'],['value']]);
+		$cls_definition['discard'] = $method;
+		$method = $pyjs__bind_method2('issubset', function(items) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				items = arguments[1];
+			}
+
+
+        for (var i in self['__object']) {
+            if (!items['__contains__'](i)) return false;
+            }
+        return true;
+        
+		}
+	, 1, [null,null,['self'],['items']]);
+		$cls_definition['issubset'] = $method;
+		$method = $pyjs__bind_method2('issuperset', function(items) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				items = arguments[1];
+			}
+
+
+        for (var i in items) {
+            if (!self['__contains__'](i)) return false;
+            }
+        return true;
+        
+		}
+	, 1, [null,null,['self'],['items']]);
+		$cls_definition['issuperset'] = $method;
+		$method = $pyjs__bind_method2('__iter__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+
+        var items=new pyjslib['list']();
+        for (var key in self['__object']) items['append'](self['__object'][key]);
+        return items['__iter__']();
+        
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__iter__'] = $method;
+		$method = $pyjs__bind_method2('__len__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var size;
+			size = 0;
+
+        for (var i in self['__object']) size++;
+        
+			return size;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__len__'] = $method;
+		$method = $pyjs__bind_method2('pop', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+
+        for (var key in self['__object']) {
+            var value = self['__object'][key];
+            delete self['__object'][key];
+            return value;
+            }
+        
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['pop'] = $method;
+		$method = $pyjs__bind_method2('remove', function(value) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				value = arguments[1];
+			}
+
+			self['discard'](value);
+			return null;
+		}
+	, 1, [null,null,['self'],['value']]);
+		$cls_definition['remove'] = $method;
+		$method = $pyjs__bind_method2('update', function(data) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				data = arguments[1];
+			}
+
+
+        if (pyjslib['isArray'](data)) {
+            for (var i in data) {
+                self['__object'][pyjslib['hash'](data[i])]=data[i];
+            }
+        }
+        else if (pyjslib['isIteratable'](data)) {
+            var iter=data['__iter__']();
+            var i=0;
+            try {
+                while (true) {
+                    var item=iter['next']();
+                    self['__object'][pyjslib['hash'](item)]=item;
+                }
+            }
+            catch (e) {
+                if (e != pyjslib['StopIteration']) throw e;
+            }
+        }
+        
+		}
+	, 1, [null,null,['self'],['data']]);
+		$cls_definition['update'] = $method;
+		var $bases = new Array(pyjslib['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('Set', $p['tuple']($bases), $data);
+	})();
+	return this;
+}; /* end sets */
+
+
+/* end module: sets */
+
+
 
 --></script>
 <script type="text/javascript"><!--
@@ -18464,70 +18174,251 @@ PYJS_DEPS: ['pyjamas.DOM', 'pyjamas', 'pyjamas.ui.Widget.Widget', 'pyjamas.ui', 
 
 --></script>
 <script type="text/javascript"><!--
-/* start module: pyjamas.ui.DropHandler */
-$pyjs['loaded_modules']['pyjamas.ui.DropHandler'] = function (__mod_name__) {
-	if($pyjs['loaded_modules']['pyjamas.ui.DropHandler']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.ui.DropHandler'];
-	if(typeof $pyjs['loaded_modules']['pyjamas.ui'] == 'undefined' || !$pyjs['loaded_modules']['pyjamas.ui']['__was_initialized__']) $p['___import___']('pyjamas.ui', null);
-	var $m = $pyjs['loaded_modules']['pyjamas.ui.DropHandler'];
-	$m['__repr__'] = function() { return '<module: pyjamas.ui.DropHandler>'; };
+/* start module: home2 */
+$pyjs['loaded_modules']['home2'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['home2']['__was_initialized__']) return $pyjs['loaded_modules']['home2'];
+	var $m = $pyjs['loaded_modules']['home2'];
+	$m['__repr__'] = function() { return '<module: home2>'; };
 	$m['__was_initialized__'] = true;
-	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'pyjamas.ui.DropHandler';
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'home2';
 	$m['__name__'] = __mod_name__;
-	$pyjs['loaded_modules']['pyjamas.ui']['DropHandler'] = $pyjs['loaded_modules']['pyjamas.ui.DropHandler'];
 
 
-	$m['DOM'] = $p['___import___']('pyjamas.DOM', 'pyjamas.ui', null, false);
-	$m['Event'] = $p['___import___']('pyjamas.ui.Event', 'pyjamas.ui', null, false);
-	$m['DROP_EVENTS'] = $p['list'](['dragenter', 'dragover', 'dragleave', 'drop']);
-	$m['fireDropEvent'] = function(listeners, event) {
-		var $iter3_type,$iter1_iter,$iter4_type,$iter2_type,$iter4_iter,$iter3_idx,$iter2_iter,$iter3_nextval,$iter3_iter,etype,$iter1_array,$iter1_nextval,listener,$iter2_idx,$iter3_array,$iter2_nextval,$iter1_type,$iter4_nextval,$iter4_idx,$iter1_idx,$iter4_array,$iter2_array;
-		etype = $m['DOM']['eventGetType'](event);
-		if ($p['bool']($p['op_eq'](etype, 'dragenter'))) {
-			$iter1_iter = listeners;
-			$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
-			while (typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined') {
-				listener = $iter1_nextval['$nextval'];
-				listener['onDragEnter'](event);
-			}
-			return true;
-		}
-		else if ($p['bool']($p['op_eq'](etype, 'dragover'))) {
-			$iter2_iter = listeners;
-			$iter2_nextval=$p['__iter_prepare']($iter2_iter,false);
-			while (typeof($p['__wrapped_next']($iter2_nextval)['$nextval']) != 'undefined') {
-				listener = $iter2_nextval['$nextval'];
-				listener['onDragOver'](event);
-			}
-			return true;
-		}
-		else if ($p['bool']($p['op_eq'](etype, 'dragleave'))) {
-			$iter3_iter = listeners;
-			$iter3_nextval=$p['__iter_prepare']($iter3_iter,false);
-			while (typeof($p['__wrapped_next']($iter3_nextval)['$nextval']) != 'undefined') {
-				listener = $iter3_nextval['$nextval'];
-				listener['onDragLeave'](event);
-			}
-			return true;
-		}
-		else if ($p['bool']($p['op_eq'](etype, 'drop'))) {
-			$iter4_iter = listeners;
-			$iter4_nextval=$p['__iter_prepare']($iter4_iter,false);
-			while (typeof($p['__wrapped_next']($iter4_nextval)['$nextval']) != 'undefined') {
-				listener = $iter4_nextval['$nextval'];
-				listener['onDrop'](event);
-			}
-			return true;
-		}
-		return false;
-	};
-	$m['fireDropEvent']['__name__'] = 'fireDropEvent';
-
-	$m['fireDropEvent']['__bind_type__'] = 0;
-	$m['fireDropEvent']['__args__'] = [null,null,['listeners'],['event']];
-	$m['DropHandler'] = (function(){
+	$m['HorizontalPanel'] = $p['___import___']('pyjamas.ui.HorizontalPanel.HorizontalPanel', null, null, false);
+	$m['Label'] = $p['___import___']('pyjamas.ui.Label.Label', null, null, false);
+	$m['VerticalPanel'] = $p['___import___']('pyjamas.ui.VerticalPanel.VerticalPanel', null, null, false);
+	$m['Anchor'] = $p['___import___']('pyjamas.ui.Anchor.Anchor', null, null, false);
+	$m['HTML'] = $p['___import___']('pyjamas.ui.HTML.HTML', null, null, false);
+	$m['RootPanel'] = $p['___import___']('pyjamas.ui.RootPanel.RootPanel', null, null, false);
+	$m['SinkList'] = $p['___import___']('pyjamas.ui.Sink.SinkList', null, null, false);
+	$m['DockPanel'] = $p['___import___']('pyjamas.ui.DockPanel.DockPanel', null, null, false);
+	$m['HasAlignment'] = $p['___import___']('pyjamas.ui.HasAlignment', null, null, false);
+	$m['Image'] = $p['___import___']('pyjamas.ui.Image.Image', null, null, false);
+	$m['StyleSheetCssFile'] = $p['___import___']('pyjamas.ui.CSS.StyleSheetCssFile', null, null, false);
+	$m['SimplePanel'] = $p['___import___']('pyjamas.ui.SimplePanel.SimplePanel', null, null, false);
+	$m['ScrollPanel'] = $p['___import___']('pyjamas.ui.ScrollPanel.ScrollPanel', null, null, false);
+	$m['AbsolutePanel'] = $p['___import___']('pyjamas.ui.AbsolutePanel.AbsolutePanel', null, null, false);
+	$m['Button'] = $p['___import___']('pyjamas.ui.Button.Button', null, null, false);
+	$m['Grid'] = $p['___import___']('pyjamas.ui.Grid.Grid', null, null, false);
+	$m['DOM'] = $p['___import___']('pyjamas.DOM', null, null, false);
+	$m['Window'] = $p['___import___']('pyjamas.Window', null, null, false);
+	$m['datetime'] = $p['___import___']('datetime.datetime', null, null, false);
+	$m['Tree'] = $p['___import___']('pyjamas.ui.Tree.Tree', null, null, false);
+	$m['TreeItem'] = $p['___import___']('pyjamas.ui.TreeItem.TreeItem', null, null, false);
+	$m['json'] = $p['___import___']('json', null);
+	$m['getCookie'] = $p['___import___']('pyjamas.Cookies.getCookie', null, null, false);
+	$m['ServiceProxy'] = $p['___import___']('pyjamas.JSONService.ServiceProxy', null, null, false);
+	$m['Home'] = (function(){
 		var $cls_definition = new Object();
 		var $method;
-		$cls_definition['__module__'] = 'pyjamas.ui.DropHandler';
+		$cls_definition['__module__'] = 'home2';
+		$method = $pyjs__bind_method2('onModuleLoad', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var newBlogAnchor,loggedInUser,logoutAnchor,tree,headerPanel,rightHeaderPanel,dockPanel,s2,allItem,welcomeNoteLabel,s1;
+			loggedInUser = $m['getCookie']('LoggedInUser');
+			self['loggedInUserJsonData'] = $m['json']['loads'](loggedInUser);
+			self['remote_py'] = (typeof MyBlogService == "undefined"?$m['MyBlogService']:MyBlogService)();
+			dockPanel = $pyjs_kwargs_call(null, $m['DockPanel'], null, null, [{'BorderWidth':0, 'Padding':0, 'HorizontalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_LEFT'), 'VerticalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_TOP')}]);
+			dockPanel['setSize']('100%', '100%');
+			headerPanel = $pyjs_kwargs_call(null, $m['HorizontalPanel'], null, null, [{'StyleName':'header'}]);
+			dockPanel['add'](headerPanel, $p['getattr']($m['DockPanel'], 'NORTH'));
+			dockPanel['setCellHeight'](headerPanel, '60px');
+			self['siteImage'] = $m['Image']('/images/Testware_logo.png');
+			self['siteImage']['setStyleName']('logo-image');
+			headerPanel['add']($p['getattr'](self, 'siteImage'));
+			self['pageTitle'] = $m['Label']('All Blogs');
+			self['pageTitle']['setStyleName']('center-header');
+			headerPanel['add']($p['getattr'](self, 'pageTitle'));
+			rightHeaderPanel = $pyjs_kwargs_call(null, $m['VerticalPanel'], null, null, [{'StyleName':'right-header'}]);
+			headerPanel['add'](rightHeaderPanel);
+			welcomeNoteLabel = $m['Label']($p['sprintf']('Hi %s %s!', $p['tuple']([$p['getattr'](self, 'loggedInUserJsonData')['__getitem__']('first_name'), $p['getattr'](self, 'loggedInUserJsonData')['__getitem__']('last_name')])));
+			rightHeaderPanel['add'](welcomeNoteLabel);
+			logoutAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']('Logout'), 'Href':'/', 'Title':'Logout'}]);
+			logoutAnchor['setStyleName']('logout');
+			rightHeaderPanel['add'](logoutAnchor);
+			newBlogAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']('Create New Blog'), 'Href':'/newblog.html', 'Title':'NewBlog'}]);
+			newBlogAnchor['setStyleName']('logout');
+			rightHeaderPanel['add'](newBlogAnchor);
+			tree = $m['Tree']();
+			tree['addTreeListener'](self);
+			tree['setStyleName']('side-menu');
+			dockPanel['add'](tree, $p['getattr']($m['DockPanel'], 'WEST'));
+			dockPanel['setCellWidth'](tree, '60px');
+			s1 = self['createItem']('Blogs');
+			allItem = $pyjs_kwargs_call(self, 'createItem', null, null, [{'value':0}, 'All']);
+			self['selectedItem'] = allItem;
+			s1['addItem'](allItem);
+			s1['addItem']($pyjs_kwargs_call(self, 'createItem', null, null, [{'value':1}, 'Published']));
+			s1['addItem']($pyjs_kwargs_call(self, 'createItem', null, null, [{'value':2}, 'Unpublished']));
+			s2 = self['createItem']("Other's Blog");
+			$pyjs_kwargs_call(s1, 'setState', null, null, [{'fireEvents':false}, true]);
+			tree['addItem'](s1);
+			tree['addItem'](s2);
+			self['absolultutePanel'] = $pyjs_kwargs_call(null, $m['AbsolutePanel'], null, null, [{'StyleName':'detail-style'}]);
+			dockPanel['add']($p['getattr'](self, 'absolultutePanel'), $p['getattr']($m['DockPanel'], 'CENTER'));
+			self['blogs'] = $p['list']([]);
+			self['g'] = $m['Grid']();
+			$m['RootPanel']()['add'](dockPanel);
+			self['remote_py']['callMethod']('getBlogs', $p['list']([$p['getattr'](self, 'loggedInUserJsonData')['__getitem__']('username')]), self);
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['onModuleLoad'] = $method;
+		$method = $pyjs__bind_method2('updatePageDisplay', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+			var blogTitleAnchor,$iter2_nextval,$iter1_nextval,$iter1_type,$iter2_iter,blogContent,blogPanel,blogDetails,$iter1_iter,$add2,$iter2_idx,$add1,$iter1_array,x,y,$iter2_type,json_data,$iter2_array,$iter1_idx;
+			self['g']['removeFromParent']();
+			self['g'] = $m['Grid']();
+			self['g']['setStyleName']('content-style');
+			$iter1_iter = $p['range']($p['len']($p['getattr'](self, 'blogs')));
+			$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
+			while (typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined') {
+				y = $iter1_nextval['$nextval'];
+				$iter2_iter = $p['range'](1);
+				$iter2_nextval=$p['__iter_prepare']($iter2_iter,false);
+				while (typeof($p['__wrapped_next']($iter2_nextval)['$nextval']) != 'undefined') {
+					x = $iter2_nextval['$nextval'];
+					json_data = $m['json']['loads']($p['getattr'](self, 'blogs')['__getitem__'](y));
+					blogPanel = $m['VerticalPanel']();
+					blogTitleAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']($p['sprintf']('%s', json_data['__getitem__']('blog_name'))), 'Href':'/login.html'}]);
+					blogTitleAnchor['setStyleName']('blog-search-title');
+					blogPanel['add'](blogTitleAnchor);
+					blogDetails = $m['Label']();
+					blogDetails['setStyleName']('blog-details');
+					blogContent = json_data['__getitem__']('blog_content');
+					if ($p['bool'](($p['cmp']($p['len'](blogContent), 200) == 1))) {
+						blogContent = $p['__op_add']($add1=$p['__getslice'](blogContent, 0, 200),$add2='......');
+					}
+					blogDetails['setText']($p['sprintf']('%s %s', $p['tuple']([json_data['__getitem__']('date_creared'), blogContent])));
+					blogPanel['add'](blogDetails);
+					self['g']['add'](blogPanel, y, x);
+				}
+			}
+			self['absolultutePanel']['add']($p['getattr'](self, 'g'));
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['updatePageDisplay'] = $method;
+		$method = $pyjs__bind_method2('createItem', function($$label, value) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				$$label = arguments[1];
+				value = arguments[2];
+			}
+			if (typeof value == 'undefined') value=arguments['callee']['__args__'][4][1];
+			var item,$$label;
+			item = $m['TreeItem']($$label);
+			$m['DOM']['setStyleAttribute'](item['getElement'](), 'cursor', 'pointer');
+			if ($p['bool']((value !== null))) {
+				item['setUserObject'](value);
+			}
+			return item;
+		}
+	, 1, [null,null,['self'],['$$label'],['value', null]]);
+		$cls_definition['createItem'] = $method;
+		$method = $pyjs__bind_method2('onTreeItemSelected', function(item) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				item = arguments[1];
+			}
+			var value;
+			self['selectedItem'] = item;
+			if ($p['bool']($p['op_eq'](item['getText'](), "Other's Blog"))) {
+				self['remote_py']['callMethod']('getOthersPublishedBlogs', $p['list']([$p['getattr'](self, 'loggedInUserJsonData')['__getitem__']('username')]), self);
+			}
+			else {
+				value = item['getUserObject']();
+				if ($p['bool']($p['op_eq'](value, 0))) {
+					self['remote_py']['callMethod']('getBlogs', $p['list']([$p['getattr'](self, 'loggedInUserJsonData')['__getitem__']('username')]), self);
+				}
+				else if ($p['bool']($p['op_eq'](value, 1))) {
+					self['remote_py']['callMethod']('getPublishedBlogs', $p['list']([$p['getattr'](self, 'loggedInUserJsonData')['__getitem__']('username')]), self);
+				}
+				else if ($p['bool']($p['op_eq'](value, 2))) {
+					self['remote_py']['callMethod']('getUnPublishedBlogs', $p['list']([$p['getattr'](self, 'loggedInUserJsonData')['__getitem__']('username')]), self);
+				}
+			}
+			return null;
+		}
+	, 1, [null,null,['self'],['item']]);
+		$cls_definition['onTreeItemSelected'] = $method;
+		$method = $pyjs__bind_method2('onTreeItemStateChanged', function(item) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				item = arguments[1];
+			}
+
+ 			return null;
+		}
+	, 1, [null,null,['self'],['item']]);
+		$cls_definition['onTreeItemStateChanged'] = $method;
+		$method = $pyjs__bind_method2('onRemoteResponse', function(response, requestInfo) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				response = arguments[1];
+				requestInfo = arguments[2];
+			}
+			var value;
+			self['blogs'] = response;
+			self['updatePageDisplay']();
+			if ($p['bool']($p['op_eq'](self['selectedItem']['getText'](), "Other's Blogs"))) {
+				self['pageTitle']['setText']("Other's Blogs");
+			}
+			else {
+				value = self['selectedItem']['getUserObject']();
+				if ($p['bool']($p['op_eq'](value, 0))) {
+					self['pageTitle']['setText']('All Blogs');
+				}
+				else if ($p['bool']($p['op_eq'](value, 1))) {
+					self['pageTitle']['setText']('Published Blogs');
+				}
+				else if ($p['bool']($p['op_eq'](value, 2))) {
+					self['pageTitle']['setText']('Unpublished Blogs');
+				}
+			}
+			return null;
+		}
+	, 1, [null,null,['self'],['response'],['requestInfo']]);
+		$cls_definition['onRemoteResponse'] = $method;
+		$method = $pyjs__bind_method2('onRemoteError', function(code, error_dict, requestInfo) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				code = arguments[1];
+				error_dict = arguments[2];
+				requestInfo = arguments[3];
+			}
+
+ 			return null;
+		}
+	, 1, [null,null,['self'],['code'],['error_dict'],['requestInfo']]);
+		$cls_definition['onRemoteError'] = $method;
+		var $bases = new Array(pyjslib['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('Home', $p['tuple']($bases), $data);
+	})();
+	$m['MyBlogService'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'home2';
 		$method = $pyjs__bind_method2('__init__', function() {
 			if (this['__is_instance__'] === true) {
 				var self = this;
@@ -18535,116 +18426,30 @@ $pyjs['loaded_modules']['pyjamas.ui.DropHandler'] = function (__mod_name__) {
 				var self = arguments[0];
 			}
 
-			self['_dropListeners'] = $p['list']([]);
-			self['sinkEvents']($p['getattr']($m['Event'], 'DROPEVENTS'));
+			$pyjs_kwargs_call($m['ServiceProxy'], '__init__', null, null, [{'headers':null}, self, 'http://127.0.0.1:8000/json/', 'jsonrpc']);
 			return null;
 		}
 	, 1, [null,null,['self']]);
 		$cls_definition['__init__'] = $method;
-		$method = $pyjs__bind_method2('onBrowserEvent', function(event) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				event = arguments[1];
-			}
-			var event_type;
-			event_type = $m['DOM']['eventGetType'](event);
-			if ($p['bool']($m['DROP_EVENTS']['__contains__'](event_type))) {
-				return $m['fireDropEvent']($p['getattr'](self, '_dropListeners'), event);
-			}
-			return false;
-		}
-	, 1, [null,null,['self'],['event']]);
-		$cls_definition['onBrowserEvent'] = $method;
-		$method = $pyjs__bind_method2('addDropListener', function(listener) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				listener = arguments[1];
-			}
-
-			self['_dropListeners']['append'](listener);
-			return null;
-		}
-	, 1, [null,null,['self'],['listener']]);
-		$cls_definition['addDropListener'] = $method;
-		$method = $pyjs__bind_method2('removeDropListener', function(listener) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				listener = arguments[1];
-			}
-
-			self['_dropListeners']['remove'](listener);
-			return null;
-		}
-	, 1, [null,null,['self'],['listener']]);
-		$cls_definition['removeDropListener'] = $method;
-		$method = $pyjs__bind_method2('onDragEnter', function(event) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				event = arguments[1];
-			}
-
- 			return null;
-		}
-	, 1, [null,null,['self'],['event']]);
-		$cls_definition['onDragEnter'] = $method;
-		$method = $pyjs__bind_method2('onDragOver', function(event) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				event = arguments[1];
-			}
-
- 			return null;
-		}
-	, 1, [null,null,['self'],['event']]);
-		$cls_definition['onDragOver'] = $method;
-		$method = $pyjs__bind_method2('onDragLeave', function(event) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				event = arguments[1];
-			}
-
- 			return null;
-		}
-	, 1, [null,null,['self'],['event']]);
-		$cls_definition['onDragLeave'] = $method;
-		$method = $pyjs__bind_method2('onDrop', function(event) {
-			if (this['__is_instance__'] === true) {
-				var self = this;
-			} else {
-				var self = arguments[0];
-				event = arguments[1];
-			}
-
- 			return null;
-		}
-	, 1, [null,null,['self'],['event']]);
-		$cls_definition['onDrop'] = $method;
-		var $bases = new Array($p['object']);
+		var $bases = new Array($m['ServiceProxy']);
 		var $data = $p['dict']();
 		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
-		return $p['_create_class']('DropHandler', $p['tuple']($bases), $data);
+		return $p['_create_class']('MyBlogService', $p['tuple']($bases), $data);
 	})();
+	if ($p['bool']($p['op_eq']((typeof __name__ == "undefined"?$m['__name__']:__name__), '__main__'))) {
+		$m['app'] = $m['Home']();
+		$m['app']['onModuleLoad']();
+		$m['StyleSheetCssFile']('./home.css');
+	}
 	return this;
-}; /* end pyjamas.ui.DropHandler */
+}; /* end home2 */
 
 
-/* end module: pyjamas.ui.DropHandler */
+/* end module: home2 */
 
 
 /*
-PYJS_DEPS: ['pyjamas.DOM', 'pyjamas', 'pyjamas.ui.Event', 'pyjamas.ui']
+PYJS_DEPS: ['pyjamas.ui.HorizontalPanel.HorizontalPanel', 'pyjamas', 'pyjamas.ui', 'pyjamas.ui.HorizontalPanel', 'pyjamas.ui.Label.Label', 'pyjamas.ui.Label', 'pyjamas.ui.VerticalPanel.VerticalPanel', 'pyjamas.ui.VerticalPanel', 'pyjamas.ui.Anchor.Anchor', 'pyjamas.ui.Anchor', 'pyjamas.ui.HTML.HTML', 'pyjamas.ui.HTML', 'pyjamas.ui.RootPanel.RootPanel', 'pyjamas.ui.RootPanel', 'pyjamas.ui.Sink.SinkList', 'pyjamas.ui.Sink', 'pyjamas.ui.DockPanel.DockPanel', 'pyjamas.ui.DockPanel', 'pyjamas.ui.HasAlignment', 'pyjamas.ui.Image.Image', 'pyjamas.ui.Image', 'pyjamas.ui.CSS.StyleSheetCssFile', 'pyjamas.ui.CSS', 'pyjamas.ui.SimplePanel.SimplePanel', 'pyjamas.ui.SimplePanel', 'pyjamas.ui.ScrollPanel.ScrollPanel', 'pyjamas.ui.ScrollPanel', 'pyjamas.ui.AbsolutePanel.AbsolutePanel', 'pyjamas.ui.AbsolutePanel', 'pyjamas.ui.Button.Button', 'pyjamas.ui.Button', 'pyjamas.ui.Grid.Grid', 'pyjamas.ui.Grid', 'pyjamas.DOM', 'pyjamas.Window', 'datetime.datetime', 'datetime', 'pyjamas.ui.Tree.Tree', 'pyjamas.ui.Tree', 'pyjamas.ui.TreeItem.TreeItem', 'pyjamas.ui.TreeItem', 'json', 'pyjamas.Cookies.getCookie', 'pyjamas.Cookies', 'pyjamas.JSONService.ServiceProxy', 'pyjamas.JSONService']
 */
 
 --></script>
@@ -38859,6 +38664,191 @@ PYJS_DEPS: ['pyjamas.DOM', 'pyjamas', 'pyjamas.Factory', 'pyjamas.ui.Widget.Widg
 
 --></script>
 <script type="text/javascript"><!--
+/* start module: pyjamas.ui.DropHandler */
+$pyjs['loaded_modules']['pyjamas.ui.DropHandler'] = function (__mod_name__) {
+	if($pyjs['loaded_modules']['pyjamas.ui.DropHandler']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas.ui.DropHandler'];
+	if(typeof $pyjs['loaded_modules']['pyjamas.ui'] == 'undefined' || !$pyjs['loaded_modules']['pyjamas.ui']['__was_initialized__']) $p['___import___']('pyjamas.ui', null);
+	var $m = $pyjs['loaded_modules']['pyjamas.ui.DropHandler'];
+	$m['__repr__'] = function() { return '<module: pyjamas.ui.DropHandler>'; };
+	$m['__was_initialized__'] = true;
+	if ((__mod_name__ === null) || (typeof __mod_name__ == 'undefined')) __mod_name__ = 'pyjamas.ui.DropHandler';
+	$m['__name__'] = __mod_name__;
+	$pyjs['loaded_modules']['pyjamas.ui']['DropHandler'] = $pyjs['loaded_modules']['pyjamas.ui.DropHandler'];
+
+
+	$m['DOM'] = $p['___import___']('pyjamas.DOM', 'pyjamas.ui', null, false);
+	$m['Event'] = $p['___import___']('pyjamas.ui.Event', 'pyjamas.ui', null, false);
+	$m['DROP_EVENTS'] = $p['list'](['dragenter', 'dragover', 'dragleave', 'drop']);
+	$m['fireDropEvent'] = function(listeners, event) {
+		var $iter3_type,$iter1_iter,$iter4_type,$iter2_type,$iter4_iter,$iter3_idx,$iter2_iter,$iter3_nextval,$iter3_iter,etype,$iter1_array,$iter1_nextval,listener,$iter2_idx,$iter3_array,$iter2_nextval,$iter1_type,$iter4_nextval,$iter4_idx,$iter1_idx,$iter4_array,$iter2_array;
+		etype = $m['DOM']['eventGetType'](event);
+		if ($p['bool']($p['op_eq'](etype, 'dragenter'))) {
+			$iter1_iter = listeners;
+			$iter1_nextval=$p['__iter_prepare']($iter1_iter,false);
+			while (typeof($p['__wrapped_next']($iter1_nextval)['$nextval']) != 'undefined') {
+				listener = $iter1_nextval['$nextval'];
+				listener['onDragEnter'](event);
+			}
+			return true;
+		}
+		else if ($p['bool']($p['op_eq'](etype, 'dragover'))) {
+			$iter2_iter = listeners;
+			$iter2_nextval=$p['__iter_prepare']($iter2_iter,false);
+			while (typeof($p['__wrapped_next']($iter2_nextval)['$nextval']) != 'undefined') {
+				listener = $iter2_nextval['$nextval'];
+				listener['onDragOver'](event);
+			}
+			return true;
+		}
+		else if ($p['bool']($p['op_eq'](etype, 'dragleave'))) {
+			$iter3_iter = listeners;
+			$iter3_nextval=$p['__iter_prepare']($iter3_iter,false);
+			while (typeof($p['__wrapped_next']($iter3_nextval)['$nextval']) != 'undefined') {
+				listener = $iter3_nextval['$nextval'];
+				listener['onDragLeave'](event);
+			}
+			return true;
+		}
+		else if ($p['bool']($p['op_eq'](etype, 'drop'))) {
+			$iter4_iter = listeners;
+			$iter4_nextval=$p['__iter_prepare']($iter4_iter,false);
+			while (typeof($p['__wrapped_next']($iter4_nextval)['$nextval']) != 'undefined') {
+				listener = $iter4_nextval['$nextval'];
+				listener['onDrop'](event);
+			}
+			return true;
+		}
+		return false;
+	};
+	$m['fireDropEvent']['__name__'] = 'fireDropEvent';
+
+	$m['fireDropEvent']['__bind_type__'] = 0;
+	$m['fireDropEvent']['__args__'] = [null,null,['listeners'],['event']];
+	$m['DropHandler'] = (function(){
+		var $cls_definition = new Object();
+		var $method;
+		$cls_definition['__module__'] = 'pyjamas.ui.DropHandler';
+		$method = $pyjs__bind_method2('__init__', function() {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+			}
+
+			self['_dropListeners'] = $p['list']([]);
+			self['sinkEvents']($p['getattr']($m['Event'], 'DROPEVENTS'));
+			return null;
+		}
+	, 1, [null,null,['self']]);
+		$cls_definition['__init__'] = $method;
+		$method = $pyjs__bind_method2('onBrowserEvent', function(event) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				event = arguments[1];
+			}
+			var event_type;
+			event_type = $m['DOM']['eventGetType'](event);
+			if ($p['bool']($m['DROP_EVENTS']['__contains__'](event_type))) {
+				return $m['fireDropEvent']($p['getattr'](self, '_dropListeners'), event);
+			}
+			return false;
+		}
+	, 1, [null,null,['self'],['event']]);
+		$cls_definition['onBrowserEvent'] = $method;
+		$method = $pyjs__bind_method2('addDropListener', function(listener) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				listener = arguments[1];
+			}
+
+			self['_dropListeners']['append'](listener);
+			return null;
+		}
+	, 1, [null,null,['self'],['listener']]);
+		$cls_definition['addDropListener'] = $method;
+		$method = $pyjs__bind_method2('removeDropListener', function(listener) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				listener = arguments[1];
+			}
+
+			self['_dropListeners']['remove'](listener);
+			return null;
+		}
+	, 1, [null,null,['self'],['listener']]);
+		$cls_definition['removeDropListener'] = $method;
+		$method = $pyjs__bind_method2('onDragEnter', function(event) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				event = arguments[1];
+			}
+
+ 			return null;
+		}
+	, 1, [null,null,['self'],['event']]);
+		$cls_definition['onDragEnter'] = $method;
+		$method = $pyjs__bind_method2('onDragOver', function(event) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				event = arguments[1];
+			}
+
+ 			return null;
+		}
+	, 1, [null,null,['self'],['event']]);
+		$cls_definition['onDragOver'] = $method;
+		$method = $pyjs__bind_method2('onDragLeave', function(event) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				event = arguments[1];
+			}
+
+ 			return null;
+		}
+	, 1, [null,null,['self'],['event']]);
+		$cls_definition['onDragLeave'] = $method;
+		$method = $pyjs__bind_method2('onDrop', function(event) {
+			if (this['__is_instance__'] === true) {
+				var self = this;
+			} else {
+				var self = arguments[0];
+				event = arguments[1];
+			}
+
+ 			return null;
+		}
+	, 1, [null,null,['self'],['event']]);
+		$cls_definition['onDrop'] = $method;
+		var $bases = new Array($p['object']);
+		var $data = $p['dict']();
+		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
+		return $p['_create_class']('DropHandler', $p['tuple']($bases), $data);
+	})();
+	return this;
+}; /* end pyjamas.ui.DropHandler */
+
+
+/* end module: pyjamas.ui.DropHandler */
+
+
+/*
+PYJS_DEPS: ['pyjamas.DOM', 'pyjamas', 'pyjamas.ui.Event', 'pyjamas.ui']
+*/
+
+--></script>
+<script type="text/javascript"><!--
 /* start module: pyjamas */
 $pyjs['loaded_modules']['pyjamas'] = function (__mod_name__) {
 	if($pyjs['loaded_modules']['pyjamas']['__was_initialized__']) return $pyjs['loaded_modules']['pyjamas'];
@@ -39490,14 +39480,14 @@ function app_imported() {
         $p('pyjslib');
         $pyjs['__modules__']['pyjslib'] = $p;
         pyjslib['___import___'](
-            'admin',
+            'home2',
             null,
             '__main__');
     } else {
         var B$ = $pyjs['loaded_modules']['__builtin__'];
         $p = B$['$dict'];
         B$['$module_init']('__builtin__');
-        $p['_start_main']('admin');
+        $p['_start_main']('home2');
     }
     return;
 }
@@ -39539,7 +39529,7 @@ function prepare_app() {
         };
         wait();
     }
-    wait_for_loading_modules(app_imported, ['pyjamas.ui','pyjamas.ui.InnerText','pyjamas.ui.ClickListener','pyjamas.JSONService','pyjamas.Canvas.RadialGradientImplDefault','pyjamas.Canvas.GWTCanvas','struct','base64','pyjamas.ui.Label','pyjamas.Canvas.GWTCanvasImplIE6','pyjamas.ui.Sink','string','datetime','pyjamas.ui.Image','pyjamas.Window','pyjslib','pyjamas.Canvas.GWTCanvasImplDefault','pyjamas.ui.InputListener','pyjamas.Canvas.VMLContext','pyjamas.Canvas.CanvasGradientImplIE6','pyjamas.Canvas.Color','pyjamas.ui.Grid','pyjamas.EventController','pyjamas.ui.HTML','pyjamas.ui.UIObject','pyjamas.Canvas.GWTCanvasConsts','pyjamas.ui.Widget','pyjamas.Canvas.RadialGradientImplIE6','pyjamas.ui.TreeItem','urllib','re','pyjamas.ui.MouseListener','pyjamas.ui.KeyboardListener','math','pyjamas.Cookies','pyjamas.Canvas.LinearGradientImplDefault','sys','pyjamas.ui.ButtonBase','admin','pyjamas.ui.CellFormatter','pyjamas.ui.HTMLTable','pyjamas.ui.FocusWidget','pyjamas.Canvas.GWTCanvasImplIEConsts','pygwt','pyjamas.ui.TreeContentPanel','pyjamas.ui.Focus','binascii','json','pyjamas.HTTPRequest','pyjamas.ui.AbsolutePanel','pyjamas.ui.Event','pyjamas.ui.Button','pyjamas.ui.CSS','pyjamas.ui.Panel','pyjamas.Factory','pyjamas.ui.Anchor','pyjamas.Canvas.JSOStack','pyjamas.ui.SimplePanel','pyjamas.ui.RootPanel','pyjamas.Canvas.ColorStop','pyjamas.ui.FocusListener','pyjamas.ui.DockPanel','pyjamas.ui.ChangeListener','pyjamas.Location','pyjamas.ui.VerticalPanel','pyjamas.Canvas.PathElement','pyjamas.Canvas.LinearGradientImplIE6','pyjamas.ui.ScrollPanel','pyjamas','pyjamas.ui.HorizontalPanel','pyjamas.ui.RowFormatter','pyjamas.ui.CellPanel','getopt','pyjamas.ui.DragHandler','pyjamas.ui.DropHandler','pyjamas.History','time','pyjamas.ui.ComplexPanel','pyjamas.ui.Composite','pyjd','pyjamas.ui.InnerHTML','pyjamas.ui.Hyperlink','pyjamas.Canvas.CanvasGradientImplDefault','pyjamas.Canvas','pyjamas.DOM','sets','pyjamas.ui.Tree']);
+    wait_for_loading_modules(app_imported, ['pyjamas.ui','pyjamas.ui.InnerText','pyjamas.ui.ClickListener','pyjamas.JSONService','pyjamas.Canvas.RadialGradientImplDefault','pyjamas.Canvas.GWTCanvas','struct','base64','pyjamas.ui.Label','pyjamas.Canvas.GWTCanvasImplIE6','pyjamas.ui.Sink','string','datetime','pyjamas.ui.Image','pyjamas.Window','pyjslib','pyjamas.Canvas.GWTCanvasImplDefault','pyjamas.ui.InputListener','pyjamas.Canvas.VMLContext','pyjamas.Canvas.CanvasGradientImplIE6','pyjamas.Canvas.Color','pyjamas.ui.Grid','pyjamas.EventController','pyjamas.ui.HTML','pyjamas.ui.UIObject','pyjamas.Canvas.GWTCanvasConsts','pyjamas.ui.Widget','pyjamas.Canvas.RadialGradientImplIE6','pyjamas.ui.TreeItem','urllib','re','pyjamas.ui.MouseListener','pyjamas.ui.KeyboardListener','math','pyjamas.Cookies','pyjamas.Canvas.LinearGradientImplDefault','sys','pyjamas.ui.ButtonBase','pyjamas.ui.CellFormatter','pyjamas.ui.HTMLTable','pyjamas.ui.FocusWidget','pyjamas.Canvas.GWTCanvasImplIEConsts','pygwt','pyjamas.ui.TreeContentPanel','home2','pyjamas.ui.Focus','binascii','json','pyjamas.HTTPRequest','pyjamas.ui.AbsolutePanel','pyjamas.ui.Event','pyjamas.ui.Button','pyjamas.ui.CSS','pyjamas.ui.Panel','pyjamas.Factory','pyjamas.ui.Anchor','pyjamas.Canvas.JSOStack','pyjamas.ui.SimplePanel','pyjamas.ui.RootPanel','pyjamas.Canvas.ColorStop','pyjamas.ui.FocusListener','pyjamas.ui.DockPanel','pyjamas.ui.ChangeListener','pyjamas.Location','pyjamas.ui.VerticalPanel','pyjamas.Canvas.PathElement','pyjamas.Canvas.LinearGradientImplIE6','pyjamas.ui.ScrollPanel','pyjamas','pyjamas.ui.HorizontalPanel','pyjamas.ui.RowFormatter','pyjamas.ui.CellPanel','getopt','pyjamas.ui.DragHandler','pyjamas.ui.DropHandler','pyjamas.History','time','pyjamas.ui.ComplexPanel','pyjamas.ui.Composite','pyjd','pyjamas.ui.InnerHTML','pyjamas.ui.Hyperlink','pyjamas.Canvas.CanvasGradientImplDefault','pyjamas.Canvas','pyjamas.DOM','sets','pyjamas.ui.Tree']);
 }
 
 function pygwtOnLoad(onLoadError, name) {

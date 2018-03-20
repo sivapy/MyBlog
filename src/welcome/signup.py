@@ -16,10 +16,10 @@ from pyjamas.JSONService import ServiceProxy
 from pyjamas.ui.HorizontalPanel import HorizontalPanel
 import re
 
-class signupform:
+class Signup:
     def onModuleLoad(self):
         self.form=FormPanel()
-        self.remote_py = EchoServicePython()
+        self.remote_py = MyBlogService()
         
         self.form.setAction("/index.html")
         
@@ -45,13 +45,10 @@ class signupform:
         hpn.setCellWidth(self.lname, "30%")
         part2=hpn
         
-      
-        
-        self.email=TextBox()
-        self.email.setName("emailsignup")
-        self.email.setPlaceholder("Enter your email address ")
-        
-        part3=self.email
+        self.uname=TextBox()
+        self.uname.setName("uname")
+        self.uname.setPlaceholder("User Name")
+        part3=self.uname
         
         self.password=PasswordTextBox()
         self.password.setName("passsignup")
@@ -63,9 +60,15 @@ class signupform:
         self.rpassword.setPlaceholder("Confirm your password")
         part5=self.rpassword
         
+        self.email=TextBox()
+        self.email.setName("emailsignup")
+        self.email.setPlaceholder("Enter your email address ")
+        part6=self.email
+        
+        
         self.errorlabel=Label()
         self.errorlabel.setStyleName("errorlabel")
-        part6=self.errorlabel
+        part7=self.errorlabel
         
         hpanel = HorizontalPanel(BorderWidth=0,HorizontalAlignment=HasAlignment.ALIGN_CENTER,VerticalAlignment=HasAlignment.ALIGN_MIDDLE,Width="100%",Height="50px")
 
@@ -80,7 +83,7 @@ class signupform:
         hpanel.setStyleName("hpanel")
         
         
-        part7=hpanel
+        part8=hpanel
  
         vp.add(part1)
         vp.add(part2)
@@ -89,6 +92,7 @@ class signupform:
         vp.add(part5)
         vp.add(part6)
         vp.add(part7)
+        vp.add(part8)
         
         
         vp.setCellHeight(part1,"5%")
@@ -98,6 +102,7 @@ class signupform:
         vp.setCellHeight(part5,"10%")
         vp.setCellHeight(part6,"10%")
         vp.setCellHeight(part7,"10%")
+        vp.setCellHeight(part8,"10%")
         
         vp.setStyleName("signup")
                          
@@ -110,6 +115,8 @@ class signupform:
         match=re.match('^[a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$',add)
         if(len(self.fname.getText())==0 or len(self.lname.getText())==0):  
             self.errorlabel.setText("First Name or Last name can't be empty ")
+        elif (len(self.uname.getText())==0):
+            self.errorlabel.setText("Username can't be empty ")
         elif (len(self.password.getText())==0):
             self.errorlabel.setText("Password can't be empty ")
             
@@ -127,19 +134,24 @@ class signupform:
         Window.alert(event.getResults())
                 
     def createUser(self):
-        self.remote_py.callMethod('createUser', [self.fname.getText(), self.email.getText(),self.password.getText(),self.lname.getText()], self)            
+        self.remote_py.callMethod('createUser', [self.fname.getText(), self.lname.getText(), self.uname.getText(), self.email.getText(),self.password.getText()], self)            
+    
+    def onRemoteResponse(self, response, requestInfo):
+        self.errorlabel.setText('')
+        Window.alert("Signed up successfully. Please login.")
+        Window.setLocation("/index.html")
     
     def onRemoteError(self, code, error_dict, requestInfo):
         if code == 500:
             self.errorlabel.setText("user name already exists .")       
         
-class EchoServicePython(ServiceProxy):
+class MyBlogService(ServiceProxy):
     def __init__(self):
         ServiceProxy.__init__(self, "http://127.0.0.1:8000/json/", 'jsonrpc', headers=None)        
         
         
 if __name__ == '__main__':
-    app = signupform()
+    app = Signup()
     app.onModuleLoad() 
     StyleSheetCssFile("./signup.css")
     

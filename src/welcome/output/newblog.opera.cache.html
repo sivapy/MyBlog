@@ -2667,7 +2667,7 @@ $pyjs['loaded_modules']['newblog'] = function (__mod_name__) {
 	$m['SimplePanel'] = $p['___import___']('pyjamas.ui.SimplePanel.SimplePanel', null, null, false);
 	$m['TextArea'] = $p['___import___']('pyjamas.ui.TextArea.TextArea', null, null, false);
 	$m['DockPanel'] = $p['___import___']('pyjamas.ui.DockPanel.DockPanel', null, null, false);
-	$m['newblogform'] = (function(){
+	$m['NewBlog'] = (function(){
 		var $cls_definition = new Object();
 		var $method;
 		$cls_definition['__module__'] = 'newblog';
@@ -2677,21 +2677,29 @@ $pyjs['loaded_modules']['newblog'] = function (__mod_name__) {
 			} else {
 				var self = arguments[0];
 			}
-			var createBlogButton,loggedInUser,logoutAnchor,headerPanel,rightHeaderPanel,dockPanel,loggedInUserJsonData,welcomeNoteLabel,panel;
+			var createBlogButton,loggedInUser,logoutAnchor,rightHeaderPanel,dockPanel,headerDockPanel,loggedInUserJsonData,welcomeNoteLabel,panel;
 			loggedInUser = $m['getCookie']('LoggedInUser');
 			loggedInUserJsonData = $m['json']['loads'](loggedInUser);
 			self['username'] = loggedInUserJsonData['__getitem__']('username');
 			self['remote_py'] = (typeof MyBlogService == "undefined"?$m['MyBlogService']:MyBlogService)();
 			dockPanel = $pyjs_kwargs_call(null, $m['DockPanel'], null, null, [{'BorderWidth':0, 'Padding':0, 'HorizontalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_CENTER'), 'VerticalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_MIDDLE')}]);
 			dockPanel['setSize']('100%', '100%');
-			headerPanel = $pyjs_kwargs_call(null, $m['HorizontalPanel'], null, null, [{'StyleName':'header'}]);
-			dockPanel['add'](headerPanel, $p['getattr']($m['DockPanel'], 'NORTH'));
-			dockPanel['setCellHeight'](headerPanel, '60px');
+			headerDockPanel = $pyjs_kwargs_call(null, $m['DockPanel'], null, null, [{'BorderWidth':0, 'Padding':0, 'HorizontalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_LEFT'), 'VerticalAlignment':$p['getattr']($m['HasAlignment'], 'ALIGN_CENTER')}]);
+			headerDockPanel['setStyleName']('header');
+			headerDockPanel['setWidth']('100%');
+			dockPanel['add'](headerDockPanel, $p['getattr']($m['DockPanel'], 'NORTH'));
+			dockPanel['setCellHeight'](headerDockPanel, '60px');
 			self['siteImage'] = $m['Image']('/images/Testware_logo.png');
 			self['siteImage']['setStyleName']('logo-image');
-			headerPanel['add']($p['getattr'](self, 'siteImage'));
+			headerDockPanel['add']($p['getattr'](self, 'siteImage'), $p['getattr']($m['DockPanel'], 'WEST'));
+			headerDockPanel['setCellWidth']($p['getattr'](self, 'siteImage'), '30%');
+			self['pageTitle'] = $m['Label']('New Blog');
+			self['pageTitle']['setStyleName']('center-header');
+			headerDockPanel['add']($p['getattr'](self, 'pageTitle'), $p['getattr']($m['DockPanel'], 'CENTER'));
+			headerDockPanel['setCellWidth']($p['getattr'](self, 'pageTitle'), '40%');
 			rightHeaderPanel = $pyjs_kwargs_call(null, $m['VerticalPanel'], null, null, [{'StyleName':'right-header'}]);
-			headerPanel['add'](rightHeaderPanel);
+			headerDockPanel['add'](rightHeaderPanel, $p['getattr']($m['DockPanel'], 'EAST'));
+			headerDockPanel['setCellWidth'](rightHeaderPanel, '30%');
 			welcomeNoteLabel = $m['Label']($p['sprintf']('Hi %s %s!', $p['tuple']([loggedInUserJsonData['__getitem__']('first_name'), loggedInUserJsonData['__getitem__']('last_name')])));
 			rightHeaderPanel['add'](welcomeNoteLabel);
 			logoutAnchor = $pyjs_kwargs_call(null, $m['Anchor'], null, null, [{'Widget':$m['HTML']('Logout'), 'Href':'/', 'Title':'Logout'}]);
@@ -2774,7 +2782,7 @@ $pyjs['loaded_modules']['newblog'] = function (__mod_name__) {
 		var $bases = new Array(pyjslib['object']);
 		var $data = $p['dict']();
 		for (var $item in $cls_definition) { $data['__setitem__']($item, $cls_definition[$item]); }
-		return $p['_create_class']('newblogform', $p['tuple']($bases), $data);
+		return $p['_create_class']('NewBlog', $p['tuple']($bases), $data);
 	})();
 	$m['MyBlogService'] = (function(){
 		var $cls_definition = new Object();
@@ -2798,7 +2806,7 @@ $pyjs['loaded_modules']['newblog'] = function (__mod_name__) {
 		return $p['_create_class']('MyBlogService', $p['tuple']($bases), $data);
 	})();
 	if ($p['bool']($p['op_eq']((typeof __name__ == "undefined"?$m['__name__']:__name__), '__main__'))) {
-		$m['app'] = $m['newblogform']();
+		$m['app'] = $m['NewBlog']();
 		$m['app']['onModuleLoad']();
 		$m['StyleSheetCssFile']('./newblog.css');
 	}

@@ -9,8 +9,9 @@ body {
 }
 
 .content-style {
-	width:100%;
 	height: auto;
+	position: relative;
+	float: left;
 }
 
 .detail-style {
@@ -29,9 +30,20 @@ body {
 	width: 100%;
 }
 
+.center-header {
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+}
+
 .right-header {
   vertical-align: middle;
   float: right;
+}
+
+.side-menu {
+	padding: .5em 0 .5em .5em;
 }
 
 .logout {
@@ -58,6 +70,23 @@ body {
   float: left;
 }
 
+.blog-details {
+  line-height: 1.5em;
+  text-decoration: none;
+  font-size: .95em;
+  margin: 0;
+  padding: 0 10;
+  float: left;
+}
+
+
 .blog-search-title:hover {
   color: #1ba0a9;
+}
+
+.blog-content {
+    display: block;
+    padding: .5em 0 .5em .5em;
+    font-weight: normal;
+    margin: auto;
 }

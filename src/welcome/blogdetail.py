@@ -23,7 +23,7 @@ from pyjamas.ui.TextArea import TextArea
 from pyjamas.ui.DockPanel import DockPanel
 
 
-class publishblogform:
+class BlogDetail:
     def onModuleLoad(self):
         self.blogJsonData = json.loads(getCookie("SelectedBlog"))
         loggedInUserJsonData = json.loads(getCookie("LoggedInUser"))
@@ -36,17 +36,29 @@ class publishblogform:
         
         dockPanel.setSize('100%', '100%')
         
-        headerPanel = HorizontalPanel(StyleName='header')
-        dockPanel.add(headerPanel,  DockPanel.NORTH)
-        dockPanel.setCellHeight(headerPanel, '60px')
+        headerDockPanel = DockPanel(BorderWidth=0, Padding=0,
+                          HorizontalAlignment=HasAlignment.ALIGN_LEFT,
+                          VerticalAlignment=HasAlignment.ALIGN_CENTER)
+        headerDockPanel.setStyleName('header')
+        headerDockPanel.setWidth('100%')
+        
+        dockPanel.add(headerDockPanel,  DockPanel.NORTH)
+        dockPanel.setCellHeight(headerDockPanel, '60px')
 
 
         self.siteImage = Image("/images/Testware_logo.png")
         self.siteImage.setStyleName('logo-image')
-        headerPanel.add(self.siteImage)
+        headerDockPanel.add(self.siteImage, DockPanel.WEST)
+        headerDockPanel.setCellWidth(self.siteImage, '30%')
+        
+        self.pageTitle = Label('Blog Details')
+        self.pageTitle.setStyleName('center-header')
+        headerDockPanel.add(self.pageTitle, DockPanel.CENTER)
+        headerDockPanel.setCellWidth(self.pageTitle, '40%')
         
         rightHeaderPanel = VerticalPanel(StyleName='right-header')
-        headerPanel.add(rightHeaderPanel)
+        headerDockPanel.add(rightHeaderPanel, DockPanel.EAST)
+        headerDockPanel.setCellWidth(rightHeaderPanel, '30%')
         
         
         welcomeNoteLabel = Label('Hi %s %s!' % (loggedInUserJsonData["first_name"], loggedInUserJsonData["last_name"]))
@@ -75,9 +87,10 @@ class publishblogform:
         
         dockPanel.add(self.blogContent, DockPanel.CENTER)
         
-        createBlogButton = Button("Publish",self)
-        createBlogButton.setStyleName('btn')
-        panel.add(createBlogButton)
+        if getCookie("ShowPublishButton") == 'True':
+            createBlogButton = Button("Publish",self)
+            createBlogButton.setStyleName('btn')
+            panel.add(createBlogButton)
         
         RootPanel().add(dockPanel)
         
@@ -102,7 +115,7 @@ class MyBlogService(ServiceProxy):
         
         
 if __name__ == '__main__':
-    app = publishblogform()
+    app = BlogDetail()
     app.onModuleLoad() 
     StyleSheetCssFile("./newblog.css")
     
