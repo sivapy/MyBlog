@@ -187,7 +187,7 @@ class Home:
              elif value == 1:
                 self.pageTitle.setText('Published Blogs')
              elif value == 2:
-                 self.pageTitle.setText('Unpublished blogs')
+                 self.pageTitle.setText('Unpublished Blogs')
 
     def onRemoteError(self, code, error_dict, requestInfo):
         pass
